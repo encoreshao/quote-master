@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Quote Master",
+  "version": "1.0.0",
+  "description": "Display a new English quote every time you open a new tab.",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icons/logo192.png",
+    "48": "icons/logo192.png",
+    "128": "icons/logo512.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icons/logo192.png",
+      "48": "icons/logo192.png",
+      "128": "icons/logo512.png"
+    }
+  }
+}
