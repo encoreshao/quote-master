@@ -1,22 +1,29 @@
-import './App.css';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useState } from 'react';
+
+import HeroFooter from './components/HeroFooter';
+import HeroHeader from './components/HeroHeader';
+
+import Overview from './components/Overview';
+import Quotes from './components/Quotes';
+import Gitlab from './components/Gitlab';
+import Settings from './components/Settings';
+
 
 function App() {
+  const [tab, setTab] = useState('overview');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Display a new English quote every time you open a new tab.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Quote Master
-        </a>
-      </header>
-    </div>
+    <section className="hero is-info is-fullheight">
+      <HeroHeader />
+
+      {tab === 'overview' && <Overview />}
+      {tab === 'quotes' && <Quotes />}
+      {tab === 'gitlab' && <Gitlab />}
+      {tab === 'settings' && <Settings />}
+
+      <HeroFooter setTab={setTab} tab={tab} />
+    </section>
   );
 }
 

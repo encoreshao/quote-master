@@ -1,4 +1,13 @@
-# Creating a Chrome Extension with React
+# Chrome Extension with React
+
+A step-by-step guide to creating a Chrome extension using React.
+
+- react + typescript
+- webpacker
+- [bulma](https://bulma.io/documentation/)
+- [Fontawesome](https://fontawesome.com/search?o=r&m=free)
+
+## Steps
 
 ### step 1: Create React App
 
@@ -129,10 +138,14 @@ Finally, run the npm run build command in your terminal to build your extension:
 
 To load your extension into Chrome, open Chrome and navigate to the Extensions page by typing `chrome://extensions` into the address bar. Then, click the "Load unpacked" button and select the dist directory in your project.
 
+##
+
 ---
 
-### How to run it locally, and visit `http://localhost:3000`
+### Let's go
 
 ```
 npm run start
 ```
+
+and visit `http://localhost:3000`
