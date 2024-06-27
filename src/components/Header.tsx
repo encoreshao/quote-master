@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { faDroplet, faHome, faCode, faMailBulk } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faEnvelopeCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faGitlab, faBandcamp } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function HeroFooter() {
@@ -20,7 +21,7 @@ function HeroFooter() {
           </div>
 
           <div id="navbarMenuHeroB" className="navbar-menu">
-            <div className="navbar-end has-background-primary-100">
+            <div className="navbar-end has-background-primary-10">
               <a className="navbar-item is-active">
                 <span className="icon">
                   <FontAwesomeIcon icon={faHome} />
@@ -30,21 +31,28 @@ function HeroFooter() {
 
               <a className="navbar-item" href="https://mail.google.com/mail/u/0/#inbox">
                 <span className="icon">
-                  <FontAwesomeIcon icon={faMailBulk} />
+                  <FontAwesomeIcon icon={faEnvelopeCircleCheck} />
                 </span>
                 <span> Gmail </span>
               </a>
 
+              <a className="navbar-item" href="https://gitlab.ekohe.com/">
+                <span className="icon">
+                  <FontAwesomeIcon icon={faGitlab} />
+                </span>
+                <span> GitLab </span>
+              </a>
+
               <a className="navbar-item" href="https://ekohe.bamboohr.com/home/">
                 <span className="icon">
-                  <FontAwesomeIcon icon={faDroplet} />
+                  <FontAwesomeIcon icon={faBandcamp} />
                 </span>
                 <span> BambooHR </span>
               </a>
 
               <a className="navbar-item" href="https://github.com/encoreshao">
                 <span className="icon">
-                  <FontAwesomeIcon icon={faCode} />
+                  <FontAwesomeIcon icon={faGithub} />
                 </span>
 
                 <span> Github </span>

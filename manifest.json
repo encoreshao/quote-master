@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Quote Master",
-  "version": "1.0.0",
-  "description": "Display a new English quote every time you open a new tab.",
+  "version": "1.0.1",
+  "description": "Extension: Override the default newtab page for easier access to pages",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

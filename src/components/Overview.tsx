@@ -3,8 +3,8 @@
 import DateTime from './DateTime';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-library.add(faCoffee)
+import { faCoffee, faDroplet } from '@fortawesome/free-solid-svg-icons'
+library.add(faCoffee, faDroplet)
 
 function Overview() {
   return (
@@ -13,11 +13,12 @@ function Overview() {
         <p>
           <FontAwesomeIcon icon="coffee" color='white' fontSize='400' className="shake"/>
         </p>
+        <hr />
+        <p className="title">Give me a coffee</p>
+        <br />
         <p className="subtitle">
           <DateTime />
         </p>
-        <hr />
-        <p className="title">Encore Shao</p>
       </div>
     </div>
   );

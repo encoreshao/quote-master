@@ -10,7 +10,7 @@ function HeroFooter(props: { setTab: (arg0: string) => void; tab: string }) {
               onClick={() => props.setTab('overview')}
               className={props.tab === 'overview' ? 'is-active' : ''}
             >
-              <a className="white"> Overview </a>
+              <a className="white"> Dashboard </a>
             </li>
             <li onClick={() => props.setTab('quotes')} className={props.tab === 'quotes' ? 'is-active' : ''}>
               <a> Quotes </a>

@@ -34,9 +34,9 @@ function Quotes() {
       </div>
 
       {quote &&
-        <div className="card is-transparent">
+        <div className="card has-background-primary-100">
           <div className="container card-content">
-            <p className="title is-transparent">
+            <p className="title">
               ”{quote['quote']}“
             </p>
             <br />

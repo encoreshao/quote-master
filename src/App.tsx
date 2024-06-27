@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from 'react';
 
-import HeroFooter from './components/HeroFooter';
-import HeroHeader from './components/HeroHeader';
+import HeroFooter from './components/Footer';
+import HeroHeader from './components/Header';
 
 import Overview from './components/Overview';
 import Quotes from './components/Quotes';
