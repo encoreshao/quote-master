@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { faHome, faEnvelopeCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBandcamp } from "@fortawesome/free-brands-svg-icons"
+import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function HeroFooter() {
@@ -9,8 +10,11 @@ function HeroFooter() {
       <nav className="navbar">
         <div className="container">
           <div className="navbar-brand">
-            <a className="navbar-item has-text-primary-100">
-              <span color='white'> Quote Master </span>
+            <a className="navbar-item has-text-white">
+              <span>
+                Quote Master
+                {/* <FontAwesomeIcon fontSize='200' color='white' icon={faHeartPulse} /> */}
+              </span>
             </a>
             <span className="navbar-burger" data-target="navbarMenuHeroB">
               <span></span>

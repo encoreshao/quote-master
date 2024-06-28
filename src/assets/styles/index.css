@@ -91,7 +91,7 @@ html {
   font-family: 'Poppins', sans-serif;
 }
 
-.hero .hero-body .title {
+.hero .hero-body .title, .cup-box span {
   font-family: 'Kaushan Script', sans-serif;
   transform: rotate(-5deg);
   font-size: 5rem;
