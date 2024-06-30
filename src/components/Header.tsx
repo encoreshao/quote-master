@@ -1,12 +1,16 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { faHome, faEnvelopeCircleCheck, faHeartPulse } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faEnvelopeCircleCheck, faHeartPulse, faDownload, faGears } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBandcamp } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useFormContext } from '../contexts/FormContext';
 
 function HeroFooter() {
   const { formData } = useFormContext();
+
+  const openInternalLink = (eventName: string) => {
+    chrome.runtime.sendMessage({ action: eventName })
+  }
 
   return (
     <div className="hero-head">
@@ -62,6 +66,21 @@ function HeroFooter() {
                 </span>
 
                 <span> Github </span>
+              </a>}
+              {formData.enabledDownloads && <a className="navbar-item" href="downdloads" onClick={() => openInternalLink('downloads')}>
+                <span className="icon">
+                  <FontAwesomeIcon icon={faDownload} />
+                </span>
+
+                <span> Downloads </span>
+              </a>}
+
+              {formData.enabledExtensions && <a className="navbar-item" href="extensions" onClick={() => openInternalLink('extensions')}>
+                <span className="icon">
+                  <FontAwesomeIcon icon={faGears} />
+                </span>
+
+                <span> Extensions </span>
               </a>}
             </div>
           </div>

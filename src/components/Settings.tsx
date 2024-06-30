@@ -16,6 +16,9 @@ function Settings() {
         <p className="title">Settings</p>
         <p className="subtitle">
         </p>
+        <hr />
+        <br />
+
         <div>
           <div className="field is-horizontal">
             <div className="field-label is-normal">
@@ -155,7 +158,7 @@ function Settings() {
 
           <div className="field is-horizontal">
             <div className="field-label">
-              <label className="label has-text-white"> Tabs </label>
+              <label className="label has-text-white"> Tabs / Links </label>
             </div>
             <div className="field-body">
               <div className="field is-narrow">
@@ -171,6 +174,18 @@ function Settings() {
                   <label className="checkbox has-text-white mr-5">
                     <input type="checkbox" name="enabledQuotes" className="mr-2" onChange={handleChange} checked={formData.enabledQuotes}/>
                     Quotes
+                  </label>
+                  <label className="checkbox has-text-white mr-5">
+                    <input type="checkbox" name="enabledBookmarks" className="mr-2" onChange={handleChange} checked={formData.enabledBookmarks}/>
+                    Bookmarks
+                  </label>
+                  <label className="checkbox has-text-white mr-5">
+                    <input type="checkbox" name="enabledDownloads" className="mr-2" onChange={handleChange} checked={formData.enabledDownloads}/>
+                    Downloads
+                  </label>
+                  <label className="checkbox has-text-white mr-5">
+                    <input type="checkbox" name="enabledExtensions" className="mr-2" onChange={handleChange} checked={formData.enabledExtensions}/>
+                    Extensions
                   </label>
                 </div>
               </div>

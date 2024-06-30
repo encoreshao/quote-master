@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Quote Master",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Extension: Override the default newtab page for easier access to pages",
   "chrome_url_overrides": {
     "newtab": "index.html"
@@ -9,7 +9,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage"],
+  "permissions": ["storage", "bookmarks", "tabs"],
   "icons": {
     "16": "icons/logo52.png",
     "48": "icons/logo.png",

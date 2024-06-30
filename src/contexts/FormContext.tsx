@@ -13,6 +13,9 @@ interface FormData {
   enabledDashboard: boolean;
   enabledGitlub: boolean;
   enabledQuotes: boolean;
+  enabledBookmarks: boolean;
+  enabledDownloads: boolean;
+  enabledExtensions: boolean;
 }
 
 interface FormContextType {
@@ -38,6 +41,9 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     enabledDashboard: true,
     enabledGitlub: true,
     enabledQuotes: true,
+    enabledBookmarks: true,
+    enabledDownloads: false,
+    enabledExtensions: true,
   });
 
   useEffect(() => {
