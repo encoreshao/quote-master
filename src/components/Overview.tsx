@@ -1,26 +1,31 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
+import { useFormContext } from '../contexts/FormContext';
 import DateTime from './DateTime';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee, faDroplet } from '@fortawesome/free-solid-svg-icons'
-library.add(faCoffee, faDroplet)
 
 function Overview() {
+  const { formData } = useFormContext();
+
   return (
-    <div className="hero-body" id="overview">
-      <div className="container has-text-centered">
-        <p>
-          <FontAwesomeIcon icon="coffee" color='white' fontSize='400' className="shake"/>
-        </p>
-        <hr />
-        <p className="title">Give me a coffee</p>
-        <br />
-        <p className="subtitle">
-          <DateTime />
-        </p>
+    <>
+      <div className="hero-body" id="overview">
+        <div className="container has-text-centered">
+          <DateTime wday={true} />
+          <hr />
+        </div>
       </div>
-    </div>
+
+      {formData.overview &&
+        <div className="card has-background-primary-100">
+          <div className="container card-content">
+            <p className="title">
+              {formData.overview}
+            </p>
+            <br />
+          </div>
+        </div>
+      }
+    </>
   );
 }
 

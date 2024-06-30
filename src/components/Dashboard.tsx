@@ -25,21 +25,21 @@ function Dashboard() {
 
             <FontAwesomeIcon icon="coffee" color='white' fontSize='400'/>
 
-            <span style={{
+            {/* <span style={{
               position: 'absolute',
               fontSize: '20px',
               left: '32%',
               top: '84%',
               zIndex: 1,
               color: "var(--bulma-hero-h)"
-            }}>Give me a coffee</span>
+            }}>Give me a coffee</span> */}
           </div>
         </div>
         <hr />
         <br />
-        <p className="subtitle">
-          <DateTime />
-        </p>
+        <div className="subtitle">
+          <DateTime wday={true}/>
+        </div>
       </div>
     </div>
   );

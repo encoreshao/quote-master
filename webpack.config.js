@@ -41,9 +41,9 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin({
             patterns: [
-                { from: "src/manifest.json", to: "[name][ext]" },
+                { from: "src/resources/manifest.json", to: "[name][ext]" },
                 { from: "public/*.ico", to: "[name][ext]" },
-                { from: "public/*.png", to: "./icons/[name][ext]" },
+                { from: "src/assets/icons/*.png", to: "./icons/[name][ext]" },
             ],
         }),
         new HTMLWebpackPlugin({

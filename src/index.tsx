@@ -4,13 +4,16 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 
 import './assets/styles/index.css';
+import { FormProvider } from './contexts/FormContext';
 
 const container = document.getElementById('root')
 if (container) {
   const root = createRoot(container);
   root.render(
     <React.StrictMode>
-      <App />
+      <FormProvider>
+        <App />
+      </FormProvider>
     </React.StrictMode>
   );
 } else {

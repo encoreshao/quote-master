@@ -1,10 +1,13 @@
+/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { faHome, faEnvelopeCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faEnvelopeCircleCheck, faHeartPulse } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBandcamp } from "@fortawesome/free-brands-svg-icons"
-import { faHeartPulse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useFormContext } from '../contexts/FormContext';
 
 function HeroFooter() {
+  const { formData } = useFormContext();
+
   return (
     <div className="hero-head">
       <nav className="navbar">
@@ -12,8 +15,7 @@ function HeroFooter() {
           <div className="navbar-brand">
             <a className="navbar-item has-text-white">
               <span>
-                Quote Master
-                {/* <FontAwesomeIcon fontSize='200' color='white' icon={faHeartPulse} /> */}
+                <FontAwesomeIcon fontSize='200' color='white' icon={faHeartPulse} />
               </span>
             </a>
             <span className="navbar-burger" data-target="navbarMenuHeroB">
@@ -40,27 +42,27 @@ function HeroFooter() {
                 <span> Gmail </span>
               </a>
 
-              <a className="navbar-item" href="https://gitlab.ekohe.com/">
+              {formData.gitlab && <a className="navbar-item" href={formData.gitlab} target="_blank">
                 <span className="icon">
                   <FontAwesomeIcon icon={faGitlab} />
                 </span>
                 <span> GitLab </span>
-              </a>
+              </a>}
 
-              <a className="navbar-item" href="https://ekohe.bamboohr.com/home/">
+              {formData.bamboohr && <a className="navbar-item" href={formData.bamboohr} target="_blank">
                 <span className="icon">
                   <FontAwesomeIcon icon={faBandcamp} />
                 </span>
                 <span> BambooHR </span>
-              </a>
+              </a>}
 
-              <a className="navbar-item" href="https://github.com/encoreshao">
+              {formData.github && <a className="navbar-item" href={formData.github} target="_blank">
                 <span className="icon">
                   <FontAwesomeIcon icon={faGithub} />
                 </span>
 
                 <span> Github </span>
-              </a>
+              </a>}
             </div>
           </div>
         </div>

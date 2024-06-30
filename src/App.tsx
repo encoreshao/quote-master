@@ -8,6 +8,7 @@ import Overview from './components/Overview';
 import Quotes from './components/Quotes';
 import Gitlab from './components/Gitlab';
 import Settings from './components/Settings';
+import Dashboard from './components/Dashboard';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <HeroHeader />
 
       {tab === 'overview' && <Overview />}
+      {tab === 'dashboard' && <Dashboard />}
       {tab === 'quotes' && <Quotes />}
       {tab === 'gitlab' && <Gitlab />}
       {tab === 'settings' && <Settings />}
