@@ -64,10 +64,12 @@ function Bookmarks() {
 
               {bookmarks &&
                 <div
-                  className='has-text-left p-2 has-background-white'
+                  className='has-text-left p-2 fixed-grid has-background-white'
                   style={{maxHeight: "calc(100vh - 400px)", overflowY: "scroll"}}
                 >
-                  <BookmarkList bookmarks={bookmarks} searchKeyword={searchKeyword} />
+                  <div className="grid">
+                    <BookmarkList bookmarks={bookmarks} searchKeyword={searchKeyword} />
+                  </div>
                 </div>
               }
             </div>

@@ -5,10 +5,16 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
   const { bookmarks, searchKeyword } = props;
   const drawTreeNodes = (bookmarkNodes: any) => {
     return (
-      <div className={bookmarkNodes.id ? `` : `ml-5`}>
+      <div className="cell ml-4">
         {bookmarkNodes.map((bookmarkNode: any) => drawNode(bookmarkNode))}
       </div>
     );
+  };
+
+  const handleChangeBackgroundColor = (event: any) => {
+    event.target.classList.toggle('has-background-link')
+    event.target.classList.toggle('has-text-white')
+    event.target.classList.toggle('has-text-link')
   };
 
   const drawNode = (bookmarkNode: any) => {
@@ -22,15 +28,21 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
 
     if (bookmarkTitle && match) {
       return (
-        <div key={bookmarkNode.id} style={{display: bookmarkNode.id === '0' ? 'inline-flex' : ''}}>
+        <div
+          className={webLink ? "cell has-text-link p-1" : "cell has-text-link"}
+          key={bookmarkNode.id}
+          style={{ cursor: 'pointer' }}
+          onClick={webLink && handleChangeBackgroundColor}
+          onDoubleClick={() => {
+            webLink && window.open(webLink, '_blank')
+          }}
+        >
           {webLink ?
             <FontAwesomeIcon icon={faBookBookmark} className={`mr-2`} /> :
             <FontAwesomeIcon icon={faFolder} className={`mr-2`} />
           }
 
-          <a href={webLink} target="_blank" rel="noopener noreferrer" className="is-link">
-            {bookmarkTitle}
-          </a>
+          {bookmarkTitle}
           {bookmarkNode.children && bookmarkNode.children.length > 0 && drawTreeNodes(bookmarkNode.children)}
         </div>
       );
