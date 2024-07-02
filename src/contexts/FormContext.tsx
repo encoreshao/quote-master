@@ -10,6 +10,7 @@ interface FormData {
   bamboohr: string;
   telphone: string;
   overview: string;
+  pinBookmarks: string[];
   enabledDashboard: boolean;
   enabledGitlub: boolean;
   enabledQuotes: boolean;
@@ -38,6 +39,7 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     bamboohr: '',
     telphone: '',
     overview: '',
+    pinBookmarks: [],
     enabledDashboard: true,
     enabledGitlub: true,
     enabledQuotes: true,
