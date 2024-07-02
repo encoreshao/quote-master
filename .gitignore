@@ -12,6 +12,7 @@
 /build
 /dist
 /tmp
+/config/credentials/key.pem
 
 # misc
 .DS_Store

@@ -12,8 +12,8 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
   };
 
   const handleChangeBackgroundColor = (event: any) => {
-    event.target.classList.toggle('has-background-link')
-    event.target.classList.toggle('has-text-white')
+    event.target.classList.toggle('has-background-link-light')
+    event.target.classList.toggle('has-text-black')
     event.target.classList.toggle('has-text-link')
   };
 
@@ -29,9 +29,9 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
     if (bookmarkTitle && match) {
       return (
         <div
-          className={webLink ? "cell has-text-link p-1" : "cell has-text-link"}
+          className={webLink ? "cell has-text-link p-1 is-widescreen" : "cell has-text-link"}
           key={bookmarkNode.id}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: 'pointer', margin: "1px 0", maxWidth: '900px' }}
           onClick={webLink && handleChangeBackgroundColor}
           onDoubleClick={() => {
             webLink && window.open(webLink, '_blank')

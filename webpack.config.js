@@ -3,6 +3,21 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 const HTMLWebpackInjector = require('html-webpack-injector');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
+const extPlugins = [
+    new CopyWebpackPlugin({
+        patterns: [
+            { from: "src/resources/manifest.json", to: "[name][ext]" },
+            { from: "public/*.ico", to: "[name][ext]" },
+            { from: "src/assets/icons/*.png", to: "./icons/[name][ext]" },
+        ],
+    }),
+    new HTMLWebpackPlugin({
+        template: "./public/index.html",
+        chunks: ["index"]
+    }),
+    new HTMLWebpackInjector(),
+]
+
 module.exports = {
     entry: {
         index: "./src/index.tsx",
@@ -38,20 +53,7 @@ module.exports = {
             },
         ],
     },
-    plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: "src/resources/manifest.json", to: "[name][ext]" },
-                { from: "public/*.ico", to: "[name][ext]" },
-                { from: "src/assets/icons/*.png", to: "./icons/[name][ext]" },
-            ],
-        }),
-        new HTMLWebpackPlugin({
-            template: "./public/index.html",
-            chunks: ["index"]
-        }),
-        new HTMLWebpackInjector(),
-    ],
+    plugins: extPlugins,
     resolve: {
         extensions: [".tsx", ".ts", ".js", "*.png"],
     },
