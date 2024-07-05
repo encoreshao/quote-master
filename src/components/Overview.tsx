@@ -19,9 +19,12 @@ function Overview() {
         <div className="card has-background-primary-100">
           <div className="container card-content">
             <p className="title">
-              {formData.overview}
+              Hello! {formData.username}
             </p>
             <br />
+            <p className="subtitle">
+              {formData.overview}
+            </p>
           </div>
         </div>
       }

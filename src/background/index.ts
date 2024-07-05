@@ -22,6 +22,11 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
   }
 });
 
+// chrome.storage.local.remove(
+//   ["pinBookmarks", "backgroundUrl", "gitlab", "enabledGitlab"],
+//   () => {}
+// );
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "getBookmarks") {
     chrome.bookmarks.getTree((bookmarkTreeNodes: any) => {

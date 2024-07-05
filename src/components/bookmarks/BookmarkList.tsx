@@ -44,19 +44,37 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
     let pinBookmarks = formData.pinBookmarks;
     pinBookmarks.push(bookmarkId)
 
-    setStorage({ pinBookmarks })
+    setStorage({ pinBookmarks }, () => {
+      formData.pinBookmarks = pinBookmarks;
+    });
+
     if (event) {
-      event.target.classList.toggle('is-hidden')
+      const parent = event.target.closest('.actions-bar');
+
+      const shuffleIcon = parent.querySelector('.shuffle');
+      shuffleIcon && shuffleIcon.classList.toggle('is-hidden');
+
+      const thumbtackIcon = parent.querySelector('.thumbtack');
+      thumbtackIcon && thumbtackIcon.classList.toggle('is-hidden');
     }
   }
 
   const handleUnPinBookmark = (bookmarkId: string, event: any) => {
     let pinBookmarks = formData.pinBookmarks;
-    pinBookmarks.filter(id => id !== bookmarkId)
+    const newPinBookmarks = pinBookmarks.filter(id => id !== bookmarkId)
 
-    setStorage({ pinBookmarks })
+    setStorage({ pinBookmarks: newPinBookmarks }, () => {
+      formData.pinBookmarks = newPinBookmarks;
+    });
+
     if (event) {
-      event.target.classList.toggle('is-hidden')
+      const parent = event.target.closest('.actions-bar');
+
+      const shuffleIcon = parent.querySelector('.shuffle');
+      shuffleIcon && shuffleIcon.classList.toggle('is-hidden');
+
+      const thumbtackIcon = parent.querySelector('.thumbtack');
+      thumbtackIcon && thumbtackIcon.classList.toggle('is-hidden');
     }
   }
 
@@ -68,7 +86,7 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
       ? new RegExp(searchKeyword, 'i').exec(bookmarkTitle) || new RegExp(searchKeyword, 'i').exec(webLink)
       : true;
 
-    if (bookmarkTitle && match) {
+    if (bookmarkTitle && match && (webLink || (bookmarkNode.children && bookmarkNode.children.length > 0))) {
       return (
         <div
           className={webLink ? "cell has-text-link p-1 is-widescreen" : "cell has-text-link"}
@@ -90,25 +108,29 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
 
           {webLink &&
             <div
-              className="is-pulled-right pl-2"
+              className="is-pulled-right pl-3 actions-bar"
               style={{ position: "absolute", top: "5px", right: "5px", zIndex: 1 }}
-              onMouseOver={webLink && handleChangeBackgroundColor}
-              onMouseOut={webLink && handleChangeBackgroundColor}
             >
               <FontAwesomeIcon
                 icon={faThumbtack}
                 onClick={(event) => handlePinBookmark(bookmarkNode.id, event)}
-                className={formData.pinBookmarks.includes(bookmarkNode.id) ? "is-hidden mt-1 mr-3" : "mt-1 mr-3"}
+                className={formData.pinBookmarks.includes(bookmarkNode.id) ? "is-hidden mt-1 mr-3 thumbtack" : "mt-1 mr-3 thumbtack"}
+                onMouseOver={webLink && handleChangeBackgroundColor}
+                onMouseOut={webLink && handleChangeBackgroundColor}
               />
               <FontAwesomeIcon
                 icon={faShuffle}
                 onClick={(event) => handleUnPinBookmark(bookmarkNode.id, event)}
-                className={formData.pinBookmarks.includes(bookmarkNode.id) ? "mt-1 mr-3" : "is-hidden mt-1 mr-3"}
+                className={formData.pinBookmarks.includes(bookmarkNode.id) ? "mt-1 mr-3 shuffle" : "is-hidden mt-1 mr-3 shuffle"}
+                onMouseOver={webLink && handleChangeBackgroundColor}
+                onMouseOut={webLink && handleChangeBackgroundColor}
               />
               <FontAwesomeIcon
                 icon={faTrash}
                 className="mt-1 mr-3"
                 onClick={(event) => handleDeleteBookmark(bookmarkNode.id, event)}
+                onMouseOver={webLink && handleChangeBackgroundColor}
+                onMouseOut={webLink && handleChangeBackgroundColor}
             />
           </div>}
         </div>

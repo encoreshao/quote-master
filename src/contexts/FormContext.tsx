@@ -4,15 +4,17 @@ import { getStorage, setStorage } from '../utils';
 
 interface FormData {
   username: string;
+  telphone: string;
+  backgroundUrl: string;
   defaultTab: string;
   github: string;
   gitlab: string;
   bamboohr: string;
-  telphone: string;
   overview: string;
   pinBookmarks: string[];
+  tasks: string[];
   enabledDashboard: boolean;
-  enabledGitlub: boolean;
+  enabledTasks: boolean;
   enabledQuotes: boolean;
   enabledBookmarks: boolean;
   enabledDownloads: boolean;
@@ -33,15 +35,17 @@ const FormContext = createContext<FormContextType | undefined>(undefined);
 const FormProvider = ({ children }: { children: ReactNode }) => {
   const [formData, setFormData] = useState<FormData>({
     username: '',
-    defaultTab: '',
+    telphone: '',
+    backgroundUrl: 'https://picsum.photos/id/381/1920/1080',
+    defaultTab: 'overview',
     github: 'https://github.com/',
     gitlab: '',
     bamboohr: '',
-    telphone: '',
     overview: '',
     pinBookmarks: [],
-    enabledDashboard: true,
-    enabledGitlub: true,
+    tasks: [],
+    enabledDashboard: false,
+    enabledTasks: true,
     enabledQuotes: true,
     enabledBookmarks: true,
     enabledDownloads: false,

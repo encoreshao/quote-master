@@ -43,11 +43,11 @@ function HeroFooter(props: { setTab: (arg0: string) => void; tab: string }) {
             >
               <a> Quotes </a>
             </li>}
-            {formData.enabledGitlub && <li
-              onClick={() => handleClick('gitlab')}
-              className={props.tab === 'gitlab' ? 'is-active' : ''}
+            {formData.enabledTasks && <li
+              onClick={() => handleClick('tasks')}
+              className={props.tab === 'tasks' ? 'is-active' : ''}
             >
-              <a> Gitlab </a>
+              <a> Tasks </a>
             </li>}
             {browserChrome && formData.enabledBookmarks && <li
               onClick={() => handleClick('bookmarks')}

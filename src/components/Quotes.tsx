@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import { useEffect, useState } from "react";
-import DateTime from "./DateTime";
 
 function Quotes() {
   const [quotes, setQuotes] = useState([])
@@ -31,7 +30,6 @@ function Quotes() {
       <div className="hero-body" id="quotes">
         <div className="container has-text-centered">
           <p className="title">Quotes</p>
-          <DateTime wday={false}/>
           <hr />
         </div>
       </div>
