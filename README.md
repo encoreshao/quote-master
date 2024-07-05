@@ -1,23 +1,16 @@
 # Quote Master: Customized Efficiency Tool
 
-Chrome Extension: Bookmarks and Extensions, Downloads and Customized Links can be accessed from the Default Newtab page.
+**Quote Master** is a powerful tool designed to enhance productivity and streamline daily activities. With Quote Master, users can effortlessly manage bookmarks, extensions, downloads, and customized links, all accessible from the default new tab page.
 
-It also supports users in managing their tasks, helping with daily work.
+Whether you need to manage your browser resources or keep track of daily tasks, Quote Master provides a seamless and efficient user experience.
 
-### Features
+### Key Features:
 
-- Download & Extension Shortcuts
-- Customized Header Links
-  - Gitlab
-  - GitHub
-  - BambooHR
-- Bookmark Manager
-  - Display all bookmarks
-  - Pin & Unpin bookmarks
-  - Delete bookmarks
-- Tasks Manager
-- Random Quotes
-- Settings
+- Bookmark Management: Easily organize and access your bookmarks.
+- Extensions: Quick access extensions directly from the new tab page.
+- Downloads: Quick access downloads directly from the new tab page.
+- Customized Links: Quick access to frequently used links and websites.
+- Task Management: Create, manage, and track tasks to boost daily productivity.
 
 ### Screenshots
 
