@@ -2,18 +2,34 @@
 
 Chrome Extension: Bookmarks and Extensions, Downloads and Customized Links can be accessed from the Default Newtab page.
 
+It also supports users in managing their tasks, helping with daily work.
+
 ### Features
 
 - Download & Extension Shortcuts
 - Customized Header Links
+  - Gitlab
+  - GitHub
+  - BambooHR
 - Bookmark Manager
+  - Display all bookmarks
+  - Pin & Unpin bookmarks
+  - Delete bookmarks
 - Tasks Manager
 - Random Quotes
 - Settings
 
 ### Screenshots
 
-### Usage
+- ![Overview](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/overview.png)
+
+- ![Quotes](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/quotes.png)
+
+- ![Tasks Management](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/tasks-management.png)
+
+- ![Bookmark Manager](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/bookmark-manager.png)
+
+- ![Settings](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/settings.png)
 
 ### Contributing
 
