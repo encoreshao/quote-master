@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     getStorage(["currentTab", "backgroundUrl"], result => {
-      setTab(result.currentTab);
+      setTab(result.currentTab || 'overview');
       result.backgroundUrl && setBackgroundUrl(result.backgroundUrl);
     });
   }, []);

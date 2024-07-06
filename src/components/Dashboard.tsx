@@ -8,7 +8,7 @@ library.add(faCoffee)
 
 function Dashboard() {
   return (
-    <div className="hero-body" id="overview">
+    <div className="hero-body">
       <div className="container has-text-centered">
         <div className='cup-wrapper'>
           <div className='cup-box shake' style={{ position: 'relative', width: 'fit-content', margin: 'auto', }}>

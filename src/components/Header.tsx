@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { faHome, faEnvelopeCircleCheck, faHeartPulse, faDownload, faGears } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faHeartPulse, faDownload, faGears, faMailBulk } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBandcamp } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useFormContext } from '../contexts/FormContext';
@@ -39,12 +39,12 @@ function HeroFooter() {
                 <span> Home </span>
               </a>
 
-              <a className="navbar-item" href="https://mail.google.com/mail/u/0/#inbox">
+              {formData.enabledGmail && <a className="navbar-item" href="https://mail.google.com/mail/u/0/#inbox" target="_blank">
                 <span className="icon">
-                  <FontAwesomeIcon icon={faEnvelopeCircleCheck} />
+                  <FontAwesomeIcon icon={faMailBulk} />
                 </span>
                 <span> Gmail </span>
-              </a>
+              </a>}
 
               {formData.gitlab && <a className="navbar-item" href={formData.gitlab} target="_blank">
                 <span className="icon">

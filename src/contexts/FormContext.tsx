@@ -6,13 +6,15 @@ interface FormData {
   username: string;
   telphone: string;
   backgroundUrl: string;
-  defaultTab: string;
   github: string;
   gitlab: string;
   bamboohr: string;
   overview: string;
+  currentTab: string;
+  searchEngine: string;
   pinBookmarks: string[];
   tasks: string[];
+  enabledGmail: boolean;
   enabledDashboard: boolean;
   enabledTasks: boolean;
   enabledQuotes: boolean;
@@ -37,13 +39,15 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     username: '',
     telphone: '',
     backgroundUrl: 'https://picsum.photos/id/381/1920/1080',
-    defaultTab: 'overview',
     github: 'https://github.com/',
     gitlab: '',
     bamboohr: '',
     overview: '',
+    currentTab: 'overview',
+    searchEngine: 'https://www.google.com/search?q=',
     pinBookmarks: [],
     tasks: [],
+    enabledGmail: true,
     enabledDashboard: false,
     enabledTasks: true,
     enabledQuotes: true,

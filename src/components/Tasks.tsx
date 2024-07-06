@@ -33,11 +33,10 @@ function Tasks() {
   };
 
   return (
-    <div className="hero-body" id="quotes">
+    <div className="hero-body">
       <div className="container has-text-centered">
         <p className="title"> Tasks </p>
 
-        <hr />
         <div>
           <div className="field is-horizontal">
               <div className="field-body">
@@ -50,7 +49,7 @@ function Tasks() {
                     </p>
                     <p className="control is-expanded">
                       <input
-                        className="input"
+                        className="input is-focused is-info"
                         type="text"
                         placeholder="Add a new task..."
                         onChange={(e) => setInput(e.target.value)}
@@ -59,7 +58,7 @@ function Tasks() {
                       />
                     </p>
                     <button
-                      className="button is-link ml-2"
+                      className="button is-link ml-2 has-background-link"
                       onClick={addTask}
                     >
                       Add Task
@@ -69,9 +68,11 @@ function Tasks() {
               </div>
             </div>
 
+            <hr />
+
             {tasks &&
               <div
-                className='has-text-left p-2'
+                className='has-text-left p-1'
                 style={{ maxHeight: "calc(100vh - 400px)", overflowY: "scroll" }}
               >
                 <div className="fixed-grid">
@@ -89,7 +90,7 @@ function Tasks() {
                                   readOnly
                                 />
                                 <span
-                                  className="icon is-small is-left has-background-link has-text-weight-bold has-text-white"
+                                  className="icon is-small is-left has-background-link has-text-weight-bold has-text-white is-rounded"
                                 >{index + 1}</span>
                               </p>
                             </div>
@@ -97,7 +98,7 @@ function Tasks() {
 
                           <div className="field-label is-normal" style={{ marginRight: "0px" }}>
                             <button
-                              className="delete is-medium is-pulled-right"
+                              className="delete is-medium is-pulled-right has-background-link"
                               onClick={() => removeTask(index)}
                             ></button>
                           </div>

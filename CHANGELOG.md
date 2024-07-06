@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.0.6] - 2024-07-06
+
+### Add a new search engine
+
+- New feature: Allow users to quickly search by keyword in Quote Master to open Google
+
 ## [1.0.5] - 2024-07-05
 
 ### New tasks manager board
