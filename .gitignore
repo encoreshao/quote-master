@@ -12,6 +12,7 @@
 /build
 /dist
 /tmp
+/releases
 /config/credentials/key.pem
 
 # misc
