@@ -39,6 +39,15 @@ function Overview() {
                         <option value={'https://www.google.com/search?q='}>
                           Google
                         </option>
+                        <option value={'https://www.bing.com/search?q='}>
+                          Bing
+                        </option>
+                        <option value={'https://search.aol.com/aol/search?q='}>
+                          AOL
+                        </option>
+                        <option value={'https://duckduckgo.com/?ia=web&q='}>
+                          DuckDuckGo
+                        </option>
                         <option value={'https://www.baidu.com/s?wd='}>
                           Baidu
                         </option>
