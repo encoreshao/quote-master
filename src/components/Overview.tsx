@@ -9,6 +9,7 @@ import { setStorage } from '../utils';
 
 function Overview() {
   const { formData } = useFormContext();
+  const [searchEngine, setSearchEngine] = useState(formData.searchEngine);
   const [keyword, setKeyword] = useState('');
 
   const handleSearch = () => {
@@ -18,7 +19,12 @@ function Overview() {
   };
 
   const handleSearachEngine = (event: any) => {
-    setStorage({ searchEngine: event.target.value }, () => {});
+    const selectedSearchEngine = event.target.value
+
+    setStorage({ searchEngine: selectedSearchEngine }, () => {
+      formData.searchEngine = selectedSearchEngine
+      setSearchEngine(selectedSearchEngine)
+    });
   };
 
   return (
@@ -33,7 +39,7 @@ function Overview() {
                   <div className="control has-icons-left">
                     <div className="select">
                       <select
-                        value={formData.searchEngine}
+                        value={searchEngine}
                         onChange={(event) => handleSearachEngine(event)}
                       >
                         <option value={'https://www.google.com/search?q='}>
@@ -63,7 +69,7 @@ function Overview() {
                   </div>
                   <p className="control is-expanded">
                     <input
-                      className="input"
+                      className="input is-focused is-info"
                       type="text"
                       placeholder="Search by keyword..."
                       onChange={(e) => setKeyword(e.target.value)}

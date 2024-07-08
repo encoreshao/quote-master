@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-duplicate-props */
-import { faFolder, faBookBookmark, faThumbtack, faTrash, faShuffle } from "@fortawesome/free-solid-svg-icons";
+import { faBookBookmark, faThumbtack, faTrash, faShuffle, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { setStorage } from "../../utils";
 import { useFormContext } from "../../contexts/FormContext";
@@ -89,7 +89,9 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
     if (bookmarkTitle && match && (webLink || (bookmarkNode.children && bookmarkNode.children.length > 0))) {
       return (
         <div
-          className={webLink ? "cell has-text-link p-1 is-widescreen" : "cell has-text-link"}
+          className={
+            webLink ? `cell has-text-link p-1 is-widescreen` : `cell has-text-link`
+          }
           key={bookmarkNode.id}
           style={{ cursor: 'pointer', margin: "1px 0", wordBreak: "break-all", position: "relative" }}
           onMouseOver={webLink && handleChangeBackgroundColor}
@@ -100,7 +102,7 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
         >
           {webLink ?
             <FontAwesomeIcon icon={faBookBookmark} className={`mr-2`} /> :
-            <FontAwesomeIcon icon={faFolder} className={`mr-2`} />
+            <FontAwesomeIcon icon={faFolderOpen} className={`mr-2`} />
           }
 
           {bookmarkTitle} {bookmarkNode.children && bookmarkNode.children.length > 0 ? `(${bookmarkNode.children.length})` : ''}
