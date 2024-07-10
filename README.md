@@ -6,6 +6,7 @@ Whether you need to manage your browser resources or keep track of daily tasks, 
 
 ### Key Features:
 
+- Search Engine: Quickly using a keyword search and access a dedicated results page.
 - Bookmark Management: Easily organize and access your bookmarks.
 - Extensions: Quick access extensions directly from the new tab page.
 - Downloads: Quick access downloads directly from the new tab page.
@@ -14,7 +15,7 @@ Whether you need to manage your browser resources or keep track of daily tasks, 
 
 ### Screenshots
 
-- ![Overview](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/overview.png)
+- ![Search Engine](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/search-engine.png)
 
 - ![Quotes](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/quotes.png)
 
