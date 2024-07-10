@@ -11,11 +11,9 @@ function Settings() {
 
   return (
     <>
-      <div className="hero-body">
+      <div className="hero-body" style={{ alignItems: 'baseline' }}>
         <div className="container has-text-centered">
           <p className="title">Settings</p>
-          <p className="subtitle">
-          </p>
           <hr />
           <br />
 
@@ -304,7 +302,7 @@ function Settings() {
         </div>
       </div>
 
-      <article className="message has-text-centered has-text-white" style={{ marginBottom: '0px' }}>
+      <article className="message has-text-centered has-background-white has-text-black" style={{ marginBottom: '0px' }}>
         <div className="message-body">
           <p>
             <strong>Quote Master</strong> by <a href="https://icmoc.com">Encore Shao</a>.

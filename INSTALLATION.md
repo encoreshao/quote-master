@@ -5,6 +5,7 @@ A step-by-step guide to creating a Chrome extension using React.
 - react + typescript
 - webpacker
 - [bulma](https://bulma.io/documentation/)
+- [Bulma Toast](https://rfoel.github.io/bulma-toast/)
 - [Fontawesome](https://fontawesome.com/search?o=r&m=free)
 
 ## Steps

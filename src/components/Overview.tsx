@@ -29,18 +29,18 @@ function Overview() {
 
   return (
     <>
-      <div className="hero-body">
+      <div className="hero-body" style={{ alignItems: 'baseline', marginTop: '5%' }}>
         <div className="container has-text-centered">
-          <DateTime wday={true} />
           <div className="field is-horizontal">
             <div className="field-body">
               <div className="field is-expanded">
-                <div className="field has-addons">
-                  <div className="control has-icons-left">
-                    <div className="select">
+                <div className="field has-addons" style={{ justifyContent: 'center' }}>
+                  <div className="control">
+                    <div className="select is-link">
                       <select
                         value={searchEngine}
                         onChange={(event) => handleSearachEngine(event)}
+                        className='has-text-centered'
                       >
                         <option value={'https://www.google.com/search?q='}>
                           Google
@@ -62,32 +62,37 @@ function Overview() {
                         </option>
                       </select>
                     </div>
-
-                    <div className="icon is-small is-left">
-                      <FontAwesomeIcon icon={faSearch} />
-                    </div>
                   </div>
-                  <p className="control is-expanded">
+
+                  <div className="control has-icons-left" style={{ width: '40%' }}>
                     <input
-                      className="input is-focused is-info"
+                      className="input is-focused is-link"
                       type="text"
                       placeholder="Search by keyword..."
                       onChange={(e) => setKeyword(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                       value={keyword}
                     />
-                  </p>
-                  <button
-                    className="button is-link ml-2"
-                    onClick={handleSearch}
-                  >
-                    Search
-                  </button>
+                    <span className="icon is-medium is-left">
+                      <FontAwesomeIcon icon={faSearch} />
+                    </span>
+                  </div>
+                  <div className="control">
+                    <button
+                      className="button is-link"
+                      onClick={handleSearch}
+                    >
+                      Search
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <hr />
+
+          <div className="has-text-centered" style={{ marginTop: '10%' }}>
+            <DateTime wday={true} />
+          </div>
         </div>
       </div>
 

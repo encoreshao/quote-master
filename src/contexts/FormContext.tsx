@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createContext, useState, useEffect, useContext, ReactNode, ChangeEvent } from 'react';
+import React, { createContext, useState, useEffect, useContext, ReactNode, ChangeEvent, useRef, useCallback } from 'react';
 import { getStorage, setStorage } from '../utils';
+import { toast } from 'bulma-toast'
+import debounce from "lodash/debounce"
 
 interface FormData {
   username: string;
@@ -65,6 +68,22 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     });
   }, []);
 
+  const debouncedSave = useCallback(
+    debounce((name: string, value: any) => {
+      setStorage({ [name]: value }, () => {
+        toast({
+          message: 'Settings saved successfully',
+          type: 'is-link',
+          duration: 2000,
+          position: 'top-left',
+          pauseOnHover: true,
+          animate: { in: 'fadeIn', out: 'fadeOut' },
+        });
+      });
+    }, 1000),
+    [1000]
+  );
+
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = event.target;
     const updatedValue = type === 'checkbox' ? (event.target as HTMLInputElement).checked : value;
@@ -74,7 +93,7 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
       [name]: updatedValue,
     }));
 
-    setStorage({ [name]: updatedValue }, () => {});
+    debouncedSave(name, updatedValue);
   };
 
   return (
