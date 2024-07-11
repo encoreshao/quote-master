@@ -2,8 +2,9 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import { faBookBookmark, faThumbtack, faTrash, faShuffle, faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { setStorage } from "../../utils";
+import { setStorage, getDomainFromURL } from "../../utils";
 import { useFormContext } from "../../contexts/FormContext";
+import ActionIcon from "./ActionIcon";
 
 const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
   const { bookmarks, searchKeyword } = props;
@@ -85,6 +86,7 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
     const match = searchKeyword
       ? new RegExp(searchKeyword, 'i').exec(bookmarkTitle) || new RegExp(searchKeyword, 'i').exec(webLink)
       : true;
+    const isPinned = formData.pinBookmarks.includes(bookmarkNode.id);
 
     if (bookmarkTitle && match && (webLink || (bookmarkNode.children && bookmarkNode.children.length > 0))) {
       return (
@@ -100,41 +102,45 @@ const BookmarkList = (props: { bookmarks: any, searchKeyword: any}) => {
             webLink && window.open(webLink, '_blank')
           }}
         >
-          {webLink ?
-            <FontAwesomeIcon icon={faBookBookmark} className={`mr-2`} /> :
-            <FontAwesomeIcon icon={faFolderOpen} className={`mr-2`} />
+          {
+            webLink ? <div style={{ width: "70%", overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+              <FontAwesomeIcon icon={faBookBookmark} className={`mr-2`} /> {bookmarkTitle}
+            </div> : <>
+              <FontAwesomeIcon icon={faFolderOpen} className={`mr-2`} />
+              {bookmarkTitle} {bookmarkNode.children && bookmarkNode.children.length > 0 ? `(${bookmarkNode.children.length})` : ''}
+              {bookmarkNode.children && bookmarkNode.children.length > 0 && drawTreeNodes(bookmarkNode.children)}
+            </>
           }
 
-          {bookmarkTitle} {bookmarkNode.children && bookmarkNode.children.length > 0 ? `(${bookmarkNode.children.length})` : ''}
-          {bookmarkNode.children && bookmarkNode.children.length > 0 && drawTreeNodes(bookmarkNode.children)}
-
-          {webLink &&
+          {webLink && <>
             <div
               className="is-pulled-right pl-3 actions-bar"
-              style={{ position: "absolute", top: "5px", right: "5px", zIndex: 1 }}
+              style={{ position: "absolute", top: "4px", right: "5px", zIndex: 1 }}
             >
-              <FontAwesomeIcon
+              <span style={{ marginRight: "10px" }}>{getDomainFromURL(webLink)}</span>
+              <ActionIcon
                 icon={faThumbtack}
                 onClick={(event) => handlePinBookmark(bookmarkNode.id, event)}
-                className={formData.pinBookmarks.includes(bookmarkNode.id) ? "is-hidden mt-1 mr-3 thumbtack" : "mt-1 mr-3 thumbtack"}
+                className={isPinned ? "is-hidden mt-1 mr-3 thumbtack" : "mt-1 mr-3 thumbtack"}
                 onMouseOver={webLink && handleChangeBackgroundColor}
                 onMouseOut={webLink && handleChangeBackgroundColor}
               />
-              <FontAwesomeIcon
+              <ActionIcon
                 icon={faShuffle}
                 onClick={(event) => handleUnPinBookmark(bookmarkNode.id, event)}
-                className={formData.pinBookmarks.includes(bookmarkNode.id) ? "mt-1 mr-3 shuffle" : "is-hidden mt-1 mr-3 shuffle"}
+                className={isPinned ? "mt-1 mr-3 shuffle" : "is-hidden mt-1 mr-3 shuffle"}
                 onMouseOver={webLink && handleChangeBackgroundColor}
                 onMouseOut={webLink && handleChangeBackgroundColor}
               />
-              <FontAwesomeIcon
+              <ActionIcon
                 icon={faTrash}
-                className="mt-1 mr-3"
                 onClick={(event) => handleDeleteBookmark(bookmarkNode.id, event)}
+                className="mt-1 mr-3"
                 onMouseOver={webLink && handleChangeBackgroundColor}
                 onMouseOut={webLink && handleChangeBackgroundColor}
-            />
-          </div>}
+              />
+            </div>
+          </>}
         </div>
       );
     } else if (bookmarkNode.children && bookmarkNode.children.length > 0) {

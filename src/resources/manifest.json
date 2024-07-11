@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Quote Master: Customized Efficiency Tool",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Bookmarks and Extensions, Downloads and Customized Links can be accessed from the Default Newtab page.",
   "chrome_url_overrides": {
     "newtab": "index.html"

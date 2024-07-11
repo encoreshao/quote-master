@@ -21,4 +21,13 @@ const setStorage = (obj: PlainObjectType, callback?: () => any) => {
   }
 };
 
-export { getStorage, setStorage };
+const getDomainFromURL = (url: string): string => {
+  try {
+    return new URL(url).hostname;
+  } catch (error) {
+    console.error("Invalid URL:", error);
+    return "";
+  }
+};
+
+export { getStorage, setStorage, getDomainFromURL };

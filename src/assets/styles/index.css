@@ -2,17 +2,34 @@
 @import 'bulma/css/bulma.min.css';
 
 :root {
-  --sl-color-bg: rgba(24, 49, 83, 1);
+  /* --sl-color-bg: rgba(24, 49, 83, 1); */
+
   --bulma-skeleton-background: var(--bulma-border);
   --bulma-skeleton-radius: var(--bulma-radius-small);
   --bulma-skeleton-block-min-height: 4.5em;
   --bulma-skeleton-lines-gap: 0.75em;
   --bulma-skeleton-line-height: 0.75em;
+
+  /* --bulma-link-text: rgb(248, 245, 245); */
+  /* --bulma-bottom: rgb(34, 23, 23); */
+  /* --bulma-link-h: rgba(212, 193, 193, 1); */
+  /* --bulma-link-s: red; */
+  /* --bulma-link-l: red; */
+
+  /* --bulma-input-text: rgb(244, 244, 248); */
+  /* --bulma-input-h: rgb(115, 97, 97); */
+  /* --bulma-input-s: rgb(90, 82, 82); */
+  /* --bulma-input-l: rgb(140, 130, 130); */
 }
 
 * {
   box-sizing: border-box;
 }
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+  }
+} */
 
 html {
   font-family: 'Poppins', Lato, Tahoma, sans-serif;
