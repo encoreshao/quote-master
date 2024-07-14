@@ -15,6 +15,7 @@ interface FormData {
   overview: string;
   currentTab: string;
   searchEngine: string;
+  chatBot: string;
   pinBookmarks: string[];
   tasks: string[];
   enabledGmail: boolean;
@@ -48,6 +49,7 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     overview: '',
     currentTab: 'overview',
     searchEngine: 'https://www.google.com/search?q=',
+    chatBot: 'https://chatgpt.com/',
     pinBookmarks: [],
     tasks: [],
     enabledGmail: true,

@@ -3,7 +3,7 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
-import { faBandcamp, faGithub, faGitlab } from "@fortawesome/free-brands-svg-icons";
+import { faBandcamp, faBots, faGithub, faGitlab } from "@fortawesome/free-brands-svg-icons";
 import { useFormContext } from "../contexts/FormContext";
 
 function Settings() {
@@ -26,7 +26,7 @@ function Settings() {
                 <div className="field">
                   <p className="control is-expanded has-icons-left">
                     <input
-                      className="input" type="text" placeholder="Name" name="username"
+                      className="input" type="text" placeholder="Your name" name="username"
                       onChange={handleChange} value={formData.username}
                     />
                     <span className="icon is-small is-left">
@@ -70,7 +70,7 @@ function Settings() {
                     </p>
                     <p className="control is-expanded">
                       <input
-                        className="input" type="text" name="backgroundUrl" placeholder="Your background image link"
+                        className="input" type="text" name="backgroundUrl" placeholder="The background image URL"
                         onChange={handleChange} value={formData.backgroundUrl}
                       />
                     </p>
@@ -152,6 +152,32 @@ function Settings() {
                       <input
                         className="input" type="text" name="bamboohr" placeholder="Your bambooHR link"
                         onChange={handleChange} value={formData.bamboohr}
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="field is-horizontal">
+              <div className="field-label"></div>
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <a className="button is-static">
+                        <FontAwesomeIcon icon={faBots} fontSize="24"/>
+                      </a>
+                    </p>
+                    <p className="control">
+                      <a className="button is-static">
+                        Chatbot
+                      </a>
+                    </p>
+                    <p className="control is-expanded">
+                      <input
+                        className="input" type="text" name="chatBot" placeholder="Your chatbot link"
+                        onChange={handleChange} value={formData.chatBot}
                       />
                     </p>
                   </div>
@@ -261,7 +287,7 @@ function Settings() {
                 <div className="field">
                   <div className="control">
                     <textarea
-                      className="textarea" name="overview" placeholder="Explain how we can help you"
+                      className="textarea" name="overview" placeholder="Say something to introduce yourself"
                       onChange={handleChange} value={formData.overview}
                     />
                   </div>
