@@ -91,24 +91,10 @@ function Overview() {
           </div>
 
           <div className="has-text-centered" style={{ marginTop: '10%' }}>
-            <DateTime wday={true} />
+            <DateTime withYear={false} />
           </div>
         </div>
       </div>
-
-      {formData.overview &&
-        <div className="card has-background-primary-100">
-          <div className="container card-content">
-            <p className="title">
-              Hello! {formData.username}
-            </p>
-            <br />
-            <p className="subtitle">
-              {formData.overview}
-            </p>
-          </div>
-        </div>
-      }
     </>
   );
 }

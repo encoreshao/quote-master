@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.1.0] - 2024-07-14
+
+- Able to display pinned bookmarks on Dashboard
+- UI Update: new date formatter on Overview
+
 ## [1.0.8] - 2024-07-10
 
 - UI Improvements: add toast for settings updates

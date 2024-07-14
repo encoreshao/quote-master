@@ -33,6 +33,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse(bookmarkTreeNodes);
     });
     return true; // Keeps the message channel open for sendResponse
+  } else if (request.action === "getBookmarkById") {
+    chrome.bookmarks.get(request.id, (bookmark) => {
+      sendResponse({ bookmark });
+    });
+    return true; // Keep the message channel open for sendResponse
   } else if (
     request.action === "downloads" ||
     request.action === "extensions"

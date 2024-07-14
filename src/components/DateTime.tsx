@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export const DateTime = (props: { wday: Boolean }) => {
+export const DateTime = (props: { withYear: Boolean }) => {
   const [date, setDate] = useState(new Date());
   const dayNames = [
     "Sunday", "Monday", "Tuesday", "Wednesday",
@@ -14,15 +14,17 @@ export const DateTime = (props: { wday: Boolean }) => {
     }
   });
 
-  const year = date.getFullYear();
-  const month = date.toLocaleString('default', { month: 'short' });
+  const month = date.toLocaleString('default', { month: 'long' });
   const day = date.getDate();
 
   return(
     <>
-      {props.wday && <p className='title'>{dayNames[date.getDay()]}</p>}
-      <br />
-      <p className="subtitle is-bold"> {month} {day}, {year} {date.toLocaleTimeString()} </p>
+      <p className="subtitle is-bold" style={{ fontSize: '2rem' }}>
+        {dayNames[date.getDay()]}, {props.withYear ? date.getFullYear() : ''} {month} {day}
+      </p>
+      <p className='subtitle is-bold' style={{ fontSize: '15rem' }}>
+        {date.getHours()}:{String(date.getMinutes()).padStart(2, '0')}
+      </p>
     </>
   )
 }

@@ -270,9 +270,9 @@ function Settings() {
             </div>
 
 
-            <div className="field is-horizontal">
+            {false &&<div className="field is-horizontal">
               <div className="field-label">
-                <label className="label has-text-white"> Pin Bookmarks </label>
+                <label className="label has-text-white"> Pinned Bookmarks </label>
               </div>
               <div className="field-body">
                 <div className="field is-narrow">
@@ -296,7 +296,7 @@ function Settings() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>}
 
           </div>
         </div>
