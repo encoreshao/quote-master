@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Lato|Poppins|Kaushan+Script");
 @import 'bulma/css/bulma.min.css';
+@import './bulma-switch.min.css';
 
 :root {
   --bulma-skeleton-background: var(--bulma-border);

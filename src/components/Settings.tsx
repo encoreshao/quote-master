@@ -192,34 +192,37 @@ function Settings() {
               <div className="field-body">
                 <div className="field is-narrow">
                   <div className="control">
-                    <label className="checkbox has-text-white mr-5">
-                      <input
-                        type="checkbox"
-                        name="enabledGmail"
-                        className="mr-2"
-                        onChange={handleChange}
-                        checked={formData.enabledGmail}
-                      />
+                    <input
+                      id="enabledGmail"
+                      type="checkbox"
+                      name="enabledGmail"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledGmail}
+                    />
+                    <label htmlFor="enabledGmail" className="has-text-white mr-5">
                       Gmail
                     </label>
-                    <label className="checkbox has-text-white mr-5">
-                      <input
-                        type="checkbox"
-                        name="enabledDownloads"
-                        className="mr-2"
-                        onChange={handleChange}
-                        checked={formData.enabledDownloads}
-                      />
+                    <input
+                      id="enabledDownloads"
+                      type="checkbox"
+                      name="enabledDownloads"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledDownloads}
+                    />
+                    <label htmlFor="enabledDownloads" className="has-text-white mr-5">
                       Downloads
                     </label>
-                    <label className="checkbox has-text-white mr-5">
-                      <input
-                        type="checkbox"
-                        name="enabledExtensions"
-                        className="mr-2"
-                        onChange={handleChange}
-                        checked={formData.enabledExtensions}
-                      />
+                    <input
+                      id="enabledExtensions"
+                      type="checkbox"
+                      name="enabledExtensions"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledExtensions}
+                    />
+                    <label htmlFor="enabledExtensions" className="has-text-white mr-5">
                       Extensions
                     </label>
                   </div>
@@ -229,49 +232,53 @@ function Settings() {
 
             <div className="field is-horizontal">
               <div className="field-label">
-                <label className="label has-text-white"> Tabs </label>
+                <label className="label has-text-white mt-3"> Tabs </label>
               </div>
               <div className="field-body">
                 <div className="field is-narrow">
                   <div className="control">
-                    <label className="checkbox has-text-white mr-5">
-                      <input
-                        type="checkbox"
-                        name="enabledDashboard"
-                        className="mr-2"
-                        onChange={handleChange}
-                        checked={formData.enabledDashboard}
-                      />
+                    <input
+                      id="enabledDashboard"
+                      type="checkbox"
+                      name="enabledDashboard"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledDashboard}
+                    />
+                    <label htmlFor="enabledDashboard" className="has-text-white mr-5">
                       Dashboard
                     </label>
-                    <label className="checkbox has-text-white mr-5">
-                      <input
-                        type="checkbox"
-                        name="enabledQuotes"
-                        className="mr-2"
-                        onChange={handleChange}
-                        checked={formData.enabledQuotes}
-                      />
+                    <input
+                      id="enabledQuotes"
+                      type="checkbox"
+                      name="enabledQuotes"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledQuotes}
+                    />
+                    <label htmlFor="enabledQuotes" className="has-text-white mr-5">
                       Quotes
-                    </label>
-                    <label className="checkbox has-text-white mr-5">
-                      <input
-                        type="checkbox"
-                        name="enabledTasks"
-                        className="mr-2"
-                        onChange={handleChange}
-                        checked={formData.enabledTasks}
-                      />
+                  </label>
+                    <input
+                      id="enabledTasks"
+                      type="checkbox"
+                      name="enabledTasks"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledTasks}
+                    />
+                    <label htmlFor="enabledTasks" className="has-text-white mr-5">
                       Tasks
                     </label>
-                    <label className="checkbox has-text-white mr-5">
-                      <input
-                        type="checkbox"
-                        name="enabledBookmarks"
-                        className="mr-2"
-                        onChange={handleChange}
-                        checked={formData.enabledBookmarks}
-                      />
+                    <input
+                      id="enabledBookmarks"
+                      type="checkbox"
+                      name="enabledBookmarks"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledBookmarks}
+                    />
+                    <label htmlFor="enabledBookmarks" className="has-text-white mr-5">
                       Bookmarks
                     </label>
                   </div>
