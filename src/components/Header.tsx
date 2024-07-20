@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { faHome, faHeartPulse, faDownload, faGears, faMailBulk } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBandcamp, faBots } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useFormContext } from '../contexts/FormContext';
+import { useEffect, useState } from 'react';
 
 interface NavItemProps {
   href?: string;
@@ -30,12 +32,21 @@ const NavItem: React.FC<NavItemProps> = ({ href, icon, text, onClick, isExternal
   </a>
 );
 
-function HeroFooter() {
+function HeroHeader(props: { tab: string }) {
   const { formData } = useFormContext();
+  const [pageTitle, setPageTitle] = useState('');
 
   const openInternalLink = (eventName: string) => {
     if (chrome.runtime) { chrome.runtime.sendMessage({ action: eventName }) }
   }
+
+  useEffect(() => {
+    if (props.tab) {
+      const currentTab = props.tab.charAt(0).toUpperCase() + formData.currentTab.slice(1)
+
+      setPageTitle(currentTab);
+    }
+  }, [props.tab])
 
   const navItems = [
     { condition: true, href: "#", icon: faHome, text: "Home", isExternal: false, isActive: true },
@@ -58,9 +69,10 @@ function HeroFooter() {
               onMouseOver={(event) => event.currentTarget.classList.toggle('has-background-link') }
               onMouseOut={(event) => event.currentTarget.classList.toggle('has-background-link') }
             >
-              <span>
+              <span style={{ marginTop: '-15px' }}>
                 <FontAwesomeIcon fontSize='200' icon={faHeartPulse} />
               </span>
+              <p className='title has-text-white ml-4'>{pageTitle}</p>
             </a>
             <span className="navbar-burger" data-target="navbarMenuHeroB">
               <span></span>
@@ -83,4 +95,4 @@ function HeroFooter() {
   );
 }
 
-export default HeroFooter;
+export default HeroHeader;

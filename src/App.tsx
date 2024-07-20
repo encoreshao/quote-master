@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react';
 
-import HeroFooter from './components/Footer';
 import HeroHeader from './components/Header';
+import HeroFooter from './components/Footer';
 
 import Overview from './components/Overview';
 import Quotes from './components/Quotes';
@@ -35,7 +35,7 @@ function App() {
         } : {}
       }
     >
-      <HeroHeader />
+      <HeroHeader tab={tab}/>
 
       {tab === 'overview' && <Overview />}
       {tab === 'dashboard' && <Dashboard />}

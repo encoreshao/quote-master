@@ -1,5 +1,10 @@
 # Change Log
 
+## [1.1.2] - 2024-07-14
+
+- UI Adjusted: move the page title to the header
+- bug fix: pinned bookmarks are not displayed in the dashboard
+
 ## [1.1.0] - 2024-07-14
 
 - Able to display pinned bookmarks on Dashboard

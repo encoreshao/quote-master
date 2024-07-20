@@ -13,9 +13,9 @@ function Settings() {
     <>
       <div className="hero-body" style={{ alignItems: 'baseline' }}>
         <div className="container has-text-centered">
-          <p className="title">Settings</p>
-          <hr />
-          <br />
+          {/* <p className="title">Settings</p> */}
+          {/* <hr /> */}
+          {/* <br /> */}
 
           <div>
             <div className="field is-horizontal">

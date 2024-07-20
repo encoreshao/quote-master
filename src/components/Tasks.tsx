@@ -35,7 +35,7 @@ function Tasks() {
   return (
     <div className="hero-body" style={{ alignItems: 'baseline' }}>
       <div className="container has-text-centered">
-        <div className="title">Tasks</div>
+        {/* <div className="title">Tasks</div> */}
         <div className="field is-horizontal" style={{ marginBottom: '10%' }}>
           <div className="field-body">
             <div className="field is-expanded">

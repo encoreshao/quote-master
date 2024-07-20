@@ -38,17 +38,8 @@ function Quotes() {
     <>
       <div className="hero-body">
         <div className="container has-text-centered">
-          <p className="title">Quotes</p>
-          <hr />
-          <p className="subtitle" style={{ cursor: 'pointer' }} onClick={() => handleRefreshQuote(quotes) }>
-            <FontAwesomeIcon
-              icon={faRefresh}
-              fontSize={'20'}
-              className="pr-2"
-            />
-
-            Refresh new
-          </p>
+          {/* <p className="title">Quotes</p> */}
+          {/* <hr /> */}
         </div>
       </div>
 
@@ -58,8 +49,18 @@ function Quotes() {
             <p className="title">
               ”{quote['quote']}“
             </p>
+
             <br />
-            <p className="subtitle">{quote['author']}</p>
+            <p className="subtitle is-primary" style={{ cursor: 'pointer' }} onClick={() => handleRefreshQuote(quotes) }>
+              <FontAwesomeIcon
+                icon={faRefresh}
+                fontSize={'20'}
+                className="pr-2"
+              />
+
+              Refresh new
+            </p>
+            {quote['author'] && <p className="subtitle">{quote['author']}</p>}
           </div>
         </div>
       }

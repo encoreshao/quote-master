@@ -34,7 +34,7 @@ function Bookmarks() {
     <>
       <div className="hero-body" style={{ alignItems: 'baseline' }}>
         <div className="container has-text-centered">
-          <p className="title">Bookmarks</p>
+          {/* <p className="title">Bookmarks</p> */}
           <hr />
 
           {formData.enabledBookmarks && hasBookmarks &&
@@ -65,7 +65,7 @@ function Bookmarks() {
               {bookmarks &&
                 <div
                   className='has-text-left p-2 fixed-grid has-background-white'
-                  style={{ maxHeight: "calc(100vh - 400px)", overflowY: "scroll" }}
+                  style={{ maxHeight: "calc(100vh - 300px)", overflowY: "scroll" }}
                 >
                   <div>
                     <BookmarkList bookmarks={bookmarks} searchKeyword={searchKeyword} />

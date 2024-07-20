@@ -71,13 +71,13 @@ function Dashboard() {
                 {formData.overview}
               </p>
 
-              {pinnedBookmarks && <>
+              {pinnedBookmarks && pinnedBookmarks.length > 0 && <>
                 <hr />
                 <span className="has-text-black">Pinned Bookmarks: </span>
-                  {pinnedBookmarks.map((bookmark: any) => (
-                      bookmark.url && <a className="has-text-link mr-2" href={bookmark.url} target='_blank'>
+                  {pinnedBookmarks.map((bookmark: any, index: number) => (
+                      bookmark.url && <><a className="has-text-link ml-1 mr-1" href={bookmark.url} target='_blank'>
                         {bookmark.title}
-                      </a>
+                      </a> {index < pinnedBookmarks.length - 1 ? <span className='has-text-link'>|</span> : ''} </>
                   ))}
                 </>
               }

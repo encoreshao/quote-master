@@ -17,6 +17,7 @@ function HeroFooter(props: { setTab: (arg0: string) => void; tab: string }) {
   const handleClick = (whichTab: string) => {
     setStorage({ 'currentTab': whichTab }, () => {
       props.setTab(whichTab)
+      formData.currentTab = whichTab;
     });
   };
 
