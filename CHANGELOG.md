@@ -1,6 +1,10 @@
 # Change Log
 
-## [1.1.2] - 2024-07-14
+## [1.1.3] - 2024-07-20
+
+- Released a new version for new logo
+
+## [1.1.2] - 2024-07-20
 
 - UI Adjusted: move the page title to the header
 - bug fix: pinned bookmarks are not displayed in the dashboard
