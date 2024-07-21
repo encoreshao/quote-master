@@ -20,6 +20,7 @@
   },
   "action": {
     "default_popup": "index.html",
+    "default_title": "Quote Master",
     "default_icon": {
       "16": "icons/logo16.png",
       "48": "icons/logo48.png",
