@@ -1,3 +1,34 @@
+const gitlabAPIURLs = {
+  user: "user",
+  users:
+    "users?active=true&without_project_bots=true&exclude_external=true&order_by=name&sort=asc&per_page=60",
+  projects:
+    "users/:user_id/contributed_projects?order_by=name&sort=asc&per_page=60",
+  issues:
+    "issues?assignee_id=:user_id&order_by=updated_at&sort=desc&state=opened&per_page=60",
+};
+
+const fetchFromGitlab = async (url: string, token: string) => {
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Private-Token": token,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+    return null;
+  }
+};
+
 const getStorage = (
   keys: string | string[] | PlainObjectType,
   callback: (v: any) => any
@@ -30,4 +61,25 @@ const getDomainFromURL = (url: string): string => {
   }
 };
 
-export { getStorage, setStorage, getDomainFromURL };
+const chunkArray = (array: any, size: number) => {
+  return array.reduce((acc: any, item: any, index: number) => {
+    const chunkIndex = Math.floor(index / size);
+
+    if (!acc[chunkIndex]) {
+      acc[chunkIndex] = []; // Start a new chunk
+    }
+
+    acc[chunkIndex].push(item); // Add item to the chunk
+
+    return acc;
+  }, []);
+};
+
+export {
+  getStorage,
+  setStorage,
+  getDomainFromURL,
+  gitlabAPIURLs,
+  chunkArray,
+  fetchFromGitlab,
+};

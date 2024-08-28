@@ -65,7 +65,7 @@ function Settings() {
                     </p>
                     <p className="control">
                       <a className="button is-static">
-                        Background URL
+                        Background
                       </a>
                     </p>
                     <p className="control is-expanded">
@@ -83,32 +83,6 @@ function Settings() {
               <div className="field-label">
                 <label className="label has-text-white"> Customized Links </label>
               </div>
-              <div className="field-body">
-                <div className="field is-expanded">
-                  <div className="field has-addons">
-                    <p className="control">
-                      <a className="button is-static">
-                        <FontAwesomeIcon icon={faGitlab} fontSize="24" />
-                      </a>
-                    </p>
-                    <p className="control">
-                      <a className="button is-static">
-                        Gitlab
-                      </a>
-                    </p>
-                    <p className="control is-expanded">
-                      <input
-                        className="input" type="text" name="gitlab" placeholder="Your gitlab link"
-                        onChange={handleChange} value={formData.gitlab}
-                      />
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="field is-horizontal">
-              <div className="field-label"></div>
               <div className="field-body">
                 <div className="field is-expanded">
                   <div className="field has-addons">
@@ -178,6 +152,86 @@ function Settings() {
                       <input
                         className="input" type="text" name="chatBot" placeholder="Your chatbot link"
                         onChange={handleChange} value={formData.chatBot}
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="field is-horizontal">
+              <div className="field-label">
+                <label className="label has-text-white"> GitLab Setting </label>
+              </div>
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <a className="button is-static">
+                        <FontAwesomeIcon icon={faGitlab} fontSize="24" />
+                      </a>
+                    </p>
+                    <p className="control">
+                      <a className="button is-static">
+                        Web URL
+                      </a>
+                    </p>
+                    <p className="control is-expanded">
+                      <input
+                        className="input" type="text" name="gitlab" placeholder="Your GitLab Web Link"
+                        onChange={handleChange} value={formData.gitlab}
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="field is-horizontal">
+              <div className="field-label"></div>
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <a className="button is-static">
+                        <FontAwesomeIcon icon={faGitlab} fontSize="24" />
+                      </a>
+                    </p>
+                    <p className="control">
+                      <a className="button is-static">
+                        API Version
+                      </a>
+                    </p>
+                    <p className="control is-expanded">
+                      <input
+                        className="input" type="text" autoComplete="off" name="gitlabAPIVersion" placeholder="api/v4"
+                        onChange={handleChange} value={formData.gitlabAPIVersion}
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="field is-horizontal">
+              <div className="field-label"></div>
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <a className="button is-static">
+                        <FontAwesomeIcon icon={faGitlab} fontSize="24" />
+                      </a>
+                    </p>
+                    <p className="control">
+                      <a className="button is-static">
+                        Access Token
+                      </a>
+                    </p>
+                    <p className="control is-expanded">
+                      <input
+                        className="input" type="text" autoComplete="off" name="gitlabToken" placeholder="Personal Access Token (glpat-xxx)"
+                        onChange={handleChange} value={formData.gitlabToken}
                       />
                     </p>
                   </div>
@@ -258,7 +312,7 @@ function Settings() {
                     />
                     <label htmlFor="enabledQuotes" className="has-text-white mr-5">
                       Quotes
-                  </label>
+                    </label>
                     <input
                       id="enabledTasks"
                       type="checkbox"
@@ -278,6 +332,17 @@ function Settings() {
                       onChange={handleChange}
                       checked={formData.enabledBookmarks}
                     />
+                    <input
+                      id="enabledGitLab"
+                      type="checkbox"
+                      name="enabledGitLab"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledGitLab}
+                    />
+                    <label htmlFor="enabledGitLab" className="has-text-white mr-5">
+                      GitLab
+                    </label>
                     <label htmlFor="enabledBookmarks" className="has-text-white mr-5">
                       Bookmarks
                     </label>

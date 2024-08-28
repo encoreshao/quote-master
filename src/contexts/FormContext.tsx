@@ -11,6 +11,9 @@ interface FormData {
   backgroundUrl: string;
   github: string;
   gitlab: string;
+  gitlabToken: string;
+  gitlabAPIVersion: string;
+  openAIKey: string;
   bamboohr: string;
   overview: string;
   currentTab: string;
@@ -21,6 +24,7 @@ interface FormData {
   enabledGmail: boolean;
   enabledDashboard: boolean;
   enabledTasks: boolean;
+  enabledGitLab: boolean;
   enabledQuotes: boolean;
   enabledBookmarks: boolean;
   enabledDownloads: boolean;
@@ -45,6 +49,9 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     backgroundUrl: 'https://picsum.photos/id/381/1920/1080',
     github: 'https://github.com/',
     gitlab: '',
+    gitlabToken: '',
+    gitlabAPIVersion: 'api/v4',
+    openAIKey: '',
     bamboohr: '',
     overview: '',
     currentTab: 'overview',
@@ -55,6 +62,7 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     enabledGmail: true,
     enabledDashboard: false,
     enabledTasks: true,
+    enabledGitLab: true,
     enabledQuotes: true,
     enabledBookmarks: true,
     enabledDownloads: false,

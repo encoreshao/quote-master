@@ -9,6 +9,7 @@ import Quotes from './components/Quotes';
 import Tasks from './components/Tasks';
 import Settings from './components/Settings';
 import Dashboard from './components/Dashboard';
+import Gitlab from './components/gitlab/Index';
 import Bookmarks from './components/bookmarks/Index';
 import { getStorage } from './utils';
 
@@ -41,6 +42,7 @@ function App() {
       {tab === 'dashboard' && <Dashboard />}
       {tab === 'quotes' && <Quotes />}
       {tab === 'tasks' && <Tasks />}
+      {tab === 'gitlab' && <Gitlab setTab={setTab} tab={tab} />}
       {tab === 'bookmarks' && <Bookmarks />}
       {tab === 'settings' && <Settings />}
 

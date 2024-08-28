@@ -1,5 +1,9 @@
 # Change Log
 
+## [1.1.5] - 2024-08-28
+
+- New Feature: Add Gitlab screen to show users/projects/issues
+
 ## [1.1.3] - 2024-07-20
 
 - Released a new version for new logo
