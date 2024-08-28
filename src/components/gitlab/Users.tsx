@@ -9,7 +9,11 @@ function Users(props: { user: any }) {
   const [users, setUsers] = useState([]);
 
   const fetchGitlabOwners = async () => {
-    const data = await fetchFromGitlab(gitlabAPIURLs.users, formData.gitlabToken);
+    const data = await fetchFromGitlab([
+      formData.gitlab,
+      (formData.gitlabAPIVersion || 'api/v4'),
+      gitlabAPIURLs.users
+    ].join('/'), formData.gitlabToken);
     if (data) setUsers(data.sort(() => Math.random() - 0.5));
   };
 

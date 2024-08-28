@@ -12,6 +12,7 @@ Whether you need to manage your browser resources or keep track of daily tasks, 
 - Downloads: Quick access downloads directly from the new tab page.
 - Customized Links: Quick access to frequently used links and websites.
 - Task Management: Create, manage, and track tasks to boost daily productivity.
+- GitLab Integration: Access and manage your GitLab issues directly from the extension.
 
 ### Screenshots
 

@@ -39,12 +39,29 @@ type IssueType = {
 type ProjectType = {
   id: number;
   name: string;
+  name_with_namespace: string;
+  path: string;
+  path_with_namespace: string;
+  created_at: string;
+  tag_list: string[];
+  topic: string[];
   description: string;
   web_url: string;
+  readme_url: string;
   avatar_url: string;
   last_activity_at: string;
   open_issues_count: number;
   star_count: number;
+  namespace: {
+    id: number;
+    name: string;
+    path: string;
+    kind: string;
+    full_path: string;
+    parent_id: number;
+    avatar_url: string;
+    web_url: string;
+  };
 };
 
 type UserType = {

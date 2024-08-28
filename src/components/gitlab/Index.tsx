@@ -17,7 +17,11 @@ function Gitlab(props: { setTab: (arg0: string) => void; tab: string }) {
   const [activeTab, setActiveTab] = useState('all_users');
 
   const fetchGitlabOwner = async () => {
-    const data = await fetchFromGitlab(gitlabAPIURLs.user, formData.gitlabToken);
+    const data = await fetchFromGitlab([
+      formData.gitlab,
+      (formData.gitlabAPIVersion || 'api/v4'),
+      gitlabAPIURLs.user
+    ].join('/'), formData.gitlabToken);
     if (data) setMe(data);
   };
 
