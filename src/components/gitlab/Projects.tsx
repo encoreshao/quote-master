@@ -4,10 +4,8 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "../../contexts/FormContext";
 import { gitlabAPIURLs, fetchFromGitlab } from "../../utils";
-import Logo from "./../../assets/icons/icon48.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faLayerGroup, faLink, faReply, faRetweet } from "@fortawesome/free-solid-svg-icons";
-import { fa42Group } from "@fortawesome/free-brands-svg-icons";
+import { faLayerGroup, faLink } from "@fortawesome/free-solid-svg-icons";
 
 function Projects(props: { user: any }) {
   const { formData } = useFormContext();
