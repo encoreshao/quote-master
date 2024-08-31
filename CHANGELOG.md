@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.1.6 (2024-09-01)
+
+- Enhancement: able to search by keyword in Gitlab users/projects
+
 ## v1.1.5 (2024-08-28)
 
 - New Feature: Add Gitlab screen to show users/projects/issues

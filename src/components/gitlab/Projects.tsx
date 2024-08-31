@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "../../contexts/FormContext";
 import { gitlabAPIURLs, fetchFromGitlab } from "../../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLayerGroup, faLink } from "@fortawesome/free-solid-svg-icons";
+import { faLayerGroup, faLink, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faReadme } from "@fortawesome/free-brands-svg-icons";
 
 function Projects(props: { user: any }) {
   const { formData } = useFormContext();
   const [projects, setProjects] = useState([]);
+  const [keyword, setKeyword] = useState('');
+  const [allProjects, setAllProjects] = useState([]);
 
   const fetchOwnerProjects = async () => {
     const data = await fetchFromGitlab([
@@ -17,7 +20,11 @@ function Projects(props: { user: any }) {
       (formData.gitlabAPIVersion || 'api/v4'),
       gitlabAPIURLs.projects.replace(':user_id', props.user.id)
     ].join('/'), formData.gitlabToken);
-    if (data) setProjects(data.sort(() => Math.random() - 0.5));
+    if (data) {
+      setAllProjects(data);
+      setProjects(data);
+    }
+    // .sort(() => Math.random() - 0.5)
   };
 
   useEffect(() => {
@@ -30,59 +37,95 @@ function Projects(props: { user: any }) {
     initFetches();
   }, [props.user?.id])
 
+  useEffect(() => { handleSearch() }, [keyword])
+  const handleSearch = () => {
+    if (keyword.trim()) {
+      setProjects((allProjects).filter((item: ProjectType) => new RegExp(keyword, 'i').exec(item.name)));
+    } else {
+      setProjects(allProjects);
+    }
+  };
+
   return (
-    <div className="fixed-grid has-1-cols">
-      <div className="grid">
-        {projects.map((item: ProjectType) => (
-          <div key={item.id} className="cell">
-            <div className="box has-text-left">
-              {/* {item?.avatar_url && <article className="media">
-                <div className="media-left">
-                  <figure className="image is-48x48">
-                    <img
-                      src={item?.avatar_url}
-                      alt={item?.name}
-                      className="is-rounded"
-                    />
-                  </figure>
-                </div>
-              </article>} */}
-
-              <div className="media-content">
-                <div className="content mb-2">
-                  <p>
-                    <strong>{item?.name}</strong> <small>{new Date(item?.last_activity_at).toISOString().split('T')[0]}</small>
-                    <small>{item.star_count}</small>
-                    <br />
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-
-              <nav className="level is-mobile">
-                <div className="level-left">
-                  <a className="level-item" aria-label="reply" href={item.web_url} target="_blank">
-                    <span className="icon is-small">
-                      <FontAwesomeIcon icon={faLink} />
-                    </span>
-                  </a>
-                  <a className="level-item" aria-label="retweet" href={item.namespace.web_url} target="_blank">
-                    <span className="icon is-small">
-                      <FontAwesomeIcon icon={faLayerGroup} />
-                    </span>
-                  </a>
-                  {/* <a className="level-item" aria-label="like">
-                    <span className="icon is-small">
-                      <FontAwesomeIcon icon={faHeart} />
-                    </span>
-                  </a> */}
-                </div>
-              </nav>
-            </div>
-          </div>
-        ))}
+    <>
+      <div className="control">
+        <div className="control has-icons-left" style={{ width: '100%' }}>
+          <input
+            className="input is-focused is-link"
+            type="text"
+            placeholder="Search by project name..."
+            onChange={(e) => setKeyword(e.target.value)}
+            value={keyword}
+          />
+          <span className="icon is-medium is-left">
+            <FontAwesomeIcon icon={faSearch} />
+          </span>
+        </div>
       </div>
-    </div>
+
+      <br />
+      <div className="fixed-grid has-1-cols">
+        <div className="grid">
+          {projects.map((item: ProjectType) => (
+            <div key={item.id} className="cell">
+              <div className="box has-text-left">
+                {item?.avatar_url && <article className="media" style={{ position: 'absolute', right: '10px' }}>
+                  <div className="media-left">
+                    <figure className="image is-48x48">
+                      <img
+                        src={item?.avatar_url}
+                        alt={item?.name}
+                        className="is-rounded"
+                      />
+                    </figure>
+                  </div>
+                </article>}
+
+                <div className="media-content">
+                  <div className="content mb-2">
+                    <p>
+                      <strong>{item?.name_with_namespace}</strong> <small>{new Date(item?.last_activity_at).toISOString().split('T')[0]}</small>
+                      <br />
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+
+                <nav className="level is-mobile">
+                  <div className="level-left">
+                    <a className="level-item mr-2" target="_blank">
+                      <span className="is-large">
+                        Default Branch: {item.default_branch}
+                      </span>
+                    </a>
+                    <a className="level-item mr-2" aria-label="like">
+                      <span className="is-small">
+                        Star: {item.star_count}
+                      </span>
+                    </a>
+                    <a className="level-item mr-2" aria-label="reply" href={item.web_url} target="_blank">
+                      <span className="icon is-small">
+                        <FontAwesomeIcon icon={faLink} fontSize={20} />
+                      </span>
+                    </a>
+                    <a className="level-item mr-2" aria-label="retweet" href={item.namespace.web_url} target="_blank">
+                      <span className="icon is-small">
+                        <FontAwesomeIcon icon={faLayerGroup} fontSize={20} />
+                      </span>
+                    </a>
+                    <a className="level-item mr-2" aria-label="retweet" href={item.readme_url} target="_blank">
+                      <span className="icon is-small">
+                        <FontAwesomeIcon icon={faReadme} fontSize={20} />
+                      </span>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -63,7 +63,7 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     enabledDashboard: false,
     enabledTasks: true,
     enabledGitLab: true,
-    enabledQuotes: true,
+    enabledQuotes: false,
     enabledBookmarks: true,
     enabledDownloads: false,
     enabledExtensions: true,

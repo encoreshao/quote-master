@@ -42,6 +42,7 @@ type ProjectType = {
   name_with_namespace: string;
   path: string;
   path_with_namespace: string;
+  default_branch: string;
   created_at: string;
   tag_list: string[];
   topic: string[];
