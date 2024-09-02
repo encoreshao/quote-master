@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "short_name": "Quote Master",
   "name": "Quote Master: Customized Efficiency Tool",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Gitlab, Bookmarks and Extensions, Downloads and Customized Links can be accessed from the Default Newtab page.",
   "chrome_url_overrides": {
     "newtab": "index.html"

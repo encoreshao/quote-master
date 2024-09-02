@@ -44,7 +44,7 @@ function Gitlab(props: { setTab: (arg0: string) => void; tab: string }) {
     <div className="hero-body" style={{ alignItems: 'baseline' }}>
       <div className="container has-text-centered">
         <div style={{ justifyContent: 'center' }}>
-          <div className="tabs is-toggle has-background-white p-4 is-centered is-toggle-rounded is-fullwidth">
+          <div className="tabs is-toggle has-background-white p-4 is-centered is-toggle-rounded is-fullwidth" style={{marginBottom: '5px'}}>
             <ul>
               <li className={activeTab === 'all_users' ? 'is-active' : ''} onClick={() => setActiveTab('all_users') }>
                 <a>
@@ -73,9 +73,9 @@ function Gitlab(props: { setTab: (arg0: string) => void; tab: string }) {
             </ul>
           </div>
 
-          {activeTab === 'all_users' && <Users user={me}/>}
-          {activeTab === 'contributed_projects' && <Projects user={me}/>}
-          {activeTab === 'issues' && <Issues user={me}/>}
+          {activeTab === 'all_users' && me?.id !== 'xxx' && <Users user={me}/>}
+          {activeTab === 'contributed_projects' && me?.id !== 'xxx' && <Projects user={me}/>}
+          {activeTab === 'issues' && me?.id !== 'xxx' && <Issues user={me}/>}
 
           {me?.id === 'xxx' && <div className="card has-background-primary-100 has-text-center">
             <div className="container card-content">

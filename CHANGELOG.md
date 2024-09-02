@@ -1,8 +1,12 @@
 # Change Log
 
+## v1.1.7 (2024-09-02)
+
+- Enhancement: Set maximum height for Gitlab users/projects
+
 ## v1.1.6 (2024-09-01)
 
-- Enhancement: able to search by keyword in Gitlab users/projects
+- Enhancement: Able to search by keyword in Gitlab users/projects
 
 ## v1.1.5 (2024-08-28)
 

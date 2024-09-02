@@ -48,23 +48,25 @@ function Projects(props: { user: any }) {
 
   return (
     <>
-      <div className="control">
-        <div className="control has-icons-left" style={{ width: '100%' }}>
-          <input
-            className="input is-focused is-link"
-            type="text"
-            placeholder="Search by project name..."
-            onChange={(e) => setKeyword(e.target.value)}
-            value={keyword}
-          />
-          <span className="icon is-medium is-left">
-            <FontAwesomeIcon icon={faSearch} />
-          </span>
-        </div>
+      <div className="control has-icons-left" style={{ width: '100%' }}>
+        <input
+          className="input is-focused is-link"
+          type="text"
+          placeholder="Search by project name..."
+          onChange={(e) => setKeyword(e.target.value)}
+          value={keyword}
+        />
+        <span className="icon is-medium is-left">
+          <FontAwesomeIcon icon={faSearch} />
+        </span>
       </div>
 
-      <br />
-      <div className="fixed-grid has-1-cols">
+      <div
+        className="fixed-grid has-1-cols p-4"
+        style={
+          { overflowY: 'auto', height: "calc(100vh - 350px)", boxSizing: "border-box" }
+        }
+      >
         <div className="grid">
           {projects.map((item: ProjectType) => (
             <div key={item.id} className="cell">

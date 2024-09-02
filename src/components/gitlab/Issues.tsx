@@ -28,7 +28,12 @@ function Issues(props: { user: any }) {
   }, [props.user?.id])
 
   return (
-    <div className="control">
+    <div
+      className="control p-4"
+      style={
+        { overflowY: 'auto', height: "calc(100vh - 280px)", boxSizing: "border-box" }
+      }
+    >
       {issues.map((item: IssueType) => (
         <article className="message is-link" key={item.id}>
           <div className="message-header">
@@ -44,7 +49,14 @@ function Issues(props: { user: any }) {
             </time>
           </div>
 
-          <div className="message-body has-text-left">
+          <div
+            className="message-body has-text-left"
+            style={{
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: "nowrap"
+            }}
+          >
             {item.description}
           </div>
 

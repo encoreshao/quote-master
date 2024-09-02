@@ -103,6 +103,15 @@ function Tasks() {
                   </div>
                 </div>
               }
+
+              {tasks.length === 0 && <div className="card has-background-primary-100 has-text-center">
+                <div className="container card-content">
+                  <div className="has-text-black subtitle p-5">
+                    No tasks yet.
+                  </div>
+                </div>
+              </div>}
+
             </div>
           </div>
         </div>

@@ -47,23 +47,25 @@ function Users(props: { user: any }) {
 
   return (
     <>
-      <div className="control">
-        <div className="control has-icons-left" style={{ width: '100%' }}>
-          <input
-            className="input is-focused is-link"
-            type="text"
-            placeholder="Search by user name..."
-            onChange={(e) => setKeyword(e.target.value)}
-            value={keyword}
-          />
-          <span className="icon is-medium is-left">
-            <FontAwesomeIcon icon={faSearch} />
-          </span>
-        </div>
+      <div className="control has-icons-left" style={{ width: '100%' }}>
+        <input
+          className="input is-focused is-link"
+          type="text"
+          placeholder="Search by user name..."
+          onChange={(e) => setKeyword(e.target.value)}
+          value={keyword}
+        />
+        <span className="icon is-medium is-left">
+          <FontAwesomeIcon icon={faSearch} />
+        </span>
       </div>
 
-      <br />
-      <div className="control">
+      <div
+        className="control p-4"
+        style={
+          { overflowY: 'auto', height: "calc(100vh - 350px)", boxSizing: "border-box" }
+        }
+      >
         {chunkArray(users, 5).map((chunk: any, chunkIndex: number) => (
           <div className="columns" key={chunkIndex}>
             {chunk.map((item: UserType) => (
