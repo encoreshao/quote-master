@@ -27,6 +27,12 @@ function Issues(props: { user: any }) {
     initFetches();
   }, [props.user?.id])
 
+  const replaceUserMentionsWithLinks = (text: string) => {
+    return text.replace(/@(\w+)/g, (match, username) => {
+      return `<a href="${formData.gitlab}/${username}" target="_blank">${match}</a>`;
+    });
+  };
+
   return (
     <div
       className="control p-4"
@@ -57,7 +63,7 @@ function Issues(props: { user: any }) {
               whiteSpace: "nowrap"
             }}
           >
-            {item.description}
+            <div dangerouslySetInnerHTML={{ __html: replaceUserMentionsWithLinks(item.description) }} />
           </div>
 
           <div className="message-body has-text-right">

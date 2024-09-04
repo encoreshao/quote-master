@@ -72,3 +72,49 @@ type UserType = {
   avatar_url: string;
   web_url: string;
 };
+
+type EventType = {
+  id: number;
+  project_id: number;
+  action_name: string;
+  target_id: number;
+  target_iid: number;
+  target_type: string;
+  author_id: number;
+  target_title: string;
+  created_at: string;
+  note: {
+    id: number;
+    type: string;
+    body: string;
+    created_at: string;
+    updated_at: string;
+    noteable_id: number;
+    noteable_iid: number;
+    noteable_type: string;
+    author: {
+      id: number;
+      username: string;
+      name: string;
+      state: string;
+      avatar_url: string;
+      web_url: string;
+    };
+  };
+  author: {
+    id: number;
+    username: string;
+    name: string;
+    state: string;
+    locked: boolean;
+    avatar_url: string;
+    web_url: string;
+  };
+  push_data: {
+    action: string;
+    ref_type: string;
+    ref: string;
+    commit_title: string;
+  };
+  author_username: string;
+};

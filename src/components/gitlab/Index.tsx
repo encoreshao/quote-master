@@ -1,20 +1,22 @@
+/* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useFormContext } from "../../contexts/FormContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faProjectDiagram, faTasks, faUserGroup } from "@fortawesome/free-solid-svg-icons";
+import { faComments, faProjectDiagram, faTasks, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
 import { fetchFromGitlab, gitlabAPIURLs, setStorage } from "../../utils";
 
 import Users from "./Users";
 import Projects from "./Projects";
 import Issues from "./Issues";
+import Events from "./Events";
 
 function Gitlab(props: { setTab: (arg0: string) => void; tab: string }) {
   const { formData } = useFormContext();
   const [me, setMe] = useState({ id: 'xxx', name: 'Anonymous', username: 'NA', email: 'NA' });
-  const [activeTab, setActiveTab] = useState('all_users');
+  const [activeTab, setActiveTab] = useState('events');
 
   const fetchGitlabOwner = async () => {
     const data = await fetchFromGitlab([
@@ -46,20 +48,12 @@ function Gitlab(props: { setTab: (arg0: string) => void; tab: string }) {
         <div style={{ justifyContent: 'center' }}>
           <div className="tabs is-toggle has-background-white p-4 is-centered is-toggle-rounded is-fullwidth" style={{marginBottom: '5px'}}>
             <ul>
-              <li className={activeTab === 'all_users' ? 'is-active' : ''} onClick={() => setActiveTab('all_users') }>
+              <li className={activeTab === 'events' ? 'is-active' : ''} onClick={() => setActiveTab('events')}>
                 <a>
                   <span className="icon is-small">
-                    <FontAwesomeIcon icon={faUserGroup} />
+                    <FontAwesomeIcon icon={faComments} />
                   </span>
-                  <span>All Users</span>
-                </a>
-              </li>
-              <li className={activeTab === 'contributed_projects' ? 'is-active' : ''} onClick={() => setActiveTab('contributed_projects')}>
-                <a>
-                  <span className="icon is-small">
-                    <FontAwesomeIcon icon={faProjectDiagram} />
-                  </span>
-                  <span>Contributed Projects</span>
+                  <span>My Activity</span>
                 </a>
               </li>
               <li className={activeTab === 'issues' ? 'is-active' : ''} onClick={() => setActiveTab('issues')}>
@@ -70,9 +64,26 @@ function Gitlab(props: { setTab: (arg0: string) => void; tab: string }) {
                   <span>My Issues</span>
                 </a>
               </li>
+              <li className={activeTab === 'contributed_projects' ? 'is-active' : ''} onClick={() => setActiveTab('contributed_projects')}>
+                <a>
+                  <span className="icon is-small">
+                    <FontAwesomeIcon icon={faProjectDiagram} />
+                  </span>
+                  <span>Contributed Projects</span>
+                </a>
+              </li>
+              <li className={activeTab === 'all_users' ? 'is-active' : ''} onClick={() => setActiveTab('all_users') }>
+                <a>
+                  <span className="icon is-small">
+                    <FontAwesomeIcon icon={faUserGroup} />
+                  </span>
+                  <span>All Users</span>
+                </a>
+              </li>
             </ul>
           </div>
 
+          {activeTab === 'events' && me?.id !== 'xxx' && <Events user={me}/>}
           {activeTab === 'all_users' && me?.id !== 'xxx' && <Users user={me}/>}
           {activeTab === 'contributed_projects' && me?.id !== 'xxx' && <Projects user={me}/>}
           {activeTab === 'issues' && me?.id !== 'xxx' && <Issues user={me}/>}
@@ -80,7 +91,19 @@ function Gitlab(props: { setTab: (arg0: string) => void; tab: string }) {
           {me?.id === 'xxx' && <div className="card has-background-primary-100 has-text-center">
             <div className="container card-content">
               <div className="has-text-black subtitle p-5">
-                Please complete <a onClick={() => handleClick('settings') }>GitLab Setting</a> first.
+                <p className="p-5">
+                  If you don't have an access token, click
+                  <a href={`${formData.gitlab}/-/user_settings/personal_access_tokens`} target="_blank" className="has-text-link"> here </a>
+                  to generate one.
+                </p>
+
+              </div>
+              <div className="has-background-grey subtitle p-5">
+                <p className="p-5">
+                  You already have token, please complete
+                  <a onClick={() => handleClick('settings') } className="has-text-white is-bold"> GitLab Setting </a>
+                  first.
+                </p>
               </div>
             </div>
           </div>}

@@ -6,6 +6,7 @@ const gitlabAPIURLs = {
     "users/:user_id/contributed_projects?order_by=name&sort=asc&per_page=60",
   issues:
     "issues?assignee_id=:user_id&order_by=updated_at&sort=desc&state=opened&per_page=60",
+  events: "users/:user_id/events?per_page=100",
 };
 
 const fetchFromGitlab = async (url: string, token: string) => {

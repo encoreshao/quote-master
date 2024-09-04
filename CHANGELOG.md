@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.1.8 (2024-09-02)
+
+- new Feature: Add My activity lists to Gitlab, as default tab
+
 ## v1.1.7 (2024-09-02)
 
 - Enhancement: Set maximum height for Gitlab users/projects
