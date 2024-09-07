@@ -62,7 +62,7 @@ function Projects(props: { user: any }) {
       </div>
 
       <div
-        className="fixed-grid has-1-cols p-4"
+        className="fixed-grid has-1-cols pb-1 mt-2"
         style={
           { overflowY: 'auto', height: "calc(100vh - 350px)", boxSizing: "border-box" }
         }

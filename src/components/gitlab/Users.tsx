@@ -10,16 +10,14 @@ function Users(props: { user: any }) {
   const { formData } = useFormContext();
   const [users, setUsers] = useState([]);
   const [keyword, setKeyword] = useState('');
-  const [allUsers, setAllUsers] = useState([]);
 
-  const fetchGitlabOwners = async () => {
+  const fetchGitlabOwners = async (keyword: string | undefined) => {
     const data = await fetchFromGitlab([
       formData.gitlab,
       (formData.gitlabAPIVersion || 'api/v4'),
-      gitlabAPIURLs.users
+      gitlabAPIURLs.users + ((keyword === undefined) ? '' : '&search=' + keyword)
     ].join('/'), formData.gitlabToken);
     if (data) {
-      setAllUsers(data);
       setUsers(data);
     }
     // .sort(() => Math.random() - 0.5)
@@ -28,31 +26,34 @@ function Users(props: { user: any }) {
   useEffect(() => {
     const initFetches = async () => {
       if (formData.gitlab && formData.gitlabToken && props.user?.id !== 'xxx') {
-        await fetchGitlabOwners();
+        await fetchGitlabOwners(undefined);
       }
     };
 
     initFetches();
   }, [props.user?.id])
 
-  useEffect(() => { handleSearch() }, [keyword])
+  // useEffect(() => { handleSearch() }, [keyword])
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (keyword.trim()) {
-      setUsers((allUsers).filter((item: UserType) => new RegExp(keyword, 'i').exec(item.name)));
+      // setUsers((allUsers).filter((item: UserType) => new RegExp(keyword, 'i').exec(item.name)));
+
+      await fetchGitlabOwners(keyword.trim());
     } else {
-      setUsers(allUsers);
+      await fetchGitlabOwners(undefined);
     }
   };
 
   return (
     <>
-      <div className="control has-icons-left" style={{ width: '100%' }}>
+      <div className="control has-icons-left">
         <input
           className="input is-focused is-link"
           type="text"
           placeholder="Search by user name..."
           onChange={(e) => setKeyword(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           value={keyword}
         />
         <span className="icon is-medium is-left">
@@ -61,7 +62,7 @@ function Users(props: { user: any }) {
       </div>
 
       <div
-        className="control p-4"
+        className="control p-2 mt-2"
         style={
           { overflowY: 'auto', height: "calc(100vh - 350px)", boxSizing: "border-box" }
         }

@@ -90,18 +90,18 @@ function Gitlab(props: { setTab: (arg0: string) => void; tab: string }) {
 
           {me?.id === 'xxx' && <div className="card has-background-primary-100 has-text-center">
             <div className="container card-content">
-              <div className="has-text-black subtitle p-5">
+              {formData.gitlab && <div className="has-text-black subtitle p-5">
                 <p className="p-5">
                   If you don't have an access token, click
                   <a href={`${formData.gitlab}/-/user_settings/personal_access_tokens`} target="_blank" className="has-text-link"> here </a>
                   to generate one.
                 </p>
+              </div>}
 
-              </div>
               <div className="has-background-grey subtitle p-5">
                 <p className="p-5">
                   You already have token, please complete
-                  <a onClick={() => handleClick('settings') } className="has-text-white is-bold"> GitLab Setting </a>
+                  <a onClick={() => handleClick('settings') } className="has-text-white ml-1 mr-1" style={{textDecoration: 'underline'}}>GitLab Setting</a>
                   first.
                 </p>
               </div>

@@ -29,19 +29,19 @@ function Issues(props: { user: any }) {
 
   const replaceUserMentionsWithLinks = (text: string) => {
     return text.replace(/@(\w+)/g, (match, username) => {
-      return `<a href="${formData.gitlab}/${username}" target="_blank">${match}</a>`;
+      return `<a href="${formData.gitlab}/${username}" target="_blank" class="has-text-link">${match}</a>`;
     });
   };
 
   return (
     <div
-      className="control p-4"
+      className="control pb-1"
       style={
         { overflowY: 'auto', height: "calc(100vh - 280px)", boxSizing: "border-box" }
       }
     >
       {issues.map((item: IssueType) => (
-        <article className="message is-link" key={item.id}>
+        <article className="message" key={item.id}>
           <div className="message-header">
             <p>
               <a href={item.web_url} target="_blank">

@@ -38,7 +38,7 @@ function Events(props: { user: any }) {
 
   return (
     <div
-      className="control p-4"
+      className="control pb-1"
       style={
         { overflowY: 'auto', height: "calc(100vh - 280px)", boxSizing: "border-box" }
       }
@@ -77,6 +77,14 @@ function Events(props: { user: any }) {
 
                   <strong className="has-text-grey mr-1">
                     {item.action_name} {item.push_data?.ref_type} '{item.push_data?.ref}' {item.push_data?.commit_title}
+                  </strong>
+                </>}
+
+                {(item.action_name === 'created') && <>
+                  <FontAwesomeIcon icon={faCodeFork} className="mr-1" />
+
+                  <strong className="has-text-grey mr-1">
+                    {item.action_name}
                   </strong>
                 </>}
 
