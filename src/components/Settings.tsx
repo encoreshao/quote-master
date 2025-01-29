@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faBandcamp, faBots, faGithub, faGitlab } from "@fortawesome/free-brands-svg-icons";
 import { useFormContext } from "../contexts/FormContext";
+import { QuoteMaster } from "../utils/common";
 
 function Settings() {
   const { formData, handleChange } = useFormContext();
@@ -12,12 +13,14 @@ function Settings() {
   return (
     <>
       <div className="hero-body" style={{ alignItems: 'baseline' }}>
-        <div className="container has-text-centered">
-          {/* <p className="title">Settings</p> */}
-          {/* <hr /> */}
-          {/* <br /> */}
+        <div
+          className="container has-text-centered"
+        >
 
-          <div>
+          <div
+            className='fixed-grid pt-2 pb-2'
+            style={{ maxHeight: "calc(100vh - 300px)", overflowY: "scroll" }}
+          >
             <div className="field is-horizontal">
               <div className="field-label is-normal">
                 <label className="label has-text-white"> Information </label>
@@ -134,6 +137,34 @@ function Settings() {
             </div>
 
             <div className="field is-horizontal">
+              <div className="field-label">
+                <label className="label has-text-white mt-3"> ChatBOT </label>
+              </div>
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <a className="button is-static">
+                        <FontAwesomeIcon icon={faBots} fontSize="24"/>
+                      </a>
+                    </p>
+                    <p className="control">
+                      <a className="button is-static">
+                        OpenAI
+                      </a>
+                    </p>
+                    <p className="control is-expanded">
+                      <input
+                        className="input" type="text" name="openAIChatBotURL" placeholder="OpenAI chat link"
+                        onChange={handleChange} value={formData.openAIChatBotURL}
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="field is-horizontal">
               <div className="field-label"></div>
               <div className="field-body">
                 <div className="field is-expanded">
@@ -145,13 +176,13 @@ function Settings() {
                     </p>
                     <p className="control">
                       <a className="button is-static">
-                        Chatbot
+                        DeepSeek
                       </a>
                     </p>
                     <p className="control is-expanded">
                       <input
-                        className="input" type="text" name="chatBot" placeholder="Your chatbot link"
-                        onChange={handleChange} value={formData.chatBot}
+                        className="input" type="text" name="deepSeekChatBotURL" placeholder="DeepSeek chat link"
+                        onChange={handleChange} value={formData.deepSeekChatBotURL}
                       />
                     </p>
                   </div>
@@ -241,7 +272,7 @@ function Settings() {
 
             <div className="field is-horizontal">
               <div className="field-label">
-                <label className="label has-text-white">  </label>
+                <label className="label has-text-white mt-3"> Navigation </label>
               </div>
               <div className="field-body">
                 <div className="field is-narrow">
@@ -325,14 +356,6 @@ function Settings() {
                       Tasks
                     </label>
                     <input
-                      id="enabledBookmarks"
-                      type="checkbox"
-                      name="enabledBookmarks"
-                      className="mr-2 switch is-rounded is-info"
-                      onChange={handleChange}
-                      checked={formData.enabledBookmarks}
-                    />
-                    <input
                       id="enabledGitLab"
                       type="checkbox"
                       name="enabledGitLab"
@@ -343,6 +366,14 @@ function Settings() {
                     <label htmlFor="enabledGitLab" className="has-text-white mr-5">
                       GitLab
                     </label>
+                    <input
+                      id="enabledBookmarks"
+                      type="checkbox"
+                      name="enabledBookmarks"
+                      className="mr-2 switch is-rounded is-info"
+                      onChange={handleChange}
+                      checked={formData.enabledBookmarks}
+                    />
                     <label htmlFor="enabledBookmarks" className="has-text-white mr-5">
                       Bookmarks
                     </label>
@@ -403,9 +434,9 @@ function Settings() {
       <article className="message has-text-centered has-background-white has-text-black" style={{ marginBottom: '0px' }}>
         <div className="message-body">
           <p>
-            <strong>Quote Master</strong> by <a href="https://icmoc.com">Encore Shao</a>.
+            <strong>Quote Master</strong> by <a href={QuoteMaster.homepageURL}>{QuoteMaster.authorName}</a>.
 
-            If you have a idea? Please contact me (encore.shao[at]gmail.com).
+            If you have a idea? Please contact me ({QuoteMaster.authorEmail}).
           </p>
         </div>
       </article>

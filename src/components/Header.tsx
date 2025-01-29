@@ -54,7 +54,8 @@ function HeroHeader(props: { tab: string }) {
     { condition: formData.gitlab, href: formData.gitlab, icon: faGitlab, text: "GitLab", isExternal: true },
     { condition: formData.bamboohr, href: formData.bamboohr, icon: faBandcamp, text: "BambooHR", isExternal: true },
     { condition: formData.github, href: formData.github, icon: faGithub, text: "Github", isExternal: true },
-    { condition: formData.chatBot, href: formData.chatBot, icon: faBots, text: "Chatbot", isExternal: true },
+    { condition: formData.openAIChatBotURL, href: formData.openAIChatBotURL, icon: faBots, text: "OpenAI", isExternal: true },
+    { condition: formData.deepSeekChatBotURL, href: formData.deepSeekChatBotURL, icon: faBots, text: "DeepSeek", isExternal: true },
     { condition: formData.enabledDownloads, href: "#", icon: faDownload, text: "Downloads", onClick: () => openInternalLink('downloads'), isExternal: false },
     { condition: formData.enabledExtensions, href: "#", icon: faGears, text: "Extensions", onClick: () => openInternalLink('extensions'), isExternal: false },
   ];

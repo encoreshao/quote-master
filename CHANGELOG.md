@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.1.9 (2025-01-29)
+
+- Enhancement: Add DeepSeek Chat Link
+- Enhancement: Add icon for each tabs
+
 ## v1.1.8 (2024-09-02)
 
 - new Feature: Add My activity lists to Gitlab, as default tab

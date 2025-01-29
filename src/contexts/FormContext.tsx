@@ -18,7 +18,8 @@ interface FormData {
   overview: string;
   currentTab: string;
   searchEngine: string;
-  chatBot: string;
+  openAIChatBotURL: string;
+  deepSeekChatBotURL: string;
   pinBookmarks: string[];
   tasks: string[];
   enabledGmail: boolean;
@@ -56,7 +57,8 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     overview: '',
     currentTab: 'overview',
     searchEngine: 'https://www.google.com/search?q=',
-    chatBot: 'https://chatgpt.com/',
+    openAIChatBotURL: 'https://chatgpt.com/',
+    deepSeekChatBotURL: 'https://chat.deepseek.com/',
     pinBookmarks: [],
     tasks: [],
     enabledGmail: true,

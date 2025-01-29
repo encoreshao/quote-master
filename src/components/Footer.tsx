@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "../contexts/FormContext";
 import { setStorage } from "../utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark, faCog, faDashboard, faTasks } from "@fortawesome/free-solid-svg-icons";
+import { faGitlab, faQuora } from "@fortawesome/free-brands-svg-icons";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 function HeroFooter(props: { setTab: (arg0: string) => void; tab: string }) {
@@ -31,43 +34,63 @@ function HeroFooter(props: { setTab: (arg0: string) => void; tab: string }) {
                 onClick={() => handleClick('overview')}
                 className={props.tab === 'overview' ? 'is-active' : ''}
               >
-                <a className="white"> Overview </a>
+                <a className="white">
+                  Overview
+                </a>
               </li>
               {formData.enabledDashboard && <li
                 onClick={() => handleClick('dashboard') }
                 className={props.tab === 'dashboard' ? 'is-active' : ''}
               >
-                <a> Dashboard </a>
+                <a>
+                  <FontAwesomeIcon icon={faDashboard} className="mr-1" />
+                  Dashboard
+                </a>
               </li>}
               {formData.enabledQuotes && <li
                 onClick={() => handleClick('quotes')}
                 className={props.tab === 'quotes' ? 'is-active' : ''}
               >
-                <a> Quotes </a>
+                <a>
+                  <FontAwesomeIcon icon={faQuora} className="mr-1" />
+                  Quotes
+                </a>
               </li>}
               {formData.enabledTasks && <li
                 onClick={() => handleClick('tasks')}
                 className={props.tab === 'tasks' ? 'is-active' : ''}
               >
-                <a> Tasks </a>
+                <a>
+                  <FontAwesomeIcon icon={faTasks} className="mr-1" />
+                  Tasks
+                </a>
               </li>}
               {formData.enabledGitLab && <li
                 onClick={() => handleClick('gitlab')}
                 className={props.tab === 'gitlab' ? 'is-active' : ''}
               >
-                <a> GitLab </a>
+                <a>
+                  <FontAwesomeIcon icon={faGitlab} className="mr-1" />
+                  GitLab
+                </a>
               </li>}
               {browserChrome && formData.enabledBookmarks && <li
                 onClick={() => handleClick('bookmarks')}
                 className={props.tab === 'bookmarks' ? 'is-active' : ''}
               >
-                <a> Bookmarks </a>
+                <a>
+                  <FontAwesomeIcon icon={faBookmark} className="mr-1" />
+                  Bookmarks
+                </a>
               </li>}
               <li
                 onClick={() => handleClick('settings')}
                 className={props.tab === 'settings' ? 'is-active' : ''}
               >
-                <a> Settings </a>
+                <a>
+                  <FontAwesomeIcon icon={faCog} className="mr-1" />
+                  Settings
+                </a>
               </li>
             </ul>
           </div>
