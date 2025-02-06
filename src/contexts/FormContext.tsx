@@ -19,6 +19,7 @@ interface FormData {
   currentTab: string;
   searchEngine: string;
   openAIChatBotURL: string;
+  geminiChatBotURL: string;
   deepSeekChatBotURL: string;
   pinBookmarks: string[];
   tasks: string[];
@@ -58,6 +59,7 @@ const FormProvider = ({ children }: { children: ReactNode }) => {
     currentTab: 'overview',
     searchEngine: 'https://www.google.com/search?q=',
     openAIChatBotURL: 'https://chatgpt.com/',
+    geminiChatBotURL: 'https://gemini.google.com/app',
     deepSeekChatBotURL: 'https://chat.deepseek.com/',
     pinBookmarks: [],
     tasks: [],

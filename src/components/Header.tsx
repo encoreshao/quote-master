@@ -103,7 +103,14 @@ function HeroHeader(props: { tab: string }) {
           text: "DeepSeek",
           isExternal: true,
           submenu: false
-        }
+        },
+        {
+          condition: formData.geminiChatBotURL,
+          href: formData.geminiChatBotURL,
+          text: "Gemini",
+          isExternal: true,
+          submenu: false
+        },
       ]
     },
   ];

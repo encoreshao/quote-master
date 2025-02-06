@@ -191,6 +191,32 @@ function Settings() {
             </div>
 
             <div className="field is-horizontal">
+              <div className="field-label"></div>
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <a className="button is-static">
+                        <FontAwesomeIcon icon={faBots} fontSize="24"/>
+                      </a>
+                    </p>
+                    <p className="control">
+                      <a className="button is-static">
+                        Google Gemini
+                      </a>
+                    </p>
+                    <p className="control is-expanded">
+                      <input
+                        className="input" type="text" name="geminiChatBotURL" placeholder="Google chat link"
+                        onChange={handleChange} value={formData.geminiChatBotURL}
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="field is-horizontal">
               <div className="field-label">
                 <label className="label has-text-white"> GitLab Setting </label>
               </div>

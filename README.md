@@ -10,7 +10,7 @@ Whether you need to manage your browser resources or keep track of daily tasks, 
 - Bookmark Management: Easily organize and access your bookmarks.
 - Extensions: Quick access extensions directly from the new tab page.
 - Downloads: Quick access downloads directly from the new tab page.
-- Customized Links: Quick access to frequently used links and websites.
+- Customized Links: Quick access to frequently used links and websites. (i.e: OpenAI, DeepSeek, Gemini)
 - Task Management: Create, manage, and track tasks to boost daily productivity.
 - GitLab Integration: Access and manage your GitLab issues directly from the extension.
 

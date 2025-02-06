@@ -1,13 +1,17 @@
 # Change Log
 
+## v1.2.0 (2025-02-06)
+
+- New Feature: Add Google Gemini Chat Link
+
 ## v1.1.9 (2025-01-29)
 
-- Enhancement: Add DeepSeek Chat Link
+- New Feature: Add DeepSeek Chat Link
 - Enhancement: Add icon for each tabs
 
 ## v1.1.8 (2024-09-02)
 
-- new Feature: Add My activity lists to Gitlab, as default tab
+- New Feature: Add My activity lists to Gitlab, as default tab
 
 ## v1.1.7 (2024-09-02)
 
