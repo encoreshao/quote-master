@@ -3,6 +3,7 @@
 ## v1.2.0 (2025-02-06)
 
 - New Feature: Add Google Gemini Chat Link
+- Update: Removed search engine func & Dashboard page
 
 ## v1.1.9 (2025-01-29)
 

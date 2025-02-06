@@ -26,7 +26,7 @@ function Dashboard() {
   return (
     <div className="hero-body">
       <div className="container has-text-centered">
-        {false && <>
+        {true && <>
           <div className='cup-wrapper'>
             <div className='cup-box shake' style={{ position: 'relative', width: 'fit-content', margin: 'auto', }}>
               <span style={{
@@ -67,9 +67,10 @@ function Dashboard() {
                   Hello! {formData.username}
                 </p>
               </>}
-              <p className="has-text-black ml-1">
+
+              {formData.overview && <p className="has-text-black ml-1">
                 {formData.overview}
-              </p>
+              </p>}
 
               {pinnedBookmarks && pinnedBookmarks.length > 0 && <>
                 <hr />

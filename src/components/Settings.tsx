@@ -349,17 +349,6 @@ function Settings() {
                 <div className="field is-narrow">
                   <div className="control">
                     <input
-                      id="enabledDashboard"
-                      type="checkbox"
-                      name="enabledDashboard"
-                      className="mr-2 switch is-rounded is-info"
-                      onChange={handleChange}
-                      checked={formData.enabledDashboard}
-                    />
-                    <label htmlFor="enabledDashboard" className="has-text-white mr-5">
-                      Dashboard
-                    </label>
-                    <input
                       id="enabledQuotes"
                       type="checkbox"
                       name="enabledQuotes"
