@@ -138,7 +138,7 @@ function Settings() {
 
             <div className="field is-horizontal">
               <div className="field-label">
-                <label className="label has-text-white mt-3"> ChatBOT </label>
+                <label className="label has-text-white mt-3"> ChatBOTs </label>
               </div>
               <div className="field-body">
                 <div className="field is-expanded">

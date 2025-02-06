@@ -15,6 +15,10 @@
   box-sizing: border-box;
 }
 
+a:visited, a:link {
+  background-color: hsla(221, 14%, calc(100% + 0%), 0);
+}
+
 html {
   font-family: 'Poppins', Lato, Tahoma, sans-serif;
   width: 100%;
