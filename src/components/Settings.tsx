@@ -207,8 +207,34 @@ function Settings() {
                     </p>
                     <p className="control is-expanded">
                       <input
-                        className="input" type="text" name="geminiChatBotURL" placeholder="Google chat link"
+                        className="input" type="text" name="geminiChatBotURL" placeholder="Google Gemini chat link"
                         onChange={handleChange} value={formData.geminiChatBotURL}
+                      />
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="field is-horizontal">
+              <div className="field-label"></div>
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <a className="button is-static">
+                        <FontAwesomeIcon icon={faBots} fontSize="24"/>
+                      </a>
+                    </p>
+                    <p className="control">
+                      <a className="button is-static">
+                        Grok
+                      </a>
+                    </p>
+                    <p className="control is-expanded">
+                      <input
+                        className="input" type="text" name="grokChatBotURL" placeholder="X Grok chat link"
+                        onChange={handleChange} value={formData.grokChatBotURL}
                       />
                     </p>
                   </div>
