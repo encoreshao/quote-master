@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { faHome, faHeartPulse, faDownload, faGears, faMailBulk } from '@fortawesome/free-solid-svg-icons';
+import { faHeartPulse, faDownload, faGears, faMailBulk } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faGitlab, faBandcamp, faBots } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useFormContext } from '../contexts/FormContext';
@@ -77,7 +77,6 @@ function HeroHeader(props: { tab: string }) {
   }, [props.tab])
 
   const navItems = [
-    { submenu: false, condition: true, href: "#", icon: faHome, text: "Home", isExternal: false, isActive: true },
     { submenu: false, condition: formData.enabledGmail, href: "https://mail.google.com/mail/u/0/#inbox", icon: faMailBulk, text: "Gmail", isExternal: true },
     { submenu: false, condition: formData.gitlab, href: formData.gitlab, icon: faGitlab, text: "GitLab", isExternal: true },
     { submenu: false, condition: formData.bamboohr, href: formData.bamboohr, icon: faBandcamp, text: "BambooHR", isExternal: true },
