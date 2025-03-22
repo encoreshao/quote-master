@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.2.0 (2025-03-22)
+
+- New Feature: Add X.com Grok Chat Link
+- Enhancement: A more powerful task manager
+
 ## v1.2.0 (2025-02-06)
 
 - New Feature: Add Google Gemini Chat Link
