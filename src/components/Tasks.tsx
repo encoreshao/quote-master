@@ -14,10 +14,6 @@ import {
   faPause,
   faCheckDouble,
   faTimes,
-  faClose,
-  faStop,
-  faBarsProgress,
-  faTornado,
   faTrash,
   faLink,
 } from "@fortawesome/free-solid-svg-icons";
@@ -118,27 +114,38 @@ const styles = {
 const statusConfig = {
   'todo': {
     label: 'To Do',
+    action: 'To Do',
     icon: faList,
     color: '#3e8ed0'
   },
   'in-progress': {
     label: 'In Progress',
+    action: 'In Progress',
     icon: faClock,
     color: '#48c774'
   },
   'postponed': {
     label: 'Postponed',
+    action: 'Postpone',
     icon: faPause,
     color: '#ffdd57'
   },
   'done': {
     label: 'Done',
+    action: 'Done',
     icon: faCheckDouble,
     color: '#00d1b2'
   },
   'closed': {
     label: 'Closed',
+    action: 'Close',
     icon: faTimes,
+    color: '#f14668'
+  },
+  'deleted': {
+    label: 'Deleted',
+    action: 'Delete',
+    icon: faTrash,
     color: '#f14668'
   }
 };
@@ -317,10 +324,11 @@ const TaskItem = ({
               className="icon is-small has-text-weight-bold has-text-white is-rounded"
               style={{ padding: '10px', borderRadius: '80%' }}
             >
-              {task.completed ?
-                <FontAwesomeIcon icon={faCheck} /> :
-                <FontAwesomeIcon icon={statusConfig[task.status].icon} size="sm" color={statusConfig[task.status].color} />
-              }
+              <FontAwesomeIcon
+                icon={task.completed ? faCheck : statusConfig[task.status].icon}
+                size="sm"
+                color={statusConfig[task.status].color}
+              />
             </span>
           </div>
           <div className="media-content" style={{ marginTop: '-10px' }}>
@@ -349,12 +357,12 @@ const TaskItem = ({
                 )}
                 <div className="cell">
                   <span className="tag is-light has-text-grey">
-                    <FontAwesomeIcon icon={faCalendarAlt} className="mr-1" />
+                    <FontAwesomeIcon icon={faCalendarAlt} className="mr-1" color="tomato" />
                     {task.date}
                   </span>
                 </div>
                 <div className="cell">
-                  <span className="tag is-light has-text-grey">
+                  <span className="tag" style={{ textTransform: 'capitalize', backgroundColor: statusConfig[task.status].color, color: 'white' }}>
                     <FontAwesomeIcon icon={statusConfig[task.status].icon} className="mr-1" />
                     {statusConfig[task.status].label}
                   </span>
@@ -364,6 +372,15 @@ const TaskItem = ({
           </div>
 
           <div className="media-right">
+            {viewType === 'board' && (
+              <div className="field-label is-normal" style={{ marginRight: "0px", marginTop: "-10px" }}>
+                <button
+                  className="delete is-medium is-pulled-right has-background-danger"
+                  style={styles.deleteButton}
+                  onClick={onRemove}
+                ></button>
+              </div>
+            )}
             {viewType === 'timeline' && (
               <div className="field has-addons mt-1">
                 {task.status !== 'todo' && <p className="control">
@@ -371,7 +388,7 @@ const TaskItem = ({
                     className="button is-small"
                     onClick={() => onUpdateStatus('todo')}
                   >
-                    <FontAwesomeIcon icon={faTornado} className="m-1" />
+                    {statusConfig['todo'].action}
                   </button>
                 </p>}
                 {task.status !== 'in-progress' && <p className="control">
@@ -379,7 +396,7 @@ const TaskItem = ({
                     className="button is-small"
                     onClick={() => onUpdateStatus('in-progress')}
                   >
-                    <FontAwesomeIcon icon={faBarsProgress} className="m-1" />
+                    {statusConfig['in-progress'].action}
                   </button>
                 </p>}
                 {task.status !== 'postponed' && <p className="control">
@@ -387,7 +404,7 @@ const TaskItem = ({
                     className="button is-small"
                     onClick={() => onUpdateStatus('postponed')}
                   >
-                    <FontAwesomeIcon icon={faStop} className="m-1" />
+                    {statusConfig['postponed'].action}
                   </button>
                 </p>}
                 {task.status !== 'done' && <p className="control">
@@ -395,7 +412,7 @@ const TaskItem = ({
                     className="button is-small"
                     onClick={() => onUpdateStatus('done')}
                   >
-                    <FontAwesomeIcon icon={faCheck} className="m-1" />
+                    {statusConfig['done'].action}
                   </button>
                 </p>}
                 {task.status !== 'closed' && <p className="control">
@@ -403,7 +420,7 @@ const TaskItem = ({
                     className="button is-small"
                     onClick={() => onUpdateStatus('closed')}
                   >
-                    <FontAwesomeIcon icon={faClose} className="m-1" />
+                    {statusConfig['closed'].action}
                   </button>
                 </p>}
                 <p className="control">
@@ -411,7 +428,7 @@ const TaskItem = ({
                     className="button is-small"
                     onClick={onRemove}
                   >
-                    <FontAwesomeIcon icon={faTrash} className="m-1" />
+                    {statusConfig['deleted'].action}
                   </button>
                 </p>
               </div>
@@ -590,6 +607,12 @@ const TimelineView = ({
           })}
         </div>
       ))}
+
+      {Object.entries(tasksByDate).length === 0 &&
+        <p className="has-text-centered has-background-light has-text-grey-light p-5">
+        No tasks
+        </p>
+      }
     </div>
   );
 };
@@ -645,11 +668,11 @@ const ViewSelector = ({
                     onChange={(e) => onStatusFilterChange(e.target.value as TaskStatus | 'all')}
                   >
                     <option value="all">All Tasks</option>
-                    <option value="todo">To Do</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="postponed">Postponed</option>
-                    <option value="done">Done</option>
-                    <option value="closed">Closed</option>
+                    <option value="todo">{statusConfig.todo.label}</option>
+                    <option value="in-progress">{statusConfig["in-progress"].label}</option>
+                    <option value="postponed">{statusConfig.postponed.label}</option>
+                    <option value="done">{statusConfig.done.label}</option>
+                    <option value="closed">{statusConfig.closed.label}</option>
                   </select>
                 </div>
               </p>

@@ -110,6 +110,13 @@ function HeroHeader(props: { tab: string }) {
           isExternal: true,
           submenu: false
         },
+        {
+          condition: formData.grokChatBotURL,
+          href: formData.grokChatBotURL,
+          text: "Grok",
+          isExternal: true,
+          submenu: false
+        },
       ]
     },
   ];
