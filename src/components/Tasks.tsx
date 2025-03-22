@@ -301,6 +301,8 @@ const TaskItem = ({
   onUpdateStatus: (status: TaskStatus) => void;
   dragHandleProps?: any;
 }) => {
+  const [showDelete, setShowDelete] = useState(false);
+
   // Determine priority style
   const priorityStyle = task.priority ?
     (task.priority === 'high' ? styles.priorityHigh :
@@ -316,6 +318,8 @@ const TaskItem = ({
         opacity: task.completed ? 0.7 : 1
       }}
       {...dragHandleProps}
+      onMouseEnter={() => setShowDelete(true)}
+      onMouseLeave={() => setShowDelete(false)}
     >
       <div className="card-content p-3">
         <div className="media mb-2">
@@ -373,12 +377,17 @@ const TaskItem = ({
 
           <div className="media-right">
             {viewType === 'board' && (
-              <div className="field-label is-normal" style={{ marginRight: "0px", marginTop: "-10px" }}>
+              <div
+                className="field-label is-normal"
+                style={{ marginRight: "0px", marginTop: "-10px", visibility: showDelete ? 'visible' : 'hidden', transition: 'visibility 0.2s ease' }}
+              >
                 <button
-                  className="delete is-medium is-pulled-right has-background-danger"
+                  className="is-medium is-pulled-right"
                   style={styles.deleteButton}
                   onClick={onRemove}
-                ></button>
+                >
+                  <FontAwesomeIcon icon={faTrash} color="red"/>
+                </button>
               </div>
             )}
             {viewType === 'timeline' && (
@@ -423,12 +432,13 @@ const TaskItem = ({
                     {statusConfig['closed'].action}
                   </button>
                 </p>}
-                <p className="control">
+                <p className="control ml-5">
                   <button
-                    className="button is-small"
+                    className="is-small"
+                    style={{ marginTop: "4px" }}
                     onClick={onRemove}
                   >
-                    {statusConfig['deleted'].action}
+                    <FontAwesomeIcon icon={faTrash} color="red" size="lg" />
                   </button>
                 </p>
               </div>
