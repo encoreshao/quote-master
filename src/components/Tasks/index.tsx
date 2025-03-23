@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import { useEffect, useState } from "react";
-import { useFormContext } from "../contexts/FormContext";
-import { setStorage } from "../utils";
 import {
   faTasks,
   faCalendarAlt,
@@ -22,6 +20,9 @@ import {
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { useFormContext } from "../../contexts/FormContext";
+import { setStorage } from "../../utils";
 
 // NOTE: To enable drag and drop functionality, install the following package:
 // npm install react-beautiful-dnd
@@ -921,6 +922,7 @@ function Tasks() {
           return {
             id: generateId(),
             text: task,
+            link: "",
             completed: false,
             date: new Date().toISOString().split("T")[0],
             status: "todo" as TaskStatus,
@@ -931,6 +933,7 @@ function Tasks() {
           return {
             id: taskObj.id || generateId(),
             text: taskObj.text || "",
+            link: taskObj.link || "",
             completed: taskObj.completed || false,
             date: taskObj.date || new Date().toISOString().split("T")[0],
             status: (taskObj.status as TaskStatus) || "todo",
@@ -942,6 +945,7 @@ function Tasks() {
         return {
           id: generateId(),
           text: "Unknown task",
+          link: "",
           completed: false,
           date: new Date().toISOString().split("T")[0],
           status: "todo" as TaskStatus,

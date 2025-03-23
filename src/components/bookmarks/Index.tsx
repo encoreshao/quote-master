@@ -1,18 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-import { useEffect, useState } from 'react';
-import { useFormContext } from '../../contexts/FormContext';
-import BookmarkList from './BookmarkList';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { useEffect, useState } from "react";
+import { useFormContext } from "../../contexts/FormContext";
+import BookmarkList from "./BookmarkList";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Bookmarks() {
   const { formData } = useFormContext();
   const [bookmarks, setBookmarks] = useState([]);
   const [hasBookmarks, setHasBookmarks] = useState(false);
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
     const fetchBookmarks = () => {
@@ -21,7 +20,7 @@ function Bookmarks() {
       } else {
         chrome.runtime.sendMessage({ action: "getBookmarks" }, (response) => {
           setBookmarks(response);
-          setHasBookmarks(true)
+          setHasBookmarks(true);
         });
       }
     };
@@ -29,15 +28,14 @@ function Bookmarks() {
     fetchBookmarks();
   }, []);
 
-
   return (
     <>
-      <div className="hero-body" style={{ alignItems: 'baseline' }}>
+      <div className="hero-body" style={{ alignItems: "baseline" }}>
         <div className="container has-text-centered">
           {/* <p className="title">Bookmarks</p> */}
           <hr />
 
-          {formData.enabledBookmarks && hasBookmarks &&
+          {formData.enabledBookmarks && hasBookmarks && (
             <div>
               <div className="field is-horizontal">
                 <div className="field-body">
@@ -62,18 +60,24 @@ function Bookmarks() {
                 </div>
               </div>
 
-              {bookmarks &&
+              {bookmarks && (
                 <div
-                  className='has-text-left p-2 fixed-grid has-background-white'
-                  style={{ maxHeight: "calc(100vh - 300px)", overflowY: "scroll" }}
+                  className="has-text-left p-2 fixed-grid has-background-white"
+                  style={{
+                    maxHeight: "calc(100vh - 300px)",
+                    overflowY: "scroll",
+                  }}
                 >
                   <div>
-                    <BookmarkList bookmarks={bookmarks} searchKeyword={searchKeyword} />
+                    <BookmarkList
+                      bookmarks={bookmarks}
+                      searchKeyword={searchKeyword}
+                    />
                   </div>
                 </div>
-              }
+              )}
             </div>
-          }
+          )}
         </div>
       </div>
     </>
