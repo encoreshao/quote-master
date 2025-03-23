@@ -22,6 +22,7 @@ module.exports = {
     entry: {
         index: "./src/index.tsx",
         background: "./src/background/index.ts",
+        content_scripts: "./src/content_scripts/index.ts",
     },
     mode: "production",
     module: {

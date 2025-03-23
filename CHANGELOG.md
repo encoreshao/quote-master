@@ -1,5 +1,9 @@
 # Change Log
 
+## v1.2.4 (2025-03-23)
+
+- New Feature: contextMenu to allow users to add the currently viewed page to the task
+
 ## v1.2.0 (2025-03-22)
 
 - New Feature: Add X.com Grok Chat Link

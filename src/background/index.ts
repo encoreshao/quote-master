@@ -1,4 +1,6 @@
+/* eslint-disable import/first */
 export {};
+import { updateContextMenus } from "./contextMenus";
 // import { version as manifestVersion } from "../manifest.json";
 
 function openChromeInternalPage(chromeExtURL: string) {
@@ -12,6 +14,18 @@ function openChromeInternalPage(chromeExtURL: string) {
     chrome.tabs.create({ url: chromeExtURL, active: true });
   });
 }
+
+chrome.tabs.onUpdated.addListener((tabId, { url }) => {
+  if (url) {
+    updateContextMenus(url);
+  }
+});
+
+chrome.tabs.onActivated.addListener(({ tabId }) => {
+  chrome.tabs.get(tabId, (tab) => {
+    updateContextMenus(tab.url);
+  });
+});
 
 // chrome.storage.onChanged.addListener((changes, namespace) => {
 //   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {

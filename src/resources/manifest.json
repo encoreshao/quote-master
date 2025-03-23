@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "short_name": "Quote Master",
   "name": "Quote Master: Customized Efficiency Tool",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "Gitlab, Bookmarks and Extensions, Downloads and Customized Links can be accessed from the Default Newtab page.",
   "chrome_url_overrides": {
     "newtab": "index.html"
@@ -15,7 +15,19 @@
     "email": "encore.shao@gmail.com"
   },
   "homepage_url": "https://ranbot.online",
-  "permissions": ["storage", "bookmarks", "tabs"],
+  "permissions": [
+    "storage",
+    "bookmarks",
+    "tabs",
+    "contextMenus",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_scripts.js"]
+    }
+  ],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -23,7 +35,7 @@
   },
   "action": {
     "default_popup": "index.html",
-    "default_title": "Quote Master",
+    "default_title": "Quote Master: Customized Efficiency Tool",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
