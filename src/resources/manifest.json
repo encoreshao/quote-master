@@ -3,7 +3,7 @@
   "short_name": "Quote Master",
   "name": "Quote Master: Customized Efficiency Tool",
   "version": "1.2.4",
-  "description": "Gitlab, Bookmarks and Extensions, Downloads and Customized Links can be accessed from the Default Newtab page.",
+  "description": "Task Management, Bookmarks, GitLab, Extensions and Downloads. Customized Links can be accessed from the Default Newtab page.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
