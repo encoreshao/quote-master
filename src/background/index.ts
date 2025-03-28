@@ -27,20 +27,6 @@ chrome.tabs.onActivated.addListener(({ tabId }) => {
   });
 });
 
-// chrome.storage.onChanged.addListener((changes, namespace) => {
-//   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-//     console.log(
-//       `Storage key "${key}" in namespace "${namespace}" changed.`,
-//       `Old value was "${oldValue}", new value is "${newValue}".`
-//     );
-//   }
-// });
-
-// chrome.storage.local.remove(
-//   ["pinBookmarks", "backgroundUrl", "gitlab", "enabledGitlab"],
-//   () => {}
-// );
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "getBookmarks") {
     chrome.bookmarks.getTree((bookmarkTreeNodes: any) => {

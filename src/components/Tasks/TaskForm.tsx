@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { generateId, styles, Task } from "../../types/Task";
+import {
+  generateId,
+  styles,
+  Task,
+  TaskDefaultConfig,
+  TaskPriority,
+  TaskStatus,
+} from "../../types/Task";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
@@ -19,11 +26,16 @@ export const TaskForm = ({
   editingTask?: Task;
   onCancelEdit?: () => void;
 }) => {
+  const currentDate = new Date().toISOString().split("T")[0];
+
+  // State for form inputs
   const [input, setInput] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(currentDate);
   const [link, setLink] = useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState<"low" | "medium" | "high">("medium");
+  const [priority, setPriority] = useState<TaskPriority>(
+    TaskDefaultConfig.priority as TaskPriority
+  );
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   const autoFillinTask = (editingTask: Task) => {
@@ -32,7 +44,9 @@ export const TaskForm = ({
       setDate(editingTask.date);
       setLink(editingTask.link || "");
       setDescription(editingTask.description || "");
-      setPriority(editingTask.priority || "medium");
+      setPriority(
+        editingTask.priority || (TaskDefaultConfig.priority as TaskPriority)
+      );
 
       setShowAdvanced(true); // Show advanced options when editing
     }
@@ -55,8 +69,10 @@ export const TaskForm = ({
         text: input.trim(),
         link: link.trim() || undefined,
         completed: editingTask ? editingTask.completed : false,
-        date: date || new Date().toISOString().split("T")[0],
-        status: editingTask ? editingTask.status : "todo",
+        date: date || currentDate,
+        status: editingTask
+          ? editingTask.status
+          : (TaskDefaultConfig.status as TaskStatus),
         description: description.trim() || undefined,
         priority,
       });
@@ -71,7 +87,7 @@ export const TaskForm = ({
     setLink("");
     setDate("");
     setDescription("");
-    setPriority("medium");
+    setPriority(TaskDefaultConfig.priority as TaskPriority);
     setShowAdvanced(false);
   };
 

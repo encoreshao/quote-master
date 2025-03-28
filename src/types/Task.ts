@@ -15,6 +15,8 @@ export type TaskStatus =
   | "done"
   | "closed";
 
+export type TaskPriority = "low" | "medium" | "high";
+
 export const TaskDefaultConfig = {
   status: "todo",
   priority: "medium",
@@ -29,7 +31,7 @@ export interface Task {
   date: string;
   status: TaskStatus;
   description?: string;
-  priority?: "low" | "medium" | "high";
+  priority?: TaskPriority;
 }
 
 // Define view types

@@ -9,7 +9,14 @@ import {
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { statusConfig, styles, Task, TaskStatus } from "../../types/Task";
+import {
+  statusConfig,
+  styles,
+  Task,
+  TaskDefaultConfig,
+  TaskPriority,
+  TaskStatus,
+} from "../../types/Task";
 
 // TaskItem component for individual task items
 const TaskItem = ({
@@ -36,7 +43,7 @@ const TaskItem = ({
   const priorityStyle = task.priority
     ? task.priority === "high"
       ? styles.priorityHigh
-      : task.priority === "medium"
+      : task.priority === (TaskDefaultConfig.priority as TaskPriority)
       ? styles.priorityMedium
       : styles.priorityLow
     : {};
@@ -101,7 +108,8 @@ const TaskItem = ({
                       className={`tag ${
                         task.priority === "high"
                           ? "is-danger"
-                          : task.priority === "medium"
+                          : task.priority ===
+                            (TaskDefaultConfig.priority as TaskPriority)
                           ? "is-warning"
                           : "is-success"
                       }`}
@@ -140,7 +148,10 @@ const TaskItem = ({
             </div>
           </div>
 
-          <div className="media-right">
+          <div
+            className="media-right"
+            style={{ position: "absolute", right: "10px", top: "10px" }}
+          >
             {viewType === "board" && (
               <div
                 className="field-label is-normal"
@@ -152,10 +163,26 @@ const TaskItem = ({
                 }}
               >
                 {showActionMenu ? (
-                  <div className="buttons has-addons">
+                  <div
+                    className="buttons"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column-reverse",
+                      gap: "0.1rem",
+                    }}
+                  >
+                    <button
+                      className="button is-small is-rounded"
+                      onClick={() => {
+                        onRemove();
+                        setShowActionMenu(false);
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} color="red" />
+                    </button>
                     {onEdit && (
                       <button
-                        className="button is-small"
+                        className="button is-small is-rounded"
                         onClick={() => {
                           onEdit();
                           setShowActionMenu(false);
@@ -164,15 +191,6 @@ const TaskItem = ({
                         <FontAwesomeIcon icon={faEdit} color="#3e8ed0" />
                       </button>
                     )}
-                    <button
-                      className="button is-small"
-                      onClick={() => {
-                        onRemove();
-                        setShowActionMenu(false);
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faTrash} color="red" />
-                    </button>
                   </div>
                 ) : (
                   <button
@@ -248,10 +266,17 @@ const TaskItem = ({
                     }}
                   >
                     {showActionMenu ? (
-                      <div className="buttons has-addons">
+                      <div
+                        className="buttons"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column-reverse",
+                          gap: "0.1rem",
+                        }}
+                      >
                         {onEdit && (
                           <button
-                            className="button is-small"
+                            className="button is-small is-rounded"
                             onClick={() => {
                               onEdit();
                               setShowActionMenu(false);
@@ -265,7 +290,7 @@ const TaskItem = ({
                           </button>
                         )}
                         <button
-                          className="button is-small"
+                          className="button is-small is-rounded"
                           onClick={() => {
                             onRemove();
                             setShowActionMenu(false);
