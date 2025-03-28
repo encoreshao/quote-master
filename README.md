@@ -31,6 +31,12 @@
   - Access and search your browser bookmarks
   - Quick search functionality to find specific bookmarks
   - Organized display of your bookmark hierarchy
+  - Add bookmarks directly from any webpage via context menu
+
+- **Task Integration**:
+
+  - Add tasks directly from any webpage via context menu
+  - Capture webpage title and URL automatically
 
 - **Quick Access**:
   - Direct links to Downloads and Extensions pages
@@ -78,6 +84,46 @@ Quote Master offers extensive customization options:
 - Uses FontAwesome for icons
 - Implements responsive design principles
 - Chrome extension API integration for browser features
+
+### Extension Architecture
+
+- **Background Service Worker**: Manages context menus, handles bookmark operations, and processes tab events
+- **Content Scripts**: Inject UI components into webpages for adding tasks and bookmarks
+- **New Tab Override**: Replaces the default new tab page with the Quote Master dashboard
+- **Context Menu Integration**: Right-click on any webpage to quickly add tasks or bookmarks
+- **Chrome API Integration**: Utilizes bookmarks, storage, tabs, and notifications APIs
+
+### User Experience Features
+
+- **In-page Forms**: Clean, modal forms appear directly on the webpage when adding tasks or bookmarks
+- **Smart Defaults**: Forms pre-populate with the current page title and URL
+- **Folder Selection**: When adding bookmarks, choose from your existing bookmark folders
+- **Priority Settings**: Set task priorities (low, medium, high) when adding from webpages
+- **Notification System**: Unobtrusive notifications confirm successful actions
+
+## Installation
+
+Quote Master can be installed in a few different ways:
+
+1. **Chrome Web Store**: _(Coming soon)_
+2. **Manual Installation**:
+   - Download or clone the repository
+   - Build the extension using `npm run build`
+   - Load the unpacked extension in Chrome from the `dist` directory
+   - See [INSTALLATION.md](INSTALLATION.md) for detailed instructions
+
+## Version History
+
+Current version: 1.2.4
+
+### Recent Updates
+
+- **v1.2.4**: Added context menu integration for adding tasks from any webpage
+- **v1.2.0**: Added X.com Grok Chat Link and enhanced task management capabilities
+- **v1.2.0**: Added Google Gemini Chat Link and streamlined the interface
+- **v1.1.9**: Added DeepSeek Chat Link and improved tab navigation with icons
+
+See [CHANGELOG.md](CHANGELOG.md) for a complete history of changes.
 
 ## Contributing
 
