@@ -3,7 +3,7 @@
   "short_name": "Nexus Tab",
   "name": "Nexus Tab: Your Daily Command Center",
   "version": "2.0.0",
-  "description": "A modular productivity dashboard for your new tab. Tasks, bookmarks, quick links, RSS feeds, and more — all in a beautiful glassmorphism interface.",
+  "description": "A modular productivity dashboard for your new tab. Tasks, bookmarks, quick links, RSS feeds in a glassmorphism UI.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
