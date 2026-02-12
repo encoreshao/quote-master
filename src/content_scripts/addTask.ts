@@ -1,7 +1,7 @@
 export const addTask = (request: any) => {
   // Remove any existing form
   const existingForm = document.getElementById(
-    "quote-master-task-form-container"
+    "nexus-tab-task-form-container"
   );
   if (existingForm) {
     document.body.removeChild(existingForm);
@@ -9,7 +9,7 @@ export const addTask = (request: any) => {
 
   // Create form container
   const formContainer = document.createElement("div");
-  formContainer.id = "quote-master-task-form-container";
+  formContainer.id = "nexus-tab-task-form-container";
   formContainer.style.position = "fixed";
   formContainer.style.top = "0";
   formContainer.style.left = "0";

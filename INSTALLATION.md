@@ -1,153 +1,101 @@
-# Chrome Extension with React
+# Nexus Tab — Installation Guide
 
-A step-by-step guide to creating a Chrome extension using React.
+## Prerequisites
 
-- react + typescript
-- webpacker
-- [bulma](https://bulma.io/documentation/)
-- [Bulma Toast](https://rfoel.github.io/bulma-toast/)
-- [Fontawesome](https://fontawesome.com/search?o=r&m=free)
+- [Node.js](https://nodejs.org/) (v18 or later)
+- npm (included with Node.js)
+- Google Chrome browser
 
-## Steps
+## Tech Stack
 
-### step 1: Create React App
+- React 18 + TypeScript
+- Tailwind CSS
+- Webpack 5
+- Chrome Extension Manifest v3
 
-> npx create-react-app quote-master --template typescript
+## Build from Source
 
-### step 2: Add Webpack
+### 1. Clone the repository
 
-> npm install --save-dev webpack webpack-cli copy-webpack-plugin css-loader ts-loader html-webpack-plugin html-webpack-injector ts-node
-
-#### update the Webpack configuration
-
-By default, the create-react-app template does not provide a Webpack configuration file, so we need to create one. Create a new file called `webpack.config.js` in the root directory of your project, and add the following code:
-
-```json
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
-const HTMLWebpackInjector = require('html-webpack-injector');
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-
-module.exports = {
-    entry: {
-        index: "./src/index.tsx"
-    },
-    mode: "production",
-    module: {
-        rules: [
-            {
-                exclude: /node_modules/,
-                test: /\.tsx?$/,
-                use: [
-                    {
-                        loader: "ts-loader",
-                        options: {
-                            compilerOptions: { noEmit: false },
-                        }
-                    }
-                ],
-            },
-            {
-                exclude: /node_modules/,
-                test: /\.css$/i,
-                use: [
-                    "style-loader",
-                    "css-loader"
-                ]
-            },
-            {
-                exclude: /node_modules/,
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-            },
-        ],
-    },
-    plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                { from: "public/*.json", to: "[name][ext]" },
-                { from: "public/*.ico", to: "[name][ext]" },
-                { from: "public/*.png", to: "./icons/[name][ext]" },
-            ],
-        }),
-        new HTMLWebpackPlugin({
-            template: "./public/index.html",
-            chunks: ["index"]
-        }),
-        new HTMLWebpackInjector(),
-    ],
-    resolve: {
-        extensions: [".tsx", ".ts", ".js", "*.png"],
-    },
-    output: {
-        path: path.join(__dirname, "dist"),
-        filename: "[name].js",
-        clean: true,
-    },
-};
+```bash
+git clone https://github.com/encoreshao/quote-master.git
+cd quote-master
 ```
 
-Now that we have configured webpack, Update your `package.json` file to include the following scripts:
+### 2. Install dependencies
 
-```json
-  "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "watch": "webpack -w --config webpack.config.js"
-  }
+```bash
+npm install
 ```
 
-These scripts will allow you to build your extension using the npm `run build` command, or to run Webpack in watch mode using the npm `run watch` command.
+### 3. Build the extension
 
-#### step 3: Add the Manifest file
-
-A manifest file is used to define the metadata and permissions for a Chrome extension. Create a new file called `manifest.json` in the root directory of your project and add the following code:
-
-```json
-{
-  "manifest_version": 3,
-  "name": "Quote Master: Customized Efficiency Tool",
-  "version": "1.0.4",
-  "description": "Bookmarks and Extensions, Downloads and Customized Links can be accessed from the Default Newtab page.",
-  "chrome_url_overrides": {
-    "newtab": "index.html"
-  },
-  "background": {
-    "service_worker": "background.js"
-  },
-  "permissions": ["storage", "bookmarks", "tabs"],
-  "icons": {
-    "16": "icons/logo52.png",
-    "48": "icons/logo.png",
-    "128": "icons/logo192.png"
-  },
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": {
-      "16": "icons/logo52.png",
-      "48": "icons/logo.png",
-      "128": "icons/logo192.png"
-    }
-  },
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; worker-src 'self';"
-  }
-}
+```bash
+npm run build
 ```
 
-#### step 4: Build the App
+This creates a `dist/` directory with the compiled extension.
 
-Finally, run the npm run build command in your terminal to build your extension: When script will finish → new /dist folder will be created at the root of our app:
+For development with auto-rebuild on file changes:
 
-#### step 5: Load the extension
-
-To load your extension into Chrome, open Chrome and navigate to the Extensions page by typing `chrome://extensions` into the address bar. Then, click the "Load unpacked" button and select the dist directory in your project.
-
----
-
-### Let's go
-
-```
-npm run start
+```bash
+npm run watch
 ```
 
-and visit `http://localhost:3000`
+### 4. Load the extension in Chrome
+
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable **Developer mode** using the toggle in the top-right corner
+3. Click **Load unpacked**
+4. Select the `dist/` directory from the project
+
+### 5. Verify
+
+Open a new tab — you should see the Nexus Tab dashboard with the glassmorphism interface.
+
+## Project Structure
+
+```
+src/
+├── index.tsx                  # React entry point
+├── App.tsx                    # Main app with layout engine
+├── assets/
+│   ├── icons/                 # Extension icons (16, 32, 48, 128)
+│   └── styles/index.css       # Tailwind CSS + glassmorphism components
+├── background/                # Service worker (context menus, bookmarks)
+├── content_scripts/           # Injected scripts (add task/bookmark from any page)
+├── components/
+│   ├── layouts/               # FocusLayout, DashboardLayout, WorkflowLayout
+│   ├── widgets/               # All widget components
+│   ├── LayoutSwitcher.tsx     # Layout toggle (top-right)
+│   └── SettingsPanel.tsx      # Slide-out settings (top-left)
+├── types/index.ts             # TypeScript type definitions
+├── utils/
+│   ├── storage.ts             # nexus.* storage system + migration
+│   ├── index.ts               # GitLab API utilities
+│   └── common.ts              # Extension metadata
+└── resources/manifest.json    # Chrome extension manifest
+```
+
+## Updating
+
+When updating to v2.0.0 from Quote Master v1.x:
+
+- Your existing tasks, bookmarks, and settings will be **automatically migrated** on first load
+- Old data is mapped to the new `nexus.*` storage namespace
+- Quote-related data is dropped (no longer needed)
+
+## Troubleshooting
+
+### Extension not loading
+- Make sure you selected the `dist/` directory (not the project root)
+- Check that Developer mode is enabled
+- Look for errors in `chrome://extensions/`
+
+### New tab not showing
+- Check if another extension is overriding the new tab
+- Disable other new-tab extensions temporarily
+
+### Build errors
+- Delete `node_modules/` and run `npm install` again
+- Make sure you're using Node.js v18+

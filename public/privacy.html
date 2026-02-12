@@ -5,69 +5,567 @@
   <meta charset="utf-8" />
   <link rel="icon" href="favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description"
-    content="Bookmarks and Extensions, Downloads and Customized Links can be accessed from the Default Newtab page." />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="Nexus Tab — Privacy Policy" />
   <meta name="author" content="Encore Shao" />
-  <link rel="apple-touch-icon" href="icons/logo128.png" />
-  <title>Quote Master: Privacy Page</title>
+  <link rel="apple-touch-icon" href="icons/icon128.png" />
+  <title>Nexus Tab — Privacy Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #3B82F6;
+      --accent-soft: rgba(59, 130, 246, 0.15);
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --text-primary: rgba(255, 255, 255, 0.95);
+      --text-secondary: rgba(255, 255, 255, 0.65);
+      --text-muted: rgba(255, 255, 255, 0.40);
+      --glass-bg: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.10);
+      --glass-hover: rgba(255, 255, 255, 0.10);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
+
+    /* ---- Background decoration ---- */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 10%, rgba(59, 130, 246, 0.08), transparent),
+        radial-gradient(ellipse 500px 350px at 80% 85%, rgba(139, 92, 246, 0.06), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---- Layout ---- */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    @media (min-width: 640px) {
+      .page-wrapper { padding: 64px 32px 96px; }
+    }
+
+    /* ---- Header ---- */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .header-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-bottom: 24px;
+    }
+
+    .header-logo svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .header-logo span {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @media (min-width: 640px) {
+      .header h1 { font-size: 42px; }
+    }
+
+    .header .subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ---- Table of contents ---- */
+    .toc {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .toc-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc-counter;
+      padding: 0;
+    }
+
+    .toc li {
+      counter-increment: toc-counter;
+      margin-bottom: 6px;
+    }
+
+    .toc a {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.2s ease;
+      padding: 2px 0;
+    }
+
+    .toc a::before {
+      content: counter(toc-counter, decimal-leading-zero);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 0.7;
+      min-width: 20px;
+    }
+
+    .toc a:hover {
+      color: var(--text-primary);
+    }
+
+    /* ---- Sections ---- */
+    .section {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    @media (min-width: 640px) {
+      .section { padding: 32px; }
+    }
+
+    .section:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      flex-shrink: 0;
+    }
+
+    .section-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--accent);
+    }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .section p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.75;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section ul {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .section li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .section li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .section strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ---- Services grid ---- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    @media (min-width: 500px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .service-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .service-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 3px;
+      opacity: 0.7;
+    }
+
+    .service-item .service-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .service-item .service-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ---- Contact card ---- */
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 10px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .contact-link:hover {
+      background: rgba(59, 130, 246, 0.25);
+      border-color: rgba(59, 130, 246, 0.35);
+    }
+
+    .contact-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      text-align: center;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--text-muted);
       line-height: 1.6;
     }
 
-    h1,
-    h2 {
-      color: #333;
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
     }
+
+    .footer a:hover {
+      opacity: 0.8;
+    }
+
+    /* ---- Scrollbar ---- */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
   </style>
 </head>
 
 <body>
-  <h1>Privacy Policy</h1>
-  <p><strong> Last Updated: 2024-07-05 </strong></p>
-  <p><strong>Quote Master</strong> ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy
-    explains our principles regarding the collection, use, and disclosure of your information when you use our Chrome
-    extension and related services (collectively, the "Service").</p>
+  <div class="page-wrapper">
 
-  <h2>1. Information We Do Not Collect</h2>
-  <p><strong>Quote Master</strong> respects your privacy and is designed with this principle in mind. We do not collect,
-    store, or share any personal information from our users. This includes, but is not limited to:</p>
-  <ul>
-    <li><strong>Personal Information</strong>: We do not collect names, email addresses, phone numbers, or any other
-      personally identifiable information.</li>
-    <li><strong>Usage Data</strong>: We do not track or store information about your use of the Service, including your
-      interactions with bookmarks, extensions, or tasks.</li>
-    <li><strong>Device Information</strong>: We do not collect information about your device, such as IP address, browser
-      type, or operating system.</li>
-  </ul>
+    <!-- Header -->
+    <header class="header">
+      <a class="header-logo" href="https://ranbot.online" target="_blank" rel="noopener">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="8" fill="#1e293b"/>
+          <path d="M8 24V8l8 8 8-8v16" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="8" cy="8" r="2" fill="#60A5FA"/>
+          <circle cx="24" cy="8" r="2" fill="#60A5FA"/>
+          <circle cx="16" cy="16" r="2" fill="#3B82F6"/>
+        </svg>
+        <span>Nexus Tab</span>
+      </a>
+      <h1>Privacy Policy</h1>
+      <p class="subtitle">Last updated: February 12, 2026</p>
+    </header>
 
-  <h2>2. How We Use Your Information</h2>
-  <p>Since we do not collect any personal or usage information, we do not use your information in any way. All features of
-    <strong>Quote Master</strong> operate locally on your device, and any data related to bookmarks, extensions,
-    downloads, and tasks is stored locally on your device.</p>
+    <!-- Table of contents -->
+    <nav class="toc" aria-label="Table of contents">
+      <p class="toc-title">Contents</p>
+      <ol>
+        <li><a href="#no-collection">Information We Do Not Collect</a></li>
+        <li><a href="#usage">How We Use Your Information</a></li>
+        <li><a href="#third-party">Third-Party Services</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#children">Children's Privacy</a></li>
+        <li><a href="#changes">Changes to This Policy</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ol>
+    </nav>
 
-  <h2>3. Security</h2>
-  <p>Although we do not collect any data, we prioritize the security of the information stored locally on your device.
-    <strong>Quote Master</strong> employs industry-standard security measures to protect your data.</p>
+    <!-- Section 1 -->
+    <section class="section" id="no-collection">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+          </svg>
+        </div>
+        <h2>Information We Do Not Collect</h2>
+      </div>
+      <p><strong>Nexus Tab</strong> respects your privacy and is designed with this principle in mind. We do not collect, store, or share any personal information from our users. This includes, but is not limited to:</p>
+      <ul>
+        <li><strong>Personal Information</strong> — We do not collect names, email addresses, phone numbers, or any other personally identifiable information.</li>
+        <li><strong>Usage Data</strong> — We do not track or store information about your use of the Service, including your interactions with bookmarks, tasks, or widgets.</li>
+        <li><strong>Device Information</strong> — We do not collect information about your device, such as IP address, browser type, or operating system.</li>
+      </ul>
+    </section>
 
-  <h2>4. Children's Privacy</h2>
-  <p>The Service is not intended for children under the age of 13. Since we do not collect any information, we also do not
-    knowingly collect personal information from children under 13.</p>
+    <!-- Section 2 -->
+    <section class="section" id="usage">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+          </svg>
+        </div>
+        <h2>How We Use Your Information</h2>
+      </div>
+      <p>Since we do not collect any personal or usage information, we do not use your information in any way.</p>
+      <p>All features of <strong>Nexus Tab</strong> operate locally on your device. Data related to bookmarks, tasks, notes, quick links, and settings is stored locally using Chrome's built-in storage API (<code style="font-size: 13px; background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; color: var(--accent);">chrome.storage.local</code>). Nothing leaves your browser.</p>
+    </section>
 
-  <h2>5. Changes to This Privacy Policy</h2>
-  <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational,
-    legal, or regulatory reasons. If we make material changes, we will notify you by updating the date at the top of this
-    policy.</p>
+    <!-- Section 3 -->
+    <section class="section" id="third-party">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+          </svg>
+        </div>
+        <h2>Third-Party Services</h2>
+      </div>
+      <p>Some optional widgets may connect to external services <strong>only when configured by you</strong>. These connections are initiated by your explicit action — no data is sent to our servers.</p>
+      <div class="services-grid">
+        <div class="service-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
+          </svg>
+          <div>
+            <div class="service-name">Weather Widget</div>
+            <div class="service-desc">Connects to OpenWeather API when you provide an API key and city</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 19.5v-.75a7.5 7.5 0 0 0-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+          </svg>
+          <div>
+            <div class="service-name">RSS Feeds</div>
+            <div class="service-desc">Fetches articles from feed URLs you configure</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+          </svg>
+          <div>
+            <div class="service-name">GitLab / GitHub</div>
+            <div class="service-desc">Connects to respective APIs when you provide access tokens</div>
+          </div>
+        </div>
+        <div class="service-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+          </svg>
+          <div>
+            <div class="service-name">Background Image</div>
+            <div class="service-desc">Loads an image from a URL you set for the backdrop</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <h2>6. Contact Us</h2>
-  <p>If you have any questions about this Privacy Policy, please contact us at:</p>
-  <p>
-    <strong>Email</strong>: <a href="mailto:encore.shao@gmail.com">encore.shao[@]gmail.com</a><br>
-    <strong>Website</strong>: https://ranbot.online
-  </p>
+    <!-- Section 4 -->
+    <section class="section" id="security">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+          </svg>
+        </div>
+        <h2>Security</h2>
+      </div>
+      <p>Although we do not collect any data, we prioritize the security of information stored locally on your device. <strong>Nexus Tab</strong> employs industry-standard security measures to protect your data.</p>
+      <p>All data is stored within Chrome's sandboxed extension storage, which is isolated from other extensions and websites.</p>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="section" id="children">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+          </svg>
+        </div>
+        <h2>Children's Privacy</h2>
+      </div>
+      <p>The Service is not intended for children under the age of 13. Since we do not collect any information, we also do not knowingly collect personal information from children under 13.</p>
+    </section>
+
+    <!-- Section 6 -->
+    <section class="section" id="changes">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+          </svg>
+        </div>
+        <h2>Changes to This Policy</h2>
+      </div>
+      <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. If we make material changes, we will notify you by updating the date at the top of this policy.</p>
+    </section>
+
+    <!-- Section 7 -->
+    <section class="section" id="contact">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+          </svg>
+        </div>
+        <h2>Contact Us</h2>
+      </div>
+      <p>If you have any questions about this Privacy Policy, please reach out:</p>
+      <div class="contact-grid">
+        <a class="contact-link" href="mailto:encore.shao@gmail.com">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+          </svg>
+          encore.shao@gmail.com
+        </a>
+        <a class="contact-link" href="https://ranbot.online" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+          </svg>
+          ranbot.online
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 &ndash; 2026 <a href="https://ranbot.online" target="_blank" rel="noopener">Nexus Tab</a>. Available as open source under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>.</p>
+    </footer>
+
+  </div>
 </body>
 
 </html>

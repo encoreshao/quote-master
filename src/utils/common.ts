@@ -1,6 +1,6 @@
 import manifest from "./../resources/manifest.json";
 
-export const QuoteMaster = {
+export const NexusTab = {
   name: manifest.name,
   version: manifest.version,
   authorName: manifest.author.name,
@@ -8,4 +8,4 @@ export const QuoteMaster = {
   homepageURL: manifest.homepage_url,
 };
 
-Object.assign(window, { QuoteMaster });
+Object.assign(window, { NexusTab });

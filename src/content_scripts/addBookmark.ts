@@ -1,7 +1,7 @@
 export const addBookmark = (request: any) => {
   // Remove any existing form
   const existingForm = document.getElementById(
-    "quote-master-bookmark-form-container"
+    "nexus-tab-bookmark-form-container"
   );
   if (existingForm) {
     document.body.removeChild(existingForm);
@@ -9,7 +9,7 @@ export const addBookmark = (request: any) => {
 
   // Create form container
   const formContainer = document.createElement("div");
-  formContainer.id = "quote-master-bookmark-form-container";
+  formContainer.id = "nexus-tab-bookmark-form-container";
   formContainer.style.position = "fixed";
   formContainer.style.top = "0";
   formContainer.style.left = "0";

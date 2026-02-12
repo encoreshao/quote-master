@@ -1,135 +1,134 @@
-# Quote Master: Browser Enhancement & Productivity Tool
+# Nexus Tab — Your Daily Command Center
 
-**Quote Master** is a comprehensive browser extension designed to transform your new tab experience into a productivity hub. It combines task management, inspirational quotes, bookmark organization, and GitLab integration into a single, customizable interface.
+**Nexus Tab** is a Chrome extension that replaces your new tab with a modular, beautiful productivity dashboard. Glassmorphism cards in a bento grid layout, customizable widgets, and preset layouts to match your workflow.
 
 ## Features
 
-### Core Functionality
+### Modular Widget System
 
-- **Customizable Dashboard**: Personalize your new tab page with the features you use most
-- **Beautiful UI**: Clean, modern interface with customizable background images
-- **Tab-Based Navigation**: Easy access to all features through an intuitive tabbed interface
+Every feature is a self-contained widget card. Toggle them on or off per layout, and customize each one independently.
 
-### Productivity Tools
+| Widget | Description |
+|--------|-------------|
+| **Clock & Greeting** | Live time, date, and personalized greeting |
+| **Search Bar** | Search the web or enter URLs directly |
+| **Tasks** | Full task management with kanban board and list views |
+| **Quick Links** | Customizable link grid with favicons — add/remove links |
+| **Bookmarks** | Browse and search Chrome bookmarks with tree navigation |
+| **Notes** | Persistent scratchpad for quick notes |
+| **Pomodoro Timer** | Focus timer with work/break phases and circular progress |
+| **Weather** | Current weather via OpenWeather API |
+| **RSS Feeds** | Add feed URLs, auto-refresh articles |
+| **GitLab Activity** | View issues, events, and projects *(coming soon)* |
+| **GitHub Activity** | PRs, issues, contributions *(coming soon)* |
+| **Custom Embed** | Embed any URL in an iframe *(coming soon)* |
+| **Keyboard Shortcuts** | Quick launcher for power users *(coming soon)* |
 
-- **Task Management**:
+### Three Preset Layouts
 
-  - Create and organize tasks with due dates
-  - Mark tasks as completed with a double-click
-  - Visual indicators for task status (completed tasks are strikethrough)
-  - Easily remove tasks when no longer needed
+Switch between layouts with one click — each remembers its own widget selection.
 
-- **Inspirational Quotes**:
-  - Display random inspirational quotes
-  - Refresh to see new quotes with a single click
-  - Sourced from a curated collection of motivational content
+- **Focus** — Minimal. Large clock, search bar, quick links and tasks. For a clean new tab.
+- **Dashboard** — Full bento grid. All active widgets visible at a glance.
+- **Workflow** — Split view. Tasks on the left, stacked widgets on the right. For deep work.
+
+### Glassmorphism Design
+
+- Frosted glass cards over your custom background image
+- Dark overlay for readability
+- Customizable accent color with preset options
+- Inter font for clean typography
+- Custom scrollbars and smooth transitions
 
 ### Browser Integration
 
-- **Bookmark Management**:
+- **Context Menu** — Right-click on any page to add tasks or bookmarks
+- **Content Scripts** — Modal forms appear on any webpage for quick capture
+- **Chrome APIs** — Bookmarks, storage, tabs, and notifications
 
-  - Access and search your browser bookmarks
-  - Quick search functionality to find specific bookmarks
-  - Organized display of your bookmark hierarchy
-  - Add bookmarks directly from any webpage via context menu
+### Customization
 
-- **Task Integration**:
-
-  - Add tasks directly from any webpage via context menu
-  - Capture webpage title and URL automatically
-
-- **Quick Access**:
-  - Direct links to Downloads and Extensions pages
-  - Gmail integration for quick access to your inbox
-  - Customizable links to frequently used websites
-
-### GitLab Integration
-
-- **Activity Tracking**: View your recent GitLab activity
-- **Issue Management**: Access and track your assigned GitLab issues
-- **Project Access**: Quick links to your contributed projects
-- **Team Collaboration**: View and connect with team members
-
-### AI Tools Integration
-
-- **ChatBot Links**: Configurable quick access to AI assistants:
-  - OpenAI (ChatGPT)
-  - DeepSeek
-  - Google Gemini
-  - Grok
-
-## Customization
-
-Quote Master offers extensive customization options:
-
-- **Personal Information**: Set your name and contact details
-- **Background Image**: Customize the visual appearance with your preferred background
-- **Feature Toggles**: Enable/disable specific features based on your needs
-- **External Links**: Configure links to your GitHub, GitLab, BambooHR, and other services
-- **Navigation Options**: Customize which navigation elements appear in the header
-
-## Screenshots
-
-- ![Quotes](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/quotes.png)
-
-- ![Tasks Management](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/tasks-management.png)
-
-- ![Bookmark Manager](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/bookmark-manager.png)
-
-- ![Settings](https://raw.githubusercontent.com/encoreshao/quote-master/main/src/assets/images/settings.png)
-
-## Technical Details
-
-- Built with React and TypeScript
-- Uses FontAwesome for icons
-- Implements responsive design principles
-- Chrome extension API integration for browser features
-
-### Extension Architecture
-
-- **Background Service Worker**: Manages context menus, handles bookmark operations, and processes tab events
-- **Content Scripts**: Inject UI components into webpages for adding tasks and bookmarks
-- **New Tab Override**: Replaces the default new tab page with the Quote Master dashboard
-- **Context Menu Integration**: Right-click on any webpage to quickly add tasks or bookmarks
-- **Chrome API Integration**: Utilizes bookmarks, storage, tabs, and notifications APIs
-
-### User Experience Features
-
-- **In-page Forms**: Clean, modal forms appear directly on the webpage when adding tasks or bookmarks
-- **Smart Defaults**: Forms pre-populate with the current page title and URL
-- **Folder Selection**: When adding bookmarks, choose from your existing bookmark folders
-- **Priority Settings**: Set task priorities (low, medium, high) when adding from webpages
-- **Notification System**: Unobtrusive notifications confirm successful actions
+- **Background Image** — Set any URL as your background
+- **Accent Color** — Pick from presets or choose your own
+- **Widget Toggles** — Enable/disable widgets per layout
+- **Quick Links** — Add, remove, and reorder your favorite links
+- **RSS Feeds** — Add any RSS/Atom feed URL with auto-refresh
 
 ## Installation
 
-Quote Master can be installed in a few different ways:
+### From Source
 
-1. **Chrome Web Store**: _(Coming soon)_
-2. **Manual Installation**:
-   - Download or clone the repository
-   - Build the extension using `npm run build`
-   - Load the unpacked extension in Chrome from the `dist` directory
-   - See [INSTALLATION.md](INSTALLATION.md) for detailed instructions
+```bash
+# Clone the repository
+git clone https://github.com/encoreshao/quote-master.git
+cd quote-master
+
+# Install dependencies
+npm install
+
+# Build
+npm run build
+
+# Development (watch mode)
+npm run watch
+```
+
+Then load as an unpacked extension:
+
+1. Open `chrome://extensions/`
+2. Enable **Developer mode** (top right)
+3. Click **Load unpacked**
+4. Select the `dist/` directory
+
+See [INSTALLATION.md](INSTALLATION.md) for detailed instructions.
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | React 18 |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Build | Webpack 5 |
+| Target | Chrome Extension (Manifest v3) |
+| Storage | `chrome.storage.local` |
+
+### Architecture
+
+- **Widget System** — Each widget is a self-contained React component with its own storage namespace (`nexus.widget.*`)
+- **Layout Engine** — Three preset CSS grid layouts (Focus, Dashboard, Workflow)
+- **Storage** — Clean `nexus.*` namespaced keys in `chrome.storage.local`
+- **Migration** — Automatic data migration from Quote Master v1.x on first load
+- **Background Worker** — Service worker for context menus and bookmark operations
+- **Content Scripts** — Injected forms for adding tasks/bookmarks from any page
 
 ## Version History
 
-Current version: 1.2.4
+Current version: **2.0.0**
 
-### Recent Updates
+### v2.0.0 — Nexus Tab (Complete Rebuild)
+- Rebranded from Quote Master to Nexus Tab
+- New glassmorphism + bento grid design system
+- Replaced Bulma with Tailwind CSS
+- Modular widget architecture (13 widgets)
+- Three preset layouts (Focus, Dashboard, Workflow)
+- Slide-out settings panel with widget toggles
+- RSS Feed reader with auto-refresh
+- Pomodoro focus timer
+- Weather widget
+- Notes/scratchpad widget
+- Automatic migration from Quote Master data
 
-- **v1.2.4**: Added context menu integration for adding tasks from any webpage
-- **v1.2.0**: Added X.com Grok Chat Link and enhanced task management capabilities
-- **v1.2.0**: Added Google Gemini Chat Link and streamlined the interface
-- **v1.1.9**: Added DeepSeek Chat Link and improved tab navigation with icons
+### Previous Versions (Quote Master)
+- **v1.2.4**: Context menu integration for tasks
+- **v1.2.0**: Grok/Gemini chat links, enhanced task management
+- **v1.1.9**: DeepSeek chat link, improved navigation
 
-See [CHANGELOG.md](CHANGELOG.md) for a complete history of changes.
+See [CHANGELOG.md](CHANGELOG.md) for full history.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/encoreshao/quote-master. This project is intended to be a safe, welcoming space for collaboration.
-
-To see all contributors: https://github.com/encoreshao/quote-master/graphs/contributors
+Bug reports and pull requests are welcome on GitHub at https://github.com/encoreshao/quote-master.
 
 ### Contributors
 
@@ -137,4 +136,4 @@ To see all contributors: https://github.com/encoreshao/quote-master/graphs/contr
 
 ## License
 
-Quote Master is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+Nexus Tab is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

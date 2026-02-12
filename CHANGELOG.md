@@ -1,5 +1,36 @@
 # Change Log
 
+## v2.0.0 (2026-02-12)
+
+### Nexus Tab — Complete Rebuild
+
+- **Rebrand**: Renamed from Quote Master to Nexus Tab
+- **New Design**: Glassmorphism + bento grid design system with Tailwind CSS
+- **Widget System**: Modular architecture with 13 widgets (9 functional, 4 placeholder)
+  - Clock & Greeting
+  - Search Bar
+  - Tasks (kanban board + list view)
+  - Quick Links (add/remove/favicon)
+  - Bookmarks (tree browser + search)
+  - Notes / Scratchpad
+  - Pomodoro Focus Timer
+  - Weather (OpenWeather API)
+  - RSS Feeds (auto-refresh)
+  - GitLab Activity (placeholder)
+  - GitHub Activity (placeholder)
+  - Custom Embed (placeholder)
+  - Keyboard Shortcuts (placeholder)
+- **Three Layouts**: Focus, Dashboard, and Workflow — switchable with one click
+- **Settings Panel**: Slide-out panel with profile customization and per-layout widget toggles
+- **Customization**: Background image, accent color (6 presets + custom), personalized greeting
+- **Storage**: Clean `nexus.*` namespaced keys in `chrome.storage.local`
+- **Migration**: Automatic data migration from Quote Master v1.x on first load
+- **New Logo**: Geometric "N" nexus mark in electric blue on dark navy
+- **Removed**: Bulma CSS, FontAwesome, inspirational quotes, old tab navigation
+- **Tech Stack**: React 18 + TypeScript + Tailwind CSS + Webpack 5
+
+---
+
 ## v1.2.4 (2025-03-23)
 
 - New Feature: contextMenu to allow users to add the currently viewed page to the task

@@ -8,6 +8,7 @@ const extPlugins = [
         patterns: [
             { from: "src/resources/manifest.json", to: "[name][ext]" },
             { from: "public/*.ico", to: "[name][ext]" },
+            { from: "public/privacy.html", to: "[name][ext]" },
             { from: "src/assets/icons/*.png", to: "./icons/[name][ext]" },
         ],
     }),
@@ -40,11 +41,11 @@ module.exports = {
                 ],
             },
             {
-                exclude: /node_modules/,
                 test: /\.css$/i,
                 use: [
                     "style-loader",
-                    "css-loader"
+                    "css-loader",
+                    "postcss-loader"
                 ]
             },
             {
