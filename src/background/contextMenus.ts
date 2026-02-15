@@ -5,25 +5,30 @@ const contextMenuId = "nexusTab";
 const addToTasksId = "addToTasks";
 const addToBookmarksId = "addToBookmarks";
 
-chrome.contextMenus.create({
-  id: contextMenuId,
-  title: APP.shortName,
-  contexts: ["all"],
-});
+// Create context menus — call this from onInstalled only
+export function createContextMenus() {
+  chrome.contextMenus.removeAll(() => {
+    chrome.contextMenus.create({
+      id: contextMenuId,
+      title: APP.shortName,
+      contexts: ["all"],
+    });
 
-chrome.contextMenus.create({
-  id: addToTasksId,
-  parentId: contextMenuId,
-  title: "Add to Tasks",
-  contexts: ["all"],
-});
+    chrome.contextMenus.create({
+      id: addToTasksId,
+      parentId: contextMenuId,
+      title: "Add to Tasks",
+      contexts: ["all"],
+    });
 
-chrome.contextMenus.create({
-  id: addToBookmarksId,
-  parentId: contextMenuId,
-  title: "Add to Bookmarks",
-  contexts: ["all"],
-});
+    chrome.contextMenus.create({
+      id: addToBookmarksId,
+      parentId: contextMenuId,
+      title: "Add to Bookmarks",
+      contexts: ["all"],
+    });
+  });
+}
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   if (info.menuItemId === addToTasksId && tab?.id) {

@@ -1,7 +1,11 @@
 /* eslint-disable import/first */
 export {};
-import { updateContextMenus } from "./contextMenus";
-// import { version as manifestVersion } from "../manifest.json";
+import { createContextMenus, updateContextMenus } from "./contextMenus";
+
+// Create context menus once on install/update (not on every SW wake)
+chrome.runtime.onInstalled.addListener(() => {
+  createContextMenus();
+});
 
 function openChromeInternalPage(chromeExtURL: string) {
   chrome.tabs.query({}, function (tabs: any) {
