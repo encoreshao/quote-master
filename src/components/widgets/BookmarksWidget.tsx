@@ -46,7 +46,7 @@ const BookmarksWidget: React.FC = () => {
         <a
           key={node.id}
           href={node.url}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-all duration-200 cursor-pointer group"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-all duration-200 cursor-pointer group"
           style={{ paddingLeft: `${12 + depth * 16}px` }}
           title={node.url}
         >
@@ -56,7 +56,7 @@ const BookmarksWidget: React.FC = () => {
             className="w-3.5 h-3.5 shrink-0"
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
           />
-          <span className="text-xs text-white/60 group-hover:text-white/90 truncate transition-colors">
+          <span className="text-xs t-tertiary group-hover:t-primary truncate transition-colors">
             {node.title || node.url}
           </span>
         </a>
@@ -69,14 +69,14 @@ const BookmarksWidget: React.FC = () => {
         <div key={node.id}>
           <button
             onClick={() => toggleExpand(node.id)}
-            className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-white/10 transition-all duration-200 cursor-pointer"
+            className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-[var(--glass-bg)] transition-all duration-200 cursor-pointer"
             style={{ paddingLeft: `${12 + depth * 16}px` }}
           >
-            <svg className={`w-3 h-3 text-white/40 transition-transform ${isOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className={`w-3 h-3 t-muted transition-transform ${isOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            <span className="text-xs text-white/50 font-medium">{node.title}</span>
-            <span className="text-[10px] text-white/20">{node.children.length}</span>
+            <span className="text-xs t-tertiary font-medium">{node.title}</span>
+            <span className="text-[10px] t-ghost">{node.children.length}</span>
           </button>
           {isOpen && node.children.map(child => renderNode(child, depth + 1))}
         </div>
@@ -119,7 +119,7 @@ const BookmarksWidget: React.FC = () => {
           : bookmarks.map(b => renderNode(b))
         }
         {bookmarks.length === 0 && (
-          <p className="text-center text-white/30 text-xs py-4">Loading bookmarks...</p>
+          <p className="text-center t-faint text-xs py-4">Loading bookmarks...</p>
         )}
       </div>
     </WidgetCard>

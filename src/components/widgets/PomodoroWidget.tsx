@@ -52,7 +52,7 @@ const PomodoroWidget: React.FC = () => {
         {/* Timer display */}
         <div className="relative w-24 h-24 mb-3">
           <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="4" />
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--glass-border-subtle)" strokeWidth="4" />
             <circle
               cx="50" cy="50" r="45" fill="none"
               stroke={phase === 'work' ? 'var(--accent-color)' : '#10B981'}
@@ -64,7 +64,7 @@ const PomodoroWidget: React.FC = () => {
             />
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-2xl font-light text-white tabular-nums">
+            <span className="text-2xl font-light t-primary tabular-nums">
               {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
             </span>
           </div>

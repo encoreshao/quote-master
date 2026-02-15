@@ -18,6 +18,7 @@ export const DEFAULT_PROFILE: NexusProfile = {
   greeting: '',
   backgroundUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80',
   accentColor: '#3B82F6',
+  theme: 'system',
 };
 
 export const DEFAULT_LAYOUT: LayoutType = 'dashboard';
@@ -157,6 +158,7 @@ export function migrateFromQuoteMaster(callback: () => void): void {
         greeting: '',
         backgroundUrl: oldData.backgroundUrl || DEFAULT_PROFILE.backgroundUrl,
         accentColor: '#3B82F6',
+        theme: 'system',
       };
 
       // Build quick links from old settings

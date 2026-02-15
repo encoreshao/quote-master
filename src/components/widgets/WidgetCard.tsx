@@ -28,17 +28,17 @@ const WidgetCard: React.FC<WidgetCardProps> = ({
   return (
     <div className={`glass-card overflow-hidden ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+      <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid var(--glass-border)' }}>
         <div className="flex items-center gap-2">
-          {icon && <span className="text-white/60">{icon}</span>}
-          <h3 className="text-sm font-medium text-white/80">{title}</h3>
+          {icon && <span className="t-tertiary">{icon}</span>}
+          <h3 className="text-sm font-medium t-secondary">{title}</h3>
         </div>
         <div className="flex items-center gap-1">
           {headerRight}
           {onSettings && (
             <button
               onClick={onSettings}
-              className="p-1.5 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/10 transition-all duration-200"
+              className="p-1.5 rounded-lg t-muted transition-all duration-200"
               title="Settings"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,7 +50,7 @@ const WidgetCard: React.FC<WidgetCardProps> = ({
           {collapsible && (
             <button
               onClick={() => setCollapsed(!collapsed)}
-              className="p-1.5 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/10 transition-all duration-200"
+              className="p-1.5 rounded-lg t-muted transition-all duration-200"
               title={collapsed ? 'Expand' : 'Collapse'}
             >
               <svg className={`w-4 h-4 transition-transform duration-200 ${collapsed ? '-rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">

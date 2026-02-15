@@ -253,7 +253,8 @@ const WeatherWidget: React.FC = () => {
           {/* Search city button */}
           <button
             onClick={() => setShowSearch(!showSearch)}
-            className={`p-1.5 rounded-lg transition-all cursor-pointer ${showSearch ? 'text-white/80 bg-white/10' : 'text-white/30 hover:text-white/60'}`}
+            className={`p-1.5 rounded-lg transition-all cursor-pointer ${showSearch ? 't-secondary' : 't-faint hover:t-tertiary'}`}
+            style={showSearch ? { backgroundColor: 'var(--glass-bg)' } : undefined}
             title="Search city"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,7 +264,7 @@ const WeatherWidget: React.FC = () => {
           {/* Refresh */}
           <button
             onClick={handleRefresh}
-            className="p-1.5 rounded-lg text-white/30 hover:text-white/60 transition-all cursor-pointer"
+            className="p-1.5 rounded-lg t-faint hover:t-tertiary transition-all cursor-pointer"
             title="Refresh"
           >
             <svg className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -297,17 +298,17 @@ const WeatherWidget: React.FC = () => {
               <span className="hidden sm:inline">Auto</span>
             </button>
           </div>
-          {searching && <p className="text-[10px] text-white/30 text-center">Searching...</p>}
+          {searching && <p className="text-[10px] t-faint text-center">Searching...</p>}
           {searchResults.length > 0 && (
             <div className="space-y-0.5 max-h-36 overflow-y-auto">
               {searchResults.map(r => (
                 <button
                   key={r.id}
                   onClick={() => handleSelectCity(r)}
-                  className="w-full text-left px-3 py-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] transition-colors cursor-pointer"
+                  className="w-full text-left px-3 py-2 rounded-lg bg-[var(--glass-bg-subtle)] hover:bg-[var(--glass-bg-subtle-hover)] transition-colors cursor-pointer"
                 >
-                  <p className="text-xs text-white/80">{r.name}{r.admin1 ? `, ${r.admin1}` : ''}</p>
-                  <p className="text-[10px] text-white/30">{r.country} &middot; {r.latitude.toFixed(2)}, {r.longitude.toFixed(2)}</p>
+                  <p className="text-xs t-secondary">{r.name}{r.admin1 ? `, ${r.admin1}` : ''}</p>
+                  <p className="text-[10px] t-faint">{r.country} &middot; {r.latitude.toFixed(2)}, {r.longitude.toFixed(2)}</p>
                 </button>
               ))}
             </div>
@@ -318,15 +319,15 @@ const WeatherWidget: React.FC = () => {
       {/* Loading state */}
       {loading && !weather && (
         <div className="flex items-center justify-center py-6">
-          <div className="w-5 h-5 border-2 border-white/20 border-t-white/60 rounded-full animate-spin" />
-          <span className="text-xs text-white/30 ml-2">Detecting location...</span>
+          <div className="w-5 h-5 border-2 rounded-full animate-spin" style={{ borderColor: 'var(--glass-border)', borderTopColor: 'var(--text-tertiary)' }} />
+          <span className="text-xs t-faint ml-2">Detecting location...</span>
         </div>
       )}
 
       {/* Error state */}
       {error && !weather && (
         <div className="text-center py-3 space-y-2">
-          <p className="text-xs text-white/40">{error}</p>
+          <p className="text-xs t-muted">{error}</p>
           <button
             onClick={() => { setShowSearch(true); setError(null); }}
             className="glass-button text-xs px-3 py-1.5"
@@ -345,67 +346,67 @@ const WeatherWidget: React.FC = () => {
               <span className="text-4xl leading-none">{getWeatherInfo(weather.weatherCode, weather.isDay).icon}</span>
               <div>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-light text-white tabular-nums">{weather.temperature}</span>
+                  <span className="text-3xl font-light t-primary tabular-nums">{weather.temperature}</span>
                   <button
                     onClick={toggleUnits}
-                    className="text-sm text-white/40 hover:text-white/70 transition-colors cursor-pointer"
+                    className="text-sm t-muted hover:t-tertiary transition-colors cursor-pointer"
                     title={`Switch to ${config.units === 'metric' ? 'Fahrenheit' : 'Celsius'}`}
                   >
                     {unitLabel}
                   </button>
                 </div>
-                <p className="text-xs text-white/50 capitalize">{getWeatherInfo(weather.weatherCode, weather.isDay).desc}</p>
+                <p className="text-xs t-tertiary capitalize">{getWeatherInfo(weather.weatherCode, weather.isDay).desc}</p>
               </div>
             </div>
 
             {/* High / Low */}
             <div className="text-right">
               <div className="flex items-center gap-1.5 text-[11px]">
-                <svg className="w-3 h-3 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 t-faint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
                 </svg>
-                <span className="text-white/60 tabular-nums">{weather.tempMax}{unitLabel}</span>
+                <span className="t-tertiary tabular-nums">{weather.tempMax}{unitLabel}</span>
               </div>
               <div className="flex items-center gap-1.5 text-[11px] mt-0.5">
-                <svg className="w-3 h-3 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 t-faint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
                 </svg>
-                <span className="text-white/40 tabular-nums">{weather.tempMin}{unitLabel}</span>
+                <span className="t-muted tabular-nums">{weather.tempMin}{unitLabel}</span>
               </div>
             </div>
           </div>
 
           {/* Details row */}
-          <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/5">
+          <div className="flex items-center gap-4 mt-3 pt-3 border-t" style={{ borderColor: 'var(--divider)' }}>
             {/* Feels like */}
             <div className="flex items-center gap-1.5">
-              <svg className="w-3 h-3 text-white/25" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 t-faint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.047 8.287 8.287 0 009 9.601a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
               </svg>
-              <span className="text-[10px] text-white/35">Feels {weather.apparentTemp}{unitLabel}</span>
+              <span className="text-[10px] t-muted">Feels {weather.apparentTemp}{unitLabel}</span>
             </div>
             {/* Humidity */}
             <div className="flex items-center gap-1.5">
-              <svg className="w-3 h-3 text-white/25" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 t-faint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 2.25c0 0-6.75 8.25-6.75 12a6.75 6.75 0 0013.5 0c0-3.75-6.75-12-6.75-12z" />
               </svg>
-              <span className="text-[10px] text-white/35">{weather.humidity}%</span>
+              <span className="text-[10px] t-muted">{weather.humidity}%</span>
             </div>
             {/* Wind */}
             <div className="flex items-center gap-1.5">
-              <svg className="w-3 h-3 text-white/25" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-3 h-3 t-faint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
               </svg>
-              <span className="text-[10px] text-white/35">{weather.windSpeed} {windLabel}</span>
+              <span className="text-[10px] t-muted">{weather.windSpeed} {windLabel}</span>
             </div>
           </div>
 
           {/* City + last update */}
           <div className="flex items-center justify-between mt-2.5">
-            <p className="text-[10px] text-white/25 truncate flex-1">
+            <p className="text-[10px] t-faint truncate flex-1">
               {config.city}{config.autoDetect ? ' (auto)' : ''}
             </p>
-            <p className="text-[10px] text-white/15 shrink-0 ml-2">Open-Meteo</p>
+            <p className="text-[10px] shrink-0 ml-2" style={{ color: 'var(--text-invisible)' }}>Open-Meteo</p>
           </div>
         </div>
       )}
@@ -413,7 +414,7 @@ const WeatherWidget: React.FC = () => {
       {/* Initial state — no weather, no loading, no error */}
       {!weather && !loading && !error && (
         <div className="text-center py-4 space-y-2">
-          <p className="text-xs text-white/30">Weather data not available</p>
+          <p className="text-xs t-faint">Weather data not available</p>
           <div className="flex items-center justify-center gap-2">
             <button onClick={detectLocation} className="glass-button text-xs px-3 py-1.5">
               Use my location

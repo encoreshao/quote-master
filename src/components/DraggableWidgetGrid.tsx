@@ -119,13 +119,13 @@ const DraggableWidgetGrid: React.FC<DraggableWidgetGridProps> = ({
           >
             {/* Drag handle indicator */}
             <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 opacity-0 hover:opacity-100 transition-opacity duration-200 cursor-grab active:cursor-grabbing">
-              <div className="flex gap-0.5 px-2 py-1 rounded-lg bg-black/40 backdrop-blur-sm">
-                <span className="w-1 h-1 rounded-full bg-white/50" />
-                <span className="w-1 h-1 rounded-full bg-white/50" />
-                <span className="w-1 h-1 rounded-full bg-white/50" />
-                <span className="w-1 h-1 rounded-full bg-white/50" />
-                <span className="w-1 h-1 rounded-full bg-white/50" />
-                <span className="w-1 h-1 rounded-full bg-white/50" />
+              <div className="flex gap-0.5 px-2 py-1 rounded-lg backdrop-blur-sm" style={{ backgroundColor: 'var(--glass-bg)' }}>
+                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-muted)' }} />
+                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-muted)' }} />
+                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-muted)' }} />
+                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-muted)' }} />
+                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-muted)' }} />
+                <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-muted)' }} />
               </div>
             </div>
             {renderWidget(id)}

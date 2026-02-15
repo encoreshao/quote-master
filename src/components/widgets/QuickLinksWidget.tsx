@@ -95,7 +95,7 @@ const QuickLinksWidget: React.FC = () => {
       headerRight={
         <button
           onClick={() => setShowAdd(!showAdd)}
-          className="p-1.5 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/10 transition-all duration-200 cursor-pointer"
+          className="p-1.5 rounded-lg t-muted hover:t-secondary hover:bg-[var(--glass-bg)] transition-all duration-200 cursor-pointer"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
@@ -128,10 +128,10 @@ const QuickLinksWidget: React.FC = () => {
           <a
             key={link.id}
             href={link.url}
-            className="group flex flex-col items-center gap-1.5 p-3 rounded-xl hover:bg-white/10 transition-all duration-200 cursor-pointer relative"
+            className="group flex flex-col items-center gap-1.5 p-3 rounded-xl hover:bg-[var(--glass-bg)] transition-all duration-200 cursor-pointer relative"
             title={link.url}
           >
-            <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/70 group-hover:text-white group-hover:bg-white/20 transition-all duration-200">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center t-tertiary group-hover:t-primary bg-[var(--glass-bg)] group-hover:bg-[var(--glass-bg-hover)] transition-all duration-200">
               <img
                 src={getFaviconUrl(link.url)}
                 alt=""
@@ -139,7 +139,7 @@ const QuickLinksWidget: React.FC = () => {
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               />
             </div>
-            <span className="text-[10px] text-white/50 group-hover:text-white/80 truncate w-full text-center transition-colors">
+            <span className="text-[10px] t-tertiary group-hover:t-secondary truncate w-full text-center transition-colors">
               {link.name}
             </span>
             <button

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { NexusProfile, LayoutType, NexusLayouts, WidgetId } from '../types';
+import { NexusProfile, LayoutType, NexusLayouts, WidgetId, ThemeMode } from '../types';
 import { getNexusProfile, setNexusProfile, getNexusLayouts, setStorage } from '../utils/storage';
 import { APP } from '../utils/common';
+
+const THEME_OPTIONS: { value: ThemeMode; label: string; icon: string }[] = [
+  { value: 'light', label: 'Light', icon: 'M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z' },
+  { value: 'dark', label: 'Dark', icon: 'M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z' },
+  { value: 'system', label: 'System', icon: 'M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25' },
+];
 
 interface SettingsPanelProps {
   isOpen: boolean;
@@ -63,6 +69,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
     greeting: '',
     backgroundUrl: '',
     accentColor: '#3B82F6',
+    theme: 'system',
   });
   const [layouts, setLayouts] = useState<NexusLayouts | null>(null);
 
@@ -79,6 +86,12 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
     setNexusProfile(updated);
     if (field === 'accentColor') {
       document.documentElement.style.setProperty('--accent-color', value);
+    }
+    if (field === 'theme') {
+      const resolved = value === 'system'
+        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        : value;
+      document.documentElement.setAttribute('data-theme', resolved);
     }
   };
 
@@ -101,22 +114,23 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 animate-fade-in"
+        className="fixed inset-0 backdrop-blur-sm z-40 animate-fade-in"
+        style={{ backgroundColor: 'var(--backdrop-overlay)' }}
         onClick={onClose}
       />
 
       {/* Panel */}
       <div className="fixed top-0 right-0 h-full w-full max-w-[400px] z-50 animate-slide-in">
-        <div className="h-full backdrop-blur-2xl bg-slate-900/90 border-l border-white/10 shadow-2xl flex flex-col">
+        <div className="h-full backdrop-blur-2xl shadow-2xl flex flex-col" style={{ backgroundColor: 'var(--panel-bg)', borderLeft: '1px solid var(--panel-border)' }}>
           {/* Header */}
-          <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 shrink-0">
+          <div className="flex items-center justify-between px-5 py-4 shrink-0" style={{ borderBottom: '1px solid var(--panel-border)' }}>
             <div>
-              <h2 className="text-base font-semibold text-white">Settings</h2>
-              <p className="text-[11px] text-white/35 mt-0.5">Personalize your {APP.shortName}</p>
+              <h2 className="text-base font-semibold t-primary">Settings</h2>
+              <p className="text-[11px] t-muted mt-0.5">Personalize your {APP.shortName}</p>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-white/40 hover:text-white hover:bg-white/10 transition-all duration-200 cursor-pointer"
+              className="p-2 rounded-xl t-muted transition-all duration-200 cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -128,10 +142,10 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
           <div className="flex-1 overflow-y-auto">
             {/* ─── Profile Section ─── */}
             <div className="px-5 pt-5 pb-4">
-              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-white/30 mb-3">Profile</h3>
+              <h3 className="text-[11px] font-semibold uppercase tracking-wider t-faint mb-3">Profile</h3>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Name</label>
+                  <label className="block text-xs t-tertiary mb-1">Name</label>
                   <input
                     type="text"
                     value={profile.username}
@@ -141,7 +155,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Custom Greeting</label>
+                  <label className="block text-xs t-tertiary mb-1">Custom Greeting</label>
                   <input
                     type="text"
                     value={profile.greeting}
@@ -153,15 +167,40 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
               </div>
             </div>
 
-            <div className="mx-5 border-t border-white/5" />
+            <div className="mx-5" style={{ borderTop: '1px solid var(--divider)' }} />
 
             {/* ─── Appearance Section ─── */}
             <div className="px-5 pt-4 pb-4">
-              <h3 className="text-[11px] font-semibold uppercase tracking-wider text-white/30 mb-3">Appearance</h3>
+              <h3 className="text-[11px] font-semibold uppercase tracking-wider t-faint mb-3">Appearance</h3>
               <div className="space-y-4">
+                {/* Theme */}
+                <div>
+                  <label className="block text-xs t-tertiary mb-2">Theme</label>
+                  <div className="flex gap-1.5 p-1 rounded-xl" style={{ backgroundColor: 'var(--glass-bg)' }}>
+                    {THEME_OPTIONS.map(({ value, label, icon }) => {
+                      const active = (profile.theme || 'system') === value;
+                      return (
+                        <button
+                          key={value}
+                          onClick={() => handleProfileChange('theme', value)}
+                          className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer ${
+                            active ? 't-primary' : 't-muted'
+                          }`}
+                          style={active ? { backgroundColor: 'var(--glass-bg-hover)', boxShadow: '0 1px 3px var(--shadow-color)' } : {}}
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={icon} />
+                          </svg>
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 {/* Background */}
                 <div>
-                  <label className="block text-xs text-white/50 mb-1">Background Image URL</label>
+                  <label className="block text-xs t-tertiary mb-1">Background Image URL</label>
                   <input
                     type="text"
                     value={profile.backgroundUrl}
@@ -179,7 +218,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
                       />
                       <button
                         onClick={() => handleProfileChange('backgroundUrl', '')}
-                        className="absolute top-1 right-1 p-1 rounded-lg bg-black/50 text-white/60 hover:text-white cursor-pointer transition-colors"
+                        className="absolute top-1 right-1 p-1 rounded-lg btn-overlay-icon cursor-pointer"
                         title="Remove background"
                       >
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -192,7 +231,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
 
                 {/* Accent Color */}
                 <div>
-                  <label className="block text-xs text-white/50 mb-2">Accent Color</label>
+                  <label className="block text-xs t-tertiary mb-2">Accent Color</label>
                   <div className="grid grid-cols-8 gap-2 mb-2">
                     {ACCENT_PRESETS.map(({ color, name }) => (
                       <button
@@ -207,7 +246,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
                         title={name}
                       >
                         {profile.accentColor === color && (
-                          <svg className="w-3 h-3 text-white absolute inset-0 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-3 h-3 t-primary absolute inset-0 m-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                           </svg>
                         )}
@@ -233,24 +272,24 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
               </div>
             </div>
 
-            <div className="mx-5 border-t border-white/5" />
+            <div className="mx-5" style={{ borderTop: '1px solid var(--divider)' }} />
 
             {/* ─── Widgets Section ─── */}
             <div className="px-5 pt-4 pb-6">
               <div className="flex items-baseline justify-between mb-3">
-                <h3 className="text-[11px] font-semibold uppercase tracking-wider text-white/30">
+                <h3 className="text-[11px] font-semibold uppercase tracking-wider t-faint">
                   Widgets
                 </h3>
-                <span className="text-[10px] text-white/25">
-                  {enabledCount} enabled for <span className="capitalize text-white/40">{LAYOUT_LABELS[activeLayout].name}</span>
+                <span className="text-[10px] t-faint">
+                  {enabledCount} enabled for <span className="capitalize t-muted">{LAYOUT_LABELS[activeLayout].name}</span>
                 </span>
               </div>
-              <p className="text-[11px] text-white/25 mb-3">{LAYOUT_LABELS[activeLayout].desc}</p>
+              <p className="text-[11px] t-faint mb-3">{LAYOUT_LABELS[activeLayout].desc}</p>
 
               <div className="space-y-4">
                 {WIDGET_GROUPS.map(group => (
                   <div key={group.label}>
-                    <p className="text-[10px] font-medium text-white/20 uppercase tracking-wider mb-1.5">{group.label}</p>
+                    <p className="text-[10px] font-medium t-ghost uppercase tracking-wider mb-1.5">{group.label}</p>
                     <div className="space-y-1">
                       {group.items.map(({ id, name, desc }) => {
                         const enabled = layouts ? layouts[activeLayout].widgets.includes(id) : false;
@@ -258,24 +297,23 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
                           <button
                             key={id}
                             onClick={() => handleToggleWidget(id)}
-                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 cursor-pointer text-left ${
-                              enabled
-                                ? 'bg-white/[0.08] hover:bg-white/[0.12]'
-                                : 'bg-transparent hover:bg-white/[0.04]'
-                            }`}
+                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 cursor-pointer text-left"
+                            style={{ backgroundColor: enabled ? 'var(--glass-bg)' : 'transparent' }}
                           >
                             {/* Toggle */}
                             <div className={`w-9 h-5 rounded-full transition-all duration-200 flex items-center shrink-0 ${
                               enabled ? 'justify-end' : 'justify-start'
-                            }`} style={{ backgroundColor: enabled ? `${profile.accentColor}40` : 'rgba(255,255,255,0.08)' }}>
-                              <div className={`w-3.5 h-3.5 rounded-full mx-[3px] transition-all duration-200 ${
-                                enabled ? 'bg-white' : 'bg-white/20'
-                              }`} style={enabled ? { boxShadow: `0 0 6px ${profile.accentColor}60` } : {}} />
+                            }`} style={{ backgroundColor: enabled ? `${profile.accentColor}40` : 'var(--glass-bg)' }}>
+                              <div className="w-3.5 h-3.5 rounded-full mx-[3px] transition-all duration-200"
+                                style={{
+                                  backgroundColor: enabled ? 'var(--text-primary)' : 'var(--text-ghost)',
+                                  boxShadow: enabled ? `0 0 6px ${profile.accentColor}60` : 'none',
+                                }} />
                             </div>
                             {/* Label */}
                             <div className="min-w-0 flex-1">
-                              <p className={`text-[13px] font-medium transition-colors ${enabled ? 'text-white/90' : 'text-white/40'}`}>{name}</p>
-                              <p className="text-[10px] text-white/20 truncate">{desc}</p>
+                              <p className={`text-[13px] font-medium transition-colors ${enabled ? 't-secondary' : 't-muted'}`}>{name}</p>
+                              <p className="text-[10px] t-ghost truncate">{desc}</p>
                             </div>
                           </button>
                         );
@@ -288,8 +326,8 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
           </div>
 
           {/* Footer */}
-          <div className="px-5 py-3 border-t border-white/5 shrink-0">
-            <p className="text-[10px] text-white/20 text-center">
+          <div className="px-5 py-3 shrink-0" style={{ borderTop: '1px solid var(--divider)' }}>
+            <p className="text-[10px] t-ghost text-center">
               {APP.shortName} v{APP.version} &middot; {APP.authorName}
             </p>
           </div>

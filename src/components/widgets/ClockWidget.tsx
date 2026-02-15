@@ -37,13 +37,13 @@ const ClockWidget: React.FC<ClockWidgetProps> = ({ username, greeting }) => {
 
   return (
     <div className="text-center py-4">
-      <p className="text-5xl md:text-6xl font-light text-white tracking-tight">
+      <p className="text-5xl md:text-6xl font-light t-primary tracking-tight">
         {formatTime(now)}
       </p>
-      <p className="text-white/50 text-sm mt-2">
+      <p className="t-tertiary text-sm mt-2">
         {formatDate(now)}
       </p>
-      <p className="text-white/70 text-lg mt-1 font-light">
+      <p className="t-secondary text-lg mt-1 font-light">
         {displayGreeting}
       </p>
     </div>

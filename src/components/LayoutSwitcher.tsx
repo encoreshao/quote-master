@@ -39,22 +39,27 @@ const layouts: { id: LayoutType; label: string; icon: React.ReactNode }[] = [
 
 const LayoutSwitcher: React.FC<LayoutSwitcherProps> = ({ activeLayout, onLayoutChange }) => {
   return (
-    <div className="flex items-center bg-white/[0.06] backdrop-blur-xl border border-white/10 rounded-xl p-0.5">
-      {layouts.map(({ id, label, icon }) => (
-        <button
-          key={id}
-          onClick={() => onLayoutChange(id)}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] text-[11px] font-medium transition-all duration-200 cursor-pointer ${
-            activeLayout === id
-              ? 'bg-white/15 text-white shadow-sm'
-              : 'text-white/40 hover:text-white/70 hover:bg-white/[0.06]'
-          }`}
-          title={label}
-        >
-          {icon}
-          <span className="hidden sm:inline">{label}</span>
-        </button>
-      ))}
+    <div
+      className="flex items-center backdrop-blur-xl rounded-xl p-0.5"
+      style={{ backgroundColor: 'var(--glass-bg-subtle)', border: '1px solid var(--glass-border-subtle)' }}
+    >
+      {layouts.map(({ id, label, icon }) => {
+        const active = activeLayout === id;
+        return (
+          <button
+            key={id}
+            onClick={() => onLayoutChange(id)}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] text-[11px] font-medium transition-all duration-200 cursor-pointer ${
+              active ? 't-primary' : 't-muted'
+            }`}
+            style={active ? { backgroundColor: 'var(--glass-bg-hover)', boxShadow: '0 1px 3px var(--shadow-color)' } : {}}
+            title={label}
+          >
+            {icon}
+            <span className="hidden sm:inline">{label}</span>
+          </button>
+        );
+      })}
     </div>
   );
 };

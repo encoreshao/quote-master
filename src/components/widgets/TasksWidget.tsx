@@ -10,7 +10,13 @@ const STATUS_COLORS: Record<TaskStatus, string> = {
   'in-progress': 'bg-amber-400/20 text-amber-300 border-amber-400/30',
   'postponed': 'bg-purple-400/20 text-purple-300 border-purple-400/30',
   'done': 'bg-emerald-400/20 text-emerald-300 border-emerald-400/30',
-  'closed': 'bg-white/10 text-white/40 border-white/10',
+  'closed': 'border',
+};
+
+const CLOSED_STATUS_STYLE: React.CSSProperties = {
+  backgroundColor: 'var(--glass-bg)',
+  color: 'var(--text-muted)',
+  borderColor: 'var(--glass-border-subtle)',
 };
 
 const STATUS_LABELS: Record<TaskStatus, string> = {
@@ -26,7 +32,7 @@ const STATUS_DOT: Record<TaskStatus, string> = {
   'in-progress': 'bg-amber-400',
   'postponed': 'bg-purple-400',
   'done': 'bg-emerald-400',
-  'closed': 'bg-white/30',
+  'closed': '',
 };
 
 const STATUSES: TaskStatus[] = ['todo', 'in-progress', 'postponed', 'done', 'closed'];
@@ -92,21 +98,24 @@ const TasksWidget: React.FC = () => {
             <div key={status} className="min-w-0">
               {/* Column header */}
               <div className="flex items-center gap-2 mb-2.5 px-1">
-                <span className={`w-2 h-2 rounded-full ${STATUS_DOT[status]}`} />
-                <span className="text-[11px] font-medium text-white/60">{STATUS_LABELS[status]}</span>
-                <span className="text-[10px] text-white/25 ml-auto">{items.length}</span>
+                <span
+                  className={`w-2 h-2 rounded-full ${STATUS_DOT[status]}`}
+                  style={status === 'closed' ? { backgroundColor: 'var(--text-faint)' } : undefined}
+                />
+                <span className="text-[11px] font-medium t-tertiary">{STATUS_LABELS[status]}</span>
+                <span className="text-[10px] t-ghost ml-auto">{items.length}</span>
               </div>
               {/* Cards */}
               <div className="space-y-2">
                 {items.map(task => (
                   <div
                     key={task.id}
-                    className="group bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 rounded-xl p-3 transition-all duration-200 cursor-default"
+                    className="group rounded-xl p-3 transition-all duration-200 cursor-default border bg-[var(--glass-bg-subtle)] hover:bg-[var(--glass-bg)] border-[var(--glass-border-subtle)] hover:border-[var(--glass-border-subtle)]"
                   >
                     <p
                       className={`text-xs leading-relaxed break-words ${
                         expandedTask === task.id ? '' : 'line-clamp-3'
-                      } ${task.completed ? 'line-through text-white/30' : 'text-white/80'}`}
+                      } ${task.completed ? 'line-through t-faint' : 't-secondary'}`}
                       onClick={() => setExpandedTask(expandedTask === task.id ? null : task.id)}
                       title={task.text}
                       style={{ cursor: task.text.length > 60 ? 'pointer' : 'default' }}
@@ -114,15 +123,19 @@ const TasksWidget: React.FC = () => {
                       {task.text}
                     </p>
                     {task.date && (
-                      <p className="text-[10px] text-white/20 mt-1.5">{task.date}</p>
+                      <p className="text-[10px] t-ghost mt-1.5">{task.date}</p>
                     )}
                     {/* Actions — show on hover */}
-                    <div className="flex items-center gap-1 mt-2 pt-2 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                    <div
+                      className="flex items-center gap-1 mt-2 pt-2 border-t opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+                      style={{ borderTopColor: 'var(--divider)' }}
+                    >
                       {STATUSES.filter(s => s !== status).slice(0, 3).map(s => (
                         <button
                           key={s}
                           onClick={() => handleStatusChange(task.id, s)}
                           className={`text-[9px] px-1.5 py-0.5 rounded-md border cursor-pointer hover:brightness-125 transition-all ${STATUS_COLORS[s]}`}
+                          style={s === 'closed' ? CLOSED_STATUS_STYLE : undefined}
                           title={`Move to ${STATUS_LABELS[s]}`}
                         >
                           {STATUS_LABELS[s]}
@@ -130,7 +143,7 @@ const TasksWidget: React.FC = () => {
                       ))}
                       <button
                         onClick={() => handleRemove(task.id)}
-                        className="ml-auto p-0.5 rounded text-white/20 hover:text-red-400 transition-colors cursor-pointer"
+                        className="ml-auto p-0.5 rounded t-ghost hover:text-red-400 transition-colors cursor-pointer"
                         title="Delete"
                       >
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,7 +155,7 @@ const TasksWidget: React.FC = () => {
                 ))}
                 {items.length === 0 && (
                   <div className="text-center py-6">
-                    <p className="text-[10px] text-white/15">No items</p>
+                    <p className="text-[10px]" style={{ color: 'var(--text-invisible)' }}>No items</p>
                   </div>
                 )}
               </div>
@@ -159,7 +172,7 @@ const TasksWidget: React.FC = () => {
       {filteredTasks.map(task => (
         <div
           key={task.id}
-          className="group flex items-start gap-3 bg-white/[0.03] hover:bg-white/[0.07] border border-transparent hover:border-white/5 rounded-xl px-3 py-2.5 transition-all duration-200"
+          className="group flex items-start gap-3 border border-transparent rounded-xl px-3 py-2.5 transition-all duration-200 bg-[var(--glass-bg-subtle)] hover:bg-[var(--glass-bg-subtle-hover)] hover:border-[var(--glass-border-subtle)]"
         >
           {/* Checkbox */}
           <button
@@ -167,7 +180,7 @@ const TasksWidget: React.FC = () => {
             className={`w-[18px] h-[18px] rounded-md border-2 flex items-center justify-center shrink-0 mt-0.5 cursor-pointer transition-all duration-200 ${
               task.completed
                 ? 'border-emerald-400 bg-emerald-400/20'
-                : 'border-white/25 hover:border-white/50'
+                : 'border-[var(--text-faint)] hover:border-[var(--text-tertiary)]'
             }`}
           >
             {task.completed && (
@@ -182,7 +195,7 @@ const TasksWidget: React.FC = () => {
             <p
               className={`text-[13px] leading-relaxed break-words ${
                 expandedTask === task.id ? '' : 'line-clamp-2'
-              } ${task.completed ? 'line-through text-white/30' : 'text-white/80'}`}
+              } ${task.completed ? 'line-through t-faint' : 't-secondary'}`}
               onClick={() => setExpandedTask(expandedTask === task.id ? null : task.id)}
               style={{ cursor: task.text.length > 80 ? 'pointer' : 'default' }}
               title={task.text.length > 80 ? task.text : undefined}
@@ -190,21 +203,24 @@ const TasksWidget: React.FC = () => {
               {task.text}
             </p>
             {task.date && (
-              <p className="text-[10px] text-white/20 mt-0.5">{task.date}</p>
+              <p className="text-[10px] t-ghost mt-0.5">{task.date}</p>
             )}
           </div>
 
           {/* Status badge */}
           <div className="shrink-0 flex items-center gap-1.5 mt-0.5">
-            <span className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[task.status]}`} />
+            <span
+              className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[task.status]}`}
+              style={task.status === 'closed' ? { backgroundColor: 'var(--text-faint)' } : undefined}
+            />
             <select
               value={task.status}
               onChange={e => handleStatusChange(task.id, e.target.value as TaskStatus)}
-              className="text-[10px] bg-transparent text-white/40 focus:outline-none cursor-pointer appearance-none hover:text-white/60 transition-colors"
+              className="text-[10px] bg-transparent t-muted focus:outline-none cursor-pointer appearance-none hover:[color:var(--text-tertiary)] transition-colors"
               title="Change status"
             >
               {STATUSES.map(s => (
-                <option key={s} value={s} className="bg-slate-800 text-white">{STATUS_LABELS[s]}</option>
+                <option key={s} value={s} style={{ backgroundColor: 'var(--panel-bg)', color: 'var(--text-primary)' }}>{STATUS_LABELS[s]}</option>
               ))}
             </select>
           </div>
@@ -212,7 +228,7 @@ const TasksWidget: React.FC = () => {
           {/* Delete */}
           <button
             onClick={() => handleRemove(task.id)}
-            className="shrink-0 mt-0.5 p-1 rounded-lg text-white/0 group-hover:text-white/20 hover:!text-red-400 transition-all cursor-pointer"
+            className="shrink-0 mt-0.5 p-1 rounded-lg text-transparent group-hover:[color:var(--text-ghost)] hover:!text-red-400 transition-all cursor-pointer"
             title="Delete task"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -223,7 +239,7 @@ const TasksWidget: React.FC = () => {
       ))}
       {filteredTasks.length === 0 && (
         <div className="text-center py-8">
-          <p className="text-white/20 text-xs">
+          <p className="t-ghost text-xs">
             {filter === 'all' ? 'No tasks yet — add one above' : `No ${STATUS_LABELS[filter as TaskStatus]} tasks`}
           </p>
         </div>
@@ -242,11 +258,11 @@ const TasksWidget: React.FC = () => {
       headerRight={
         <div className="flex items-center gap-1.5">
           {activeTasks > 0 && (
-            <span className="text-[10px] text-white/30 tabular-nums mr-1">{activeTasks} active</span>
+            <span className="text-[10px] t-faint tabular-nums mr-1">{activeTasks} active</span>
           )}
           <button
             onClick={() => switchView('list')}
-            className={`p-1.5 rounded-lg transition-all cursor-pointer ${viewMode === 'list' ? 'text-white/80 bg-white/10' : 'text-white/30 hover:text-white/60'}`}
+            className={`p-1.5 rounded-lg transition-all cursor-pointer ${viewMode === 'list' ? 't-secondary bg-[var(--glass-bg)]' : 't-faint hover:[color:var(--text-tertiary)]'}`}
             title="List view"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -255,7 +271,7 @@ const TasksWidget: React.FC = () => {
           </button>
           <button
             onClick={() => switchView('board')}
-            className={`p-1.5 rounded-lg transition-all cursor-pointer ${viewMode === 'board' ? 'text-white/80 bg-white/10' : 'text-white/30 hover:text-white/60'}`}
+            className={`p-1.5 rounded-lg transition-all cursor-pointer ${viewMode === 'board' ? 't-secondary bg-[var(--glass-bg)]' : 't-faint hover:[color:var(--text-tertiary)]'}`}
             title="Board view"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -290,7 +306,7 @@ const TasksWidget: React.FC = () => {
           <button
             onClick={() => setFilter('all')}
             className={`text-[10px] px-2.5 py-1 rounded-lg border cursor-pointer transition-all ${
-              filter === 'all' ? 'bg-white/15 text-white border-white/20' : 'text-white/35 border-white/5 hover:border-white/10 hover:text-white/50'
+              filter === 'all' ? 'bg-[var(--glass-bg-hover)] t-primary border-[var(--glass-border)]' : 't-faint border-[var(--glass-border-subtle)] hover:border-[var(--glass-border-subtle)] hover:[color:var(--text-tertiary)]'
             }`}
           >
             All ({config.items.length})
@@ -302,7 +318,7 @@ const TasksWidget: React.FC = () => {
                 key={s}
                 onClick={() => setFilter(s)}
                 className={`text-[10px] px-2.5 py-1 rounded-lg border cursor-pointer transition-all ${
-                  filter === s ? STATUS_COLORS[s] : 'text-white/35 border-white/5 hover:border-white/10 hover:text-white/50'
+                  filter === s ? STATUS_COLORS[s] : 't-faint border-[var(--glass-border-subtle)] hover:border-[var(--glass-border-subtle)] hover:[color:var(--text-tertiary)]'
                 }`}
               >
                 {STATUS_LABELS[s]} {count > 0 && `(${count})`}

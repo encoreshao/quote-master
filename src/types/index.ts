@@ -2,6 +2,8 @@
 // Nexus Tab — Type Definitions
 // ============================================================
 
+export type ThemeMode = 'light' | 'dark' | 'system';
+
 export type LayoutType = 'focus' | 'dashboard' | 'workflow';
 
 export type WidgetId =
@@ -34,6 +36,7 @@ export interface NexusProfile {
   greeting: string;
   backgroundUrl: string;
   accentColor: string;
+  theme: ThemeMode;
 }
 
 export interface LayoutConfig {

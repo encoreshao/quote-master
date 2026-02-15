@@ -4,9 +4,133 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════
+   Theme Tokens
+   ═══════════════════════════════════════════ */
+
 :root {
   --accent-color: #3B82F6;
 }
+
+/* ── Dark theme (default) ── */
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e1b4b;
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  --bg-overlay-from: rgba(15, 23, 42, 0.7);
+  --bg-overlay-to: rgba(15, 23, 42, 0.8);
+
+  /* Glass surfaces */
+  --glass-bg: rgba(255, 255, 255, 0.10);
+  --glass-bg-hover: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.20);
+  --glass-border-hover: rgba(255, 255, 255, 0.30);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.06);
+  --glass-bg-subtle-hover: rgba(255, 255, 255, 0.12);
+  --glass-border-subtle: rgba(255, 255, 255, 0.10);
+  --glass-border-subtle-hover: rgba(255, 255, 255, 0.20);
+
+  /* Panel surfaces */
+  --panel-bg: rgba(15, 23, 42, 0.90);
+  --panel-border: rgba(255, 255, 255, 0.10);
+
+  /* Text */
+  --text-primary: rgba(255, 255, 255, 1);
+  --text-secondary: rgba(255, 255, 255, 0.80);
+  --text-tertiary: rgba(255, 255, 255, 0.50);
+  --text-muted: rgba(255, 255, 255, 0.40);
+  --text-faint: rgba(255, 255, 255, 0.25);
+  --text-ghost: rgba(255, 255, 255, 0.20);
+  --text-invisible: rgba(255, 255, 255, 0.10);
+
+  /* Input */
+  --input-bg: rgba(255, 255, 255, 0.10);
+  --input-border: rgba(255, 255, 255, 0.20);
+  --input-text: rgba(255, 255, 255, 1);
+  --input-placeholder: rgba(255, 255, 255, 0.40);
+
+  /* Button ghost */
+  --btn-ghost-bg: rgba(255, 255, 255, 0.05);
+  --btn-ghost-bg-hover: rgba(255, 255, 255, 0.15);
+  --btn-ghost-border: rgba(255, 255, 255, 0.10);
+  --btn-ghost-border-hover: rgba(255, 255, 255, 0.20);
+  --btn-ghost-text: rgba(255, 255, 255, 0.70);
+  --btn-ghost-text-hover: rgba(255, 255, 255, 1);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(255, 255, 255, 0.15);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.25);
+
+  /* Backdrop */
+  --backdrop-overlay: rgba(0, 0, 0, 0.50);
+
+  /* Misc */
+  --loading-bg: #0f172a;
+  --divider: rgba(255, 255, 255, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ── Light theme ── */
+[data-theme="light"] {
+  --bg-primary: #f1f5f9;
+  --bg-secondary: #e2e8f0;
+  --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e0e7ff 50%, #f1f5f9 100%);
+  --bg-overlay-from: rgba(241, 245, 249, 0.75);
+  --bg-overlay-to: rgba(241, 245, 249, 0.85);
+
+  /* Glass surfaces */
+  --glass-bg: rgba(255, 255, 255, 0.60);
+  --glass-bg-hover: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-border-hover: rgba(0, 0, 0, 0.15);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.40);
+  --glass-bg-subtle-hover: rgba(255, 255, 255, 0.60);
+  --glass-border-subtle: rgba(0, 0, 0, 0.06);
+  --glass-border-subtle-hover: rgba(0, 0, 0, 0.12);
+
+  /* Panel surfaces */
+  --panel-bg: rgba(255, 255, 255, 0.92);
+  --panel-border: rgba(0, 0, 0, 0.08);
+
+  /* Text */
+  --text-primary: rgba(15, 23, 42, 1);
+  --text-secondary: rgba(15, 23, 42, 0.80);
+  --text-tertiary: rgba(15, 23, 42, 0.55);
+  --text-muted: rgba(15, 23, 42, 0.45);
+  --text-faint: rgba(15, 23, 42, 0.30);
+  --text-ghost: rgba(15, 23, 42, 0.20);
+  --text-invisible: rgba(15, 23, 42, 0.08);
+
+  /* Input */
+  --input-bg: rgba(255, 255, 255, 0.70);
+  --input-border: rgba(0, 0, 0, 0.12);
+  --input-text: rgba(15, 23, 42, 1);
+  --input-placeholder: rgba(15, 23, 42, 0.40);
+
+  /* Button ghost */
+  --btn-ghost-bg: rgba(0, 0, 0, 0.04);
+  --btn-ghost-bg-hover: rgba(0, 0, 0, 0.08);
+  --btn-ghost-border: rgba(0, 0, 0, 0.06);
+  --btn-ghost-border-hover: rgba(0, 0, 0, 0.12);
+  --btn-ghost-text: rgba(15, 23, 42, 0.60);
+  --btn-ghost-text-hover: rgba(15, 23, 42, 0.90);
+
+  /* Scrollbar */
+  --scrollbar-thumb: rgba(0, 0, 0, 0.12);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.20);
+
+  /* Backdrop */
+  --backdrop-overlay: rgba(0, 0, 0, 0.25);
+
+  /* Misc */
+  --loading-bg: #f1f5f9;
+  --divider: rgba(0, 0, 0, 0.06);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ═══════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════ */
 
 * {
   box-sizing: border-box;
@@ -22,25 +146,61 @@ html, body, #root {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Glassmorphism card base */
+/* ═══════════════════════════════════════════
+   Glassmorphism Components (theme-aware)
+   ═══════════════════════════════════════════ */
+
 @layer components {
   .glass-card {
-    @apply backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-lg;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
   }
 
   .glass-card-hover {
-    @apply glass-card transition-all duration-300 hover:bg-white/15 hover:border-white/30 hover:shadow-xl;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -4px var(--shadow-color);
+    transition: all 0.3s ease;
+  }
+
+  .glass-card-hover:hover {
+    background-color: var(--glass-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow: 0 20px 25px -5px var(--shadow-color), 0 8px 10px -6px var(--shadow-color);
   }
 
   .glass-card-dark {
-    @apply backdrop-blur-xl bg-black/20 border border-white/10 rounded-2xl shadow-lg;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background-color: var(--glass-bg);
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px var(--shadow-color);
   }
 
   .glass-input {
-    @apply w-full bg-white/10 border border-white/20 rounded-xl px-4 py-2.5 text-white placeholder-white/40 
-           focus:outline-none focus:ring-2 transition-all duration-200;
+    @apply w-full rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 transition-all duration-200;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--input-text);
     --tw-ring-color: var(--accent-color);
     --tw-ring-opacity: 0.5;
+  }
+
+  .glass-input::placeholder {
+    color: var(--input-placeholder);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--placeholder-color, var(--input-placeholder));
   }
 
   .glass-input:focus {
@@ -48,9 +208,10 @@ html, body, #root {
   }
 
   .glass-button {
-    @apply px-4 py-2 rounded-xl text-white font-medium transition-all duration-200 cursor-pointer;
+    @apply px-4 py-2 rounded-xl font-medium transition-all duration-200 cursor-pointer;
     background-color: var(--accent-color);
     border: 1px solid var(--accent-color);
+    color: #fff;
   }
 
   .glass-button:hover {
@@ -59,12 +220,41 @@ html, body, #root {
   }
 
   .glass-button-ghost {
-    @apply px-4 py-2 bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/20 rounded-xl 
-           text-white/70 hover:text-white font-medium transition-all duration-200 cursor-pointer;
+    @apply px-4 py-2 rounded-xl font-medium transition-all duration-200 cursor-pointer;
+    background-color: var(--btn-ghost-bg);
+    border: 1px solid var(--btn-ghost-border);
+    color: var(--btn-ghost-text);
   }
+
+  .glass-button-ghost:hover {
+    background-color: var(--btn-ghost-bg-hover);
+    border-color: var(--btn-ghost-border-hover);
+    color: var(--btn-ghost-text-hover);
+  }
+
+  /* Theme-aware text utility classes */
+  .btn-overlay-icon {
+    background-color: var(--glass-bg);
+    color: var(--text-tertiary);
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .btn-overlay-icon:hover {
+    background-color: var(--glass-bg-hover);
+    color: var(--text-secondary);
+  }
+
+  .t-primary { color: var(--text-primary); }
+  .t-secondary { color: var(--text-secondary); }
+  .t-tertiary { color: var(--text-tertiary); }
+  .t-muted { color: var(--text-muted); }
+  .t-faint { color: var(--text-faint); }
+  .t-ghost { color: var(--text-ghost); }
 }
 
-/* Custom scrollbar */
+/* ═══════════════════════════════════════════
+   Custom Scrollbar (theme-aware)
+   ═══════════════════════════════════════════ */
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -75,10 +265,10 @@ html, body, #root {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--scrollbar-thumb-hover);
 }

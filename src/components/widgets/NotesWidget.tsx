@@ -35,7 +35,8 @@ const NotesWidget: React.FC = () => {
         value={config.content}
         onChange={e => handleChange(e.target.value)}
         placeholder="Quick notes..."
-        className="w-full h-40 bg-transparent text-white/80 text-sm p-4 resize-none focus:outline-none placeholder-white/20"
+        className="w-full h-40 bg-transparent text-sm p-4 resize-none focus:outline-none"
+        style={{ color: 'var(--text-secondary)' }}
       />
     </WidgetCard>
   );

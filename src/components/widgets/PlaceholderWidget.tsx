@@ -17,7 +17,7 @@ const PlaceholderWidget: React.FC<PlaceholderWidgetProps> = ({ name, icon }) => 
       }
     >
       <div className="text-center py-4">
-        <p className="text-xs text-white/30">Coming soon</p>
+        <p className="text-xs t-faint">Coming soon</p>
       </div>
     </WidgetCard>
   );

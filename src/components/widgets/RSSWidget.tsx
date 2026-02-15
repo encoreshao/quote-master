@@ -135,7 +135,10 @@ const RSSWidget: React.FC = () => {
           {config.feeds.length > 0 && (
             <button
               onClick={() => fetchAllFeeds(config.feeds)}
-              className="p-1.5 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/10 transition-all duration-200 cursor-pointer"
+              className="p-1.5 rounded-lg t-muted hover:t-secondary transition-all duration-200 cursor-pointer"
+              style={{ backgroundColor: 'transparent' }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--glass-bg)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
               title="Refresh"
             >
               <svg className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +148,7 @@ const RSSWidget: React.FC = () => {
           )}
           <button
             onClick={() => setShowAdd(!showAdd)}
-            className="p-1.5 rounded-lg text-white/40 hover:text-white/80 hover:bg-white/10 transition-all duration-200 cursor-pointer"
+            className="p-1.5 rounded-lg t-muted hover:t-secondary hover:bg-[var(--glass-bg)] transition-all duration-200 cursor-pointer"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
@@ -180,11 +183,11 @@ const RSSWidget: React.FC = () => {
       {config.feeds.length > 0 && (
         <div className="flex gap-1.5 mb-3 flex-wrap">
           {config.feeds.map(feed => (
-            <span key={feed.id} className="group inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full bg-white/10 text-white/50">
+            <span key={feed.id} className="group inline-flex items-center gap-1 text-[10px] px-2 py-1 rounded-full t-tertiary" style={{ backgroundColor: 'var(--glass-bg)' }}>
               {feed.name}
               <button
                 onClick={() => handleRemoveFeed(feed.id)}
-                className="text-white/20 hover:text-red-400 cursor-pointer"
+                className="t-ghost hover:text-red-400 cursor-pointer"
               >
                 x
               </button>
@@ -201,31 +204,31 @@ const RSSWidget: React.FC = () => {
             href={article.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-start gap-2 px-2 py-2 rounded-lg hover:bg-white/10 transition-all duration-200 cursor-pointer group"
+            className="flex items-start gap-2 px-2 py-2 rounded-lg hover:bg-[var(--glass-bg)] transition-all duration-200 cursor-pointer group"
           >
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-white/70 group-hover:text-white/90 truncate transition-colors">
+              <p className="text-xs t-tertiary group-hover:t-primary truncate transition-colors">
                 {article.title}
               </p>
-              <p className="text-[10px] text-white/30 mt-0.5">
+              <p className="text-[10px] t-faint mt-0.5">
                 {article.source} {article.pubDate && `· ${timeAgo(article.pubDate)}`}
               </p>
             </div>
-            <svg className="w-3 h-3 text-white/20 group-hover:text-white/50 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3 h-3 t-ghost group-hover:t-tertiary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
             </svg>
           </a>
         ))}
         {config.feeds.length === 0 && (
-          <p className="text-center text-white/30 text-xs py-4">
+          <p className="text-center t-faint text-xs py-4">
             Click + to add RSS feed URLs
           </p>
         )}
         {config.feeds.length > 0 && articles.length === 0 && !loading && (
-          <p className="text-center text-white/30 text-xs py-4">No articles found</p>
+          <p className="text-center t-faint text-xs py-4">No articles found</p>
         )}
         {loading && (
-          <p className="text-center text-white/40 text-xs py-4">Loading feeds...</p>
+          <p className="text-center t-muted text-xs py-4">Loading feeds...</p>
         )}
       </div>
     </WidgetCard>
