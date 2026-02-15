@@ -7,7 +7,7 @@ const DEFAULTS: NotesWidgetConfig = { content: '' };
 
 const NotesWidget: React.FC = () => {
   const [config, setConfig] = useState<NotesWidgetConfig>(DEFAULTS);
-  const [saveTimeout, setSaveTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [saveTimeout, setSaveTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     getWidgetConfig('notes', DEFAULTS, setConfig);

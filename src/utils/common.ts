@@ -17,6 +17,8 @@ export const APP = {
   description: manifest.description,
 };
 
-// Keep backward-compatible global for content scripts
+// Keep backward-compatible global (only in window contexts, not service workers)
 export const NexusTab = APP;
-Object.assign(window, { NexusTab: APP });
+if (typeof window !== 'undefined') {
+  Object.assign(window, { NexusTab: APP });
+}
