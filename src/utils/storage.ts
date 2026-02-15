@@ -145,7 +145,7 @@ export function migrateFromQuoteMaster(callback: () => void): void {
           'nexus.widget.pomodoro': { workMinutes: 25, breakMinutes: 5 },
           'nexus.widget.search': { engine: 'https://www.google.com/search?q=' },
           'nexus.widget.rss': { feeds: [], refreshInterval: 15 },
-          'nexus.widget.weather': { city: '', units: 'metric', apiKey: '' },
+          'nexus.widget.weather': { latitude: null, longitude: null, city: '', units: 'metric', autoDetect: true },
           'nexus.widget.bookmarks': { showSearch: true },
         }, callback);
         return;
@@ -227,7 +227,7 @@ export function migrateFromQuoteMaster(callback: () => void): void {
           token: oldData.gitlabToken || '',
           apiVersion: oldData.gitlabAPIVersion || 'api/v4',
         },
-        'nexus.widget.weather': { city: '', units: 'metric', apiKey: '' },
+        'nexus.widget.weather': { latitude: null, longitude: null, city: '', units: 'metric', autoDetect: true },
         'nexus.widget.bookmarks': { showSearch: true },
       }, callback);
     });

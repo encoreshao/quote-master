@@ -1,4 +1,5 @@
 /// <reference types="chrome"/>
+import { APP } from '../utils/common';
 
 const contextMenuId = "nexusTab";
 const addToTasksId = "addToTasks";
@@ -6,7 +7,7 @@ const addToBookmarksId = "addToBookmarks";
 
 chrome.contextMenus.create({
   id: contextMenuId,
-  title: "Nexus Tab",
+  title: APP.shortName,
   contexts: ["all"],
 });
 

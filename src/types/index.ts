@@ -104,9 +104,11 @@ export interface PomodoroWidgetConfig {
 }
 
 export interface WeatherWidgetConfig {
+  latitude: number | null;
+  longitude: number | null;
   city: string;
   units: 'metric' | 'imperial';
-  apiKey: string;
+  autoDetect: boolean;
 }
 
 export interface GitLabWidgetConfig {
