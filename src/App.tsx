@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { LayoutType, NexusLayouts, NexusProfile, WidgetId, WidgetSettings } from './types';
 import {
   migrateFromQuoteMaster,
@@ -11,6 +11,7 @@ import {
   DEFAULT_LAYOUT,
   DEFAULT_LAYOUTS,
 } from './utils/storage';
+import { useKeyboardShortcuts, ShortcutAction, SHORTCUT_MAP } from './hooks/useKeyboardShortcuts';
 
 import FocusLayout from './components/layouts/FocusLayout';
 import DashboardLayout from './components/layouts/DashboardLayout';
@@ -18,6 +19,7 @@ import WorkflowLayout from './components/layouts/WorkflowLayout';
 import LayoutSwitcher from './components/LayoutSwitcher';
 import SettingsPanel from './components/SettingsPanel';
 import AddWidgetPanel from './components/AddWidgetPanel';
+import ShortcutsHelp from './components/ShortcutsHelp';
 
 // Widgets
 import ClockWidget from './components/widgets/ClockWidget';
@@ -38,6 +40,7 @@ function App() {
   const [layouts, setLayouts] = useState<NexusLayouts>(DEFAULT_LAYOUTS);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [addWidgetOpen, setAddWidgetOpen] = useState(false);
+  const [shortcutsHelpOpen, setShortcutsHelpOpen] = useState(false);
 
   // Initialize: migrate then load
   useEffect(() => {
@@ -129,6 +132,73 @@ function App() {
     });
   }, [activeLayoutId]);
 
+  // ── Keyboard shortcuts ──
+  const shortcuts: ShortcutAction[] = useMemo(() => [
+    {
+      key: SHORTCUT_MAP.ESCAPE,
+      label: 'Esc',
+      description: 'Close panel / blur input',
+      global: true,
+      action: () => {
+        if (shortcutsHelpOpen) { setShortcutsHelpOpen(false); return; }
+        if (settingsOpen) { setSettingsOpen(false); return; }
+        if (addWidgetOpen) { setAddWidgetOpen(false); return; }
+        // Blur any focused input
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+      },
+    },
+    {
+      key: SHORTCUT_MAP.SETTINGS,
+      label: ',',
+      description: 'Open Settings',
+      action: () => { setAddWidgetOpen(false); setShortcutsHelpOpen(false); setSettingsOpen(prev => !prev); },
+    },
+    {
+      key: SHORTCUT_MAP.ADD_WIDGET,
+      label: 'A',
+      description: 'Add Widget',
+      action: () => { setSettingsOpen(false); setShortcutsHelpOpen(false); setAddWidgetOpen(prev => !prev); },
+    },
+    {
+      key: SHORTCUT_MAP.SEARCH,
+      label: '/',
+      description: 'Focus search bar',
+      action: () => {
+        setSettingsOpen(false); setAddWidgetOpen(false); setShortcutsHelpOpen(false);
+        const searchInput = document.querySelector<HTMLInputElement>('input[placeholder*="Search"]');
+        searchInput?.focus();
+      },
+    },
+    {
+      key: SHORTCUT_MAP.HELP,
+      label: '?',
+      description: 'Keyboard shortcuts',
+      action: () => { setSettingsOpen(false); setAddWidgetOpen(false); setShortcutsHelpOpen(prev => !prev); },
+    },
+    {
+      key: SHORTCUT_MAP.LAYOUT_FOCUS,
+      label: '1',
+      description: 'Focus layout',
+      action: () => handleLayoutChange('focus'),
+    },
+    {
+      key: SHORTCUT_MAP.LAYOUT_DASHBOARD,
+      label: '2',
+      description: 'Dashboard layout',
+      action: () => handleLayoutChange('dashboard'),
+    },
+    {
+      key: SHORTCUT_MAP.LAYOUT_WORKFLOW,
+      label: '3',
+      description: 'Workflow layout',
+      action: () => handleLayoutChange('workflow'),
+    },
+  ], [settingsOpen, addWidgetOpen, shortcutsHelpOpen, handleLayoutChange]);
+
+  useKeyboardShortcuts(shortcuts);
+
   // Widget renderer
   const renderWidget = useCallback((id: WidgetId): React.ReactNode => {
     switch (id) {
@@ -213,7 +283,7 @@ function App() {
             onClick={() => setSettingsOpen(true)}
             className="p-2 rounded-xl backdrop-blur-xl transition-all duration-200 cursor-pointer"
             style={{ backgroundColor: 'var(--glass-bg-subtle)', border: '1px solid var(--glass-border-subtle)' }}
-            title="Settings"
+            title="Settings (,)"
           >
             <svg className="w-4 h-4 t-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z" />
@@ -224,10 +294,20 @@ function App() {
             onClick={() => setAddWidgetOpen(true)}
             className="p-2 rounded-xl backdrop-blur-xl transition-all duration-200 cursor-pointer"
             style={{ backgroundColor: 'var(--glass-bg-subtle)', border: '1px solid var(--glass-border-subtle)' }}
-            title="Add Widget"
+            title="Add Widget (A)"
           >
             <svg className="w-4 h-4 t-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </button>
+          <button
+            onClick={() => setShortcutsHelpOpen(true)}
+            className="p-2 rounded-xl backdrop-blur-xl transition-all duration-200 cursor-pointer"
+            style={{ backgroundColor: 'var(--glass-bg-subtle)', border: '1px solid var(--glass-border-subtle)' }}
+            title="Keyboard Shortcuts (?)"
+          >
+            <svg className="w-4 h-4 t-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
             </svg>
           </button>
         </div>
@@ -255,6 +335,12 @@ function App() {
         currentWidgets={currentWidgets}
         onAddWidget={handleAddWidget}
         accentColor={profile.accentColor}
+      />
+
+      {/* Shortcuts help */}
+      <ShortcutsHelp
+        isOpen={shortcutsHelpOpen}
+        onClose={() => setShortcutsHelpOpen(false)}
       />
     </div>
   );
