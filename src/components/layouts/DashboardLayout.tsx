@@ -1,19 +1,24 @@
 import React from 'react';
-import { WidgetId } from '../../types';
+import { WidgetId, WidgetSettings } from '../../types';
 import DraggableWidgetGrid from '../DraggableWidgetGrid';
 
 interface DashboardLayoutProps {
   widgets: WidgetId[];
   renderWidget: (id: WidgetId) => React.ReactNode;
   onReorder: (widgets: WidgetId[]) => void;
+  onRemove?: (widgetId: WidgetId) => void;
+  onWidgetSettingsChange?: (widgetId: WidgetId, settings: WidgetSettings) => void;
+  widgetSettings?: Partial<Record<WidgetId, WidgetSettings>>;
 }
 
-// Dashboard: full bento grid, 12-col on large screens.
+// Dashboard: full bento grid, 3-col on large screens.
 // Key widgets get larger spans; the rest fill in.
 const WIDE_WIDGETS: WidgetId[] = ['tasks', 'rss', 'search'];
 const MEDIUM_WIDGETS: WidgetId[] = ['bookmarks', 'notes', 'quicklinks'];
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ widgets, renderWidget, onReorder }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({
+  widgets, renderWidget, onReorder, onRemove, onWidgetSettingsChange, widgetSettings = {},
+}) => {
   const colSpans: Partial<Record<WidgetId, string>> = {};
   for (const id of widgets) {
     if (WIDE_WIDGETS.includes(id)) {
@@ -29,8 +34,12 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ widgets, renderWidget
         widgets={widgets}
         renderWidget={renderWidget}
         onReorder={onReorder}
+        onRemove={onRemove}
+        onWidgetSettingsChange={onWidgetSettingsChange}
+        widgetSettings={widgetSettings}
         gridClassName="grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
         colSpans={colSpans}
+        gridCols={3}
       />
     </div>
   );

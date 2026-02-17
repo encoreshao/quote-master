@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { LayoutType, NexusLayouts, NexusProfile, WidgetId } from './types';
+import { LayoutType, NexusLayouts, NexusProfile, WidgetId, WidgetSettings } from './types';
 import {
   migrateFromQuoteMaster,
   getNexusProfile,
@@ -87,7 +87,8 @@ function App() {
   // Persist widget reorder
   const handleReorder = useCallback((newWidgets: WidgetId[]) => {
     setLayouts(prev => {
-      const updated = { ...prev, [activeLayoutId]: { widgets: newWidgets } };
+      const currentConfig = prev[activeLayoutId];
+      const updated = { ...prev, [activeLayoutId]: { ...currentConfig, widgets: newWidgets } };
       setStorage({ 'nexus.layouts': updated });
       return updated;
     });
@@ -96,9 +97,33 @@ function App() {
   // Add a widget to the current layout
   const handleAddWidget = useCallback((widgetId: WidgetId) => {
     setLayouts(prev => {
-      const current = prev[activeLayoutId].widgets;
-      if (current.includes(widgetId)) return prev;
-      const updated = { ...prev, [activeLayoutId]: { widgets: [...current, widgetId] } };
+      const currentConfig = prev[activeLayoutId];
+      if (currentConfig.widgets.includes(widgetId)) return prev;
+      const updated = { ...prev, [activeLayoutId]: { ...currentConfig, widgets: [...currentConfig.widgets, widgetId] } };
+      setStorage({ 'nexus.layouts': updated });
+      return updated;
+    });
+  }, [activeLayoutId]);
+
+  // Remove a widget from the current layout
+  const handleRemoveWidget = useCallback((widgetId: WidgetId) => {
+    setLayouts(prev => {
+      const currentConfig = prev[activeLayoutId];
+      const newWidgets = currentConfig.widgets.filter(id => id !== widgetId);
+      const newSettings = { ...currentConfig.widgetSettings };
+      delete newSettings[widgetId];
+      const updated = { ...prev, [activeLayoutId]: { ...currentConfig, widgets: newWidgets, widgetSettings: newSettings } };
+      setStorage({ 'nexus.layouts': updated });
+      return updated;
+    });
+  }, [activeLayoutId]);
+
+  // Update widget size/style settings for the current layout
+  const handleWidgetSettingsChange = useCallback((widgetId: WidgetId, settings: WidgetSettings) => {
+    setLayouts(prev => {
+      const currentConfig = prev[activeLayoutId];
+      const newSettings = { ...currentConfig.widgetSettings, [widgetId]: settings };
+      const updated = { ...prev, [activeLayoutId]: { ...currentConfig, widgetSettings: newSettings } };
       setStorage({ 'nexus.layouts': updated });
       return updated;
     });
@@ -138,11 +163,20 @@ function App() {
     }
   }, [profile.username, profile.greeting]);
 
-  const currentWidgets = layouts[activeLayoutId]?.widgets || [];
+  const currentLayout = layouts[activeLayoutId] || { widgets: [], widgetSettings: {} };
+  const currentWidgets = currentLayout.widgets;
+  const currentWidgetSettings = currentLayout.widgetSettings || {};
 
   // Layout renderer
   const renderLayout = () => {
-    const props = { widgets: currentWidgets, renderWidget, onReorder: handleReorder };
+    const props = {
+      widgets: currentWidgets,
+      renderWidget,
+      onReorder: handleReorder,
+      onRemove: handleRemoveWidget,
+      onWidgetSettingsChange: handleWidgetSettingsChange,
+      widgetSettings: currentWidgetSettings,
+    };
     switch (activeLayoutId) {
       case 'focus':
         return <FocusLayout {...props} />;

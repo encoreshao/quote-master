@@ -21,7 +21,14 @@ export type WidgetId =
   | 'embed'
   | 'shortcuts';
 
-export type WidgetSize = 'small' | 'medium' | 'large' | 'wide';
+export type WidgetSize = 'small' | 'medium' | 'large';
+
+export type WidgetStyle = 'glass' | 'solid' | 'minimal' | 'outlined';
+
+export interface WidgetSettings {
+  size?: WidgetSize;
+  style?: WidgetStyle;
+}
 
 export interface WidgetMeta {
   id: WidgetId;
@@ -41,6 +48,7 @@ export interface NexusProfile {
 
 export interface LayoutConfig {
   widgets: WidgetId[];
+  widgetSettings?: Partial<Record<WidgetId, WidgetSettings>>;
 }
 
 export interface NexusLayouts {

@@ -97,11 +97,12 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ isOpen, onClose, activeLa
 
   const handleToggleWidget = (widgetId: WidgetId) => {
     if (!layouts) return;
-    const current = layouts[activeLayout].widgets;
+    const currentConfig = layouts[activeLayout];
+    const current = currentConfig.widgets;
     const updated = current.includes(widgetId)
       ? current.filter(id => id !== widgetId)
       : [...current, widgetId];
-    const newLayouts = { ...layouts, [activeLayout]: { widgets: updated } };
+    const newLayouts = { ...layouts, [activeLayout]: { ...currentConfig, widgets: updated } };
     setLayouts(newLayouts);
     setStorage({ 'nexus.layouts': newLayouts });
   };

@@ -249,6 +249,34 @@ html, body, #root {
   .t-muted { color: var(--text-muted); }
   .t-faint { color: var(--text-faint); }
   .t-ghost { color: var(--text-ghost); }
+
+  /* ── Widget style variants ── */
+
+  /* Solid: opaque card, no blur */
+  .widget-style-solid .glass-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Minimal: ultra-subtle, no border, no shadow */
+  .widget-style-minimal .glass-card {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: var(--glass-bg-subtle);
+    border: 1px solid transparent;
+    box-shadow: none;
+  }
+
+  /* Outlined: transparent bg, visible border, no blur */
+  .widget-style-outlined .glass-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: transparent;
+    border: 2px solid var(--glass-border-hover);
+    box-shadow: none;
+  }
 }
 
 /* ═══════════════════════════════════════════

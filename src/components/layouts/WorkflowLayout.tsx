@@ -1,15 +1,20 @@
 import React from 'react';
-import { WidgetId } from '../../types';
+import { WidgetId, WidgetSettings } from '../../types';
 import DraggableWidgetGrid from '../DraggableWidgetGrid';
 
 interface WorkflowLayoutProps {
   widgets: WidgetId[];
   renderWidget: (id: WidgetId) => React.ReactNode;
   onReorder: (widgets: WidgetId[]) => void;
+  onRemove?: (widgetId: WidgetId) => void;
+  onWidgetSettingsChange?: (widgetId: WidgetId, settings: WidgetSettings) => void;
+  widgetSettings?: Partial<Record<WidgetId, WidgetSettings>>;
 }
 
 // Workflow: tasks-heavy split. Tasks gets wide column, rest stacks in sidebar.
-const WorkflowLayout: React.FC<WorkflowLayoutProps> = ({ widgets, renderWidget, onReorder }) => {
+const WorkflowLayout: React.FC<WorkflowLayoutProps> = ({
+  widgets, renderWidget, onReorder, onRemove, onWidgetSettingsChange, widgetSettings = {},
+}) => {
   const colSpans: Partial<Record<WidgetId, string>> = {};
   for (const id of widgets) {
     if (id === 'tasks') {
@@ -23,8 +28,12 @@ const WorkflowLayout: React.FC<WorkflowLayoutProps> = ({ widgets, renderWidget, 
         widgets={widgets}
         renderWidget={renderWidget}
         onReorder={onReorder}
+        onRemove={onRemove}
+        onWidgetSettingsChange={onWidgetSettingsChange}
+        widgetSettings={widgetSettings}
         gridClassName="grid-cols-1 lg:grid-cols-3"
         colSpans={colSpans}
+        gridCols={3}
       />
     </div>
   );
