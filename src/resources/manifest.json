@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "short_name": "Nexus Tab",
   "name": "Nexus Tab: Your Daily Command Center",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Transform your new tab into a modular productivity command center with glassmorphism widgets you can toggle on or off.",
   "chrome_url_overrides": {
     "newtab": "index.html"
@@ -20,7 +20,8 @@
     "bookmarks",
     "tabs",
     "contextMenus",
-    "notifications"
+    "notifications",
+    "geolocation"
   ],
   "content_scripts": [
     {
@@ -35,5 +36,10 @@
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://*;"
-  }
+  },
+  "host_permissions": [
+    "https://api.openai.com/*",
+    "https://api.anthropic.com/*",
+    "https://generativelanguage.googleapis.com/*"
+  ]
 }

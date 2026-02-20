@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from 'react';
+import type { AIChatShortcut } from '../types/ai';
 
 export interface ShortcutAction {
   key: string;
@@ -16,6 +17,17 @@ function isInputFocused(): boolean {
   if (tag === 'input' || tag === 'textarea' || tag === 'select') return true;
   if ((el as HTMLElement).isContentEditable) return true;
   return false;
+}
+
+function matchesShortcut(e: KeyboardEvent, shortcut: AIChatShortcut): boolean {
+  // Use e.code so modifier+Space works on Mac (Option+Space changes e.key to non-breaking space)
+  if (e.code !== 'Space') return false;
+  switch (shortcut) {
+    case 'ctrl+space': return e.ctrlKey && !e.metaKey && !e.altKey;
+    case 'alt+space': return e.altKey && !e.ctrlKey && !e.metaKey;
+    case 'meta+space': return e.metaKey && !e.ctrlKey && !e.altKey;
+    default: return false;
+  }
 }
 
 export function useKeyboardShortcuts(shortcuts: ShortcutAction[]) {
@@ -38,6 +50,20 @@ export function useKeyboardShortcuts(shortcuts: ShortcutAction[]) {
   useEffect(() => {
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
+  }, [handler]);
+}
+
+export function useAIChatShortcut(shortcut: AIChatShortcut, action: () => void, enabled: boolean) {
+  const handler = useCallback((e: KeyboardEvent) => {
+    if (!enabled || !matchesShortcut(e, shortcut)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    action();
+  }, [shortcut, action, enabled]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handler, true);
+    return () => window.removeEventListener('keydown', handler, true);
   }, [handler]);
 }
 

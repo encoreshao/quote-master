@@ -248,32 +248,30 @@ const WeatherWidget: React.FC = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
         </svg>
       }
-      headerRight={
-        <div className="flex items-center gap-1">
-          {/* Search city button */}
-          <button
-            onClick={() => setShowSearch(!showSearch)}
-            className={`p-1.5 rounded-lg transition-all cursor-pointer ${showSearch ? 't-secondary' : 't-faint hover:t-tertiary'}`}
-            style={showSearch ? { backgroundColor: 'var(--glass-bg)' } : undefined}
-            title="Search city"
-          >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-            </svg>
-          </button>
-          {/* Refresh */}
-          <button
-            onClick={handleRefresh}
-            className="p-1.5 rounded-lg t-faint hover:t-tertiary transition-all cursor-pointer"
-            title="Refresh"
-          >
-            <svg className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
-            </svg>
-          </button>
-        </div>
-      }
     >
+      {/* Search + Refresh — in container to avoid overlapping widget hover bar */}
+      <div className="flex items-center gap-2 mb-3">
+        <button
+          onClick={() => setShowSearch(!showSearch)}
+          className={`flex items-center gap-1.5 text-xs transition-colors cursor-pointer ${showSearch ? 't-secondary' : 't-muted hover:t-tertiary'}`}
+          title="Search city"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <span>{showSearch ? 'Cancel' : 'Search city'}</span>
+        </button>
+        <button
+          onClick={handleRefresh}
+          className="flex items-center gap-1.5 text-xs t-muted hover:t-tertiary transition-colors cursor-pointer"
+          title="Refresh"
+        >
+          <svg className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+          </svg>
+          <span>Refresh</span>
+        </button>
+      </div>
       {/* City search panel */}
       {showSearch && (
         <div className="mb-3 space-y-2">
@@ -356,6 +354,9 @@ const WeatherWidget: React.FC = () => {
                   </button>
                 </div>
                 <p className="text-xs t-tertiary capitalize">{getWeatherInfo(weather.weatherCode, weather.isDay).desc}</p>
+                {config.city && (
+                  <p className="text-xs t-secondary mt-0.5">{config.city}</p>
+                )}
               </div>
             </div>
 
@@ -401,12 +402,12 @@ const WeatherWidget: React.FC = () => {
             </div>
           </div>
 
-          {/* City + last update */}
+          {/* Attribution */}
           <div className="flex items-center justify-between mt-2.5">
-            <p className="text-[10px] t-faint truncate flex-1">
-              {config.city}{config.autoDetect ? ' (auto)' : ''}
+            <p className="text-[10px] t-faint">
+              {config.autoDetect ? '(auto-detected) ' : ''}
             </p>
-            <p className="text-[10px] shrink-0 ml-2" style={{ color: 'var(--text-invisible)' }}>Open-Meteo</p>
+            <p className="text-[10px] shrink-0" style={{ color: 'var(--text-invisible)' }}>Open-Meteo</p>
           </div>
         </div>
       )}

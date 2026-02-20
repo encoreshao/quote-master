@@ -1,5 +1,17 @@
 # Change Log
 
+## v2.0.3 (2026-02-20)
+
+### AI Assistant & UX
+
+- **AI Assistant** — Natural-language commands via keyboard shortcut (Alt/Ctrl/Cmd+Space)
+  - Add tasks, links, notes, RSS feeds; remove links; clear notes; switch layouts
+  - Supports OpenAI, Claude, Gemini — bring your own API key
+  - Add actions run immediately; destructive actions optionally require confirmation
+- **Widget icons** — Each widget has an icon in Settings → Widgets
+- **AI icon** — CpuChip icon for AI Assistant (replaces star/sparkles)
+- **Intent handling** — "Clean up notes" clears notes; "Add note: X" appends content
+
 ## v2.0.0 (2026-02-12)
 
 ### Nexus Tab — Complete Rebuild

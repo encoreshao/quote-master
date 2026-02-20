@@ -51,6 +51,19 @@ const TasksWidget: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      if ((e as CustomEvent).detail?.widget === 'tasks') {
+        getWidgetConfig('tasks', DEFAULTS, (loaded) => {
+          setConfig(loaded);
+          setViewMode(loaded.viewMode === 'timeline' ? 'list' : (loaded.viewMode as any) || 'list');
+        });
+      }
+    };
+    window.addEventListener('nexus-widget-refresh', handler);
+    return () => window.removeEventListener('nexus-widget-refresh', handler);
+  }, []);
+
   const save = (items: Task[], mode?: 'list' | 'board') => {
     const updated = { ...config, items, viewMode: mode || viewMode };
     setConfig(updated);
@@ -255,32 +268,35 @@ const TasksWidget: React.FC = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       }
-      headerRight={
+    >
+      {/* View toggle + active count — in container to avoid overlapping widget hover bar */}
+      <div className="flex items-center justify-between gap-2 mb-3">
         <div className="flex items-center gap-1.5">
-          {activeTasks > 0 && (
-            <span className="text-[10px] t-faint tabular-nums mr-1">{activeTasks} active</span>
-          )}
           <button
             onClick={() => switchView('list')}
-            className={`p-1.5 rounded-lg transition-all cursor-pointer ${viewMode === 'list' ? 't-secondary bg-[var(--glass-bg)]' : 't-faint hover:[color:var(--text-tertiary)]'}`}
+            className={`flex items-center gap-1.5 text-xs px-2 py-1 rounded-lg transition-all cursor-pointer ${viewMode === 'list' ? 't-secondary bg-[var(--glass-bg)]' : 't-muted hover:t-tertiary'}`}
             title="List view"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
             </svg>
+            <span>List</span>
           </button>
           <button
             onClick={() => switchView('board')}
-            className={`p-1.5 rounded-lg transition-all cursor-pointer ${viewMode === 'board' ? 't-secondary bg-[var(--glass-bg)]' : 't-faint hover:[color:var(--text-tertiary)]'}`}
+            className={`flex items-center gap-1.5 text-xs px-2 py-1 rounded-lg transition-all cursor-pointer ${viewMode === 'board' ? 't-secondary bg-[var(--glass-bg)]' : 't-muted hover:t-tertiary'}`}
             title="Board view"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125z" />
             </svg>
+            <span>Board</span>
           </button>
         </div>
-      }
-    >
+        {activeTasks > 0 && (
+          <span className="text-[10px] t-faint tabular-nums">{activeTasks} active</span>
+        )}
+      </div>
       {/* Add task input */}
       <div className="flex gap-2 mb-3">
         <input

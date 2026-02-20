@@ -40,6 +40,14 @@ Switch between layouts with one click — each remembers its own widget selectio
 - Inter font for clean typography
 - Custom scrollbars and smooth transitions
 
+### AI Assistant
+
+- **Voice-style commands** — Open with a keyboard shortcut (e.g. Alt+Space) and type natural requests
+- **Add or remove** — Add tasks, links, notes, RSS feeds; remove links, clear notes; switch layouts
+- **Smart intent** — AI interprets "clean up notes" as clearing notes, not adding text
+- **Optional confirmation** — Destructive actions (delete, clear) can require confirmation; add actions run immediately
+- **Multi-provider** — OpenAI, Claude, or Gemini — bring your own API key
+
 ### Browser Integration
 
 - **Context Menu** — Right-click on any page to add tasks or bookmarks
@@ -104,7 +112,13 @@ See [INSTALLATION.md](INSTALLATION.md) for detailed instructions.
 
 ## Version History
 
-Current version: **2.0.0**
+Current version: **2.0.3**
+
+### v2.0.3 — AI Assistant & UX
+- **AI Assistant** — Natural-language commands to add/remove tasks, links, notes, RSS; switch layouts
+- OpenAI, Claude, or Gemini support with your API key
+- Add actions run immediately; destructive actions optionally require confirmation
+- Widget icons in Settings; CpuChip icon for AI
 
 ### v2.0.0 — Nexus Tab (Complete Rebuild)
 - Rebranded from Quote Master to Nexus Tab

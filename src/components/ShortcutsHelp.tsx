@@ -1,32 +1,41 @@
 import React from 'react';
+import { IconShortcuts, IconClose } from '../icons';
+
+const SHORTCUT_KEY_LABELS: Record<string, string> = {
+  'ctrl+space': 'Ctrl + Space',
+  'alt+space': 'Alt + Space',
+  'meta+space': '⌘ + Space',
+};
 
 interface ShortcutsHelpProps {
   isOpen: boolean;
   onClose: () => void;
+  aiChatShortcut?: string;
 }
 
-const SHORTCUT_SECTIONS = [
-  {
-    label: 'General',
-    items: [
-      { keys: ['?'], desc: 'Show keyboard shortcuts' },
-      { keys: ['Esc'], desc: 'Close panel / blur input' },
-      { keys: [','], desc: 'Open Settings' },
-      { keys: ['A'], desc: 'Add Widget' },
-      { keys: ['/'], desc: 'Focus search bar' },
-    ],
-  },
-  {
-    label: 'Layouts',
-    items: [
-      { keys: ['1'], desc: 'Switch to Focus' },
-      { keys: ['2'], desc: 'Switch to Dashboard' },
-      { keys: ['3'], desc: 'Switch to Workflow' },
-    ],
-  },
-];
+const ShortcutsHelp: React.FC<ShortcutsHelpProps> = ({ isOpen, onClose, aiChatShortcut = 'alt+space' }) => {
+  const shortcutSections = [
+    {
+      label: 'General',
+      items: [
+        { keys: ['?'], desc: 'Show keyboard shortcuts' },
+        { keys: ['Esc'], desc: 'Close panel / blur input' },
+        { keys: [','], desc: 'Open Settings' },
+        { keys: ['A'], desc: 'Add Widget' },
+        { keys: ['/'], desc: 'Focus search bar' },
+        { keys: [SHORTCUT_KEY_LABELS[aiChatShortcut] || 'Alt + Space'], desc: 'Open AI Assistant' },
+      ],
+    },
+    {
+      label: 'Layouts',
+      items: [
+        { keys: ['1'], desc: 'Switch to Focus' },
+        { keys: ['2'], desc: 'Switch to Dashboard' },
+        { keys: ['3'], desc: 'Switch to Workflow' },
+      ],
+    },
+  ];
 
-const ShortcutsHelp: React.FC<ShortcutsHelpProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -48,24 +57,20 @@ const ShortcutsHelp: React.FC<ShortcutsHelpProps> = ({ isOpen, onClose }) => {
           {/* Header */}
           <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: '1px solid var(--panel-border)' }}>
             <div className="flex items-center gap-2">
-              <svg className="w-4 h-4 t-tertiary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
-              </svg>
+              <IconShortcuts className="w-4 h-4 t-tertiary" />
               <h2 className="text-sm font-semibold t-primary">Keyboard Shortcuts</h2>
             </div>
             <button
               onClick={onClose}
               className="p-1.5 rounded-lg t-muted transition-all duration-200 cursor-pointer"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <IconClose className="w-4 h-4" />
             </button>
           </div>
 
           {/* Body */}
           <div className="px-5 py-4 space-y-4">
-            {SHORTCUT_SECTIONS.map(section => (
+            {shortcutSections.map(section => (
               <div key={section.label}>
                 <p className="text-[10px] font-medium t-ghost uppercase tracking-wider mb-2">{section.label}</p>
                 <div className="space-y-1.5">
@@ -98,7 +103,7 @@ const ShortcutsHelp: React.FC<ShortcutsHelpProps> = ({ isOpen, onClose }) => {
           {/* Footer hint */}
           <div className="px-5 py-3" style={{ borderTop: '1px solid var(--divider)' }}>
             <p className="text-[10px] t-ghost text-center">
-              Shortcuts are disabled while typing in an input field
+              Most shortcuts are disabled while typing. AI Assistant works globally.
             </p>
           </div>
         </div>

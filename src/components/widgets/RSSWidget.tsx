@@ -55,6 +55,21 @@ const RSSWidget: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      if ((e as CustomEvent).detail?.widget === 'rss') {
+        getWidgetConfig('rss', DEFAULTS, (loaded) => {
+          setConfig(loaded);
+          if (loaded.feeds.length > 0) {
+            fetchAllFeeds(loaded.feeds);
+          }
+        });
+      }
+    };
+    window.addEventListener('nexus-widget-refresh', handler);
+    return () => window.removeEventListener('nexus-widget-refresh', handler);
+  }, []);
+
   // Auto-refresh
   useEffect(() => {
     if (config.feeds.length === 0) return;
@@ -130,34 +145,32 @@ const RSSWidget: React.FC = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
         </svg>
       }
-      headerRight={
-        <div className="flex items-center gap-1">
-          {config.feeds.length > 0 && (
-            <button
-              onClick={() => fetchAllFeeds(config.feeds)}
-              className="p-1.5 rounded-lg t-muted hover:t-secondary transition-all duration-200 cursor-pointer"
-              style={{ backgroundColor: 'transparent' }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'var(--glass-bg)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; }}
-              title="Refresh"
-            >
-              <svg className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
-              </svg>
-            </button>
-          )}
-          <button
-            onClick={() => setShowAdd(!showAdd)}
-            className="p-1.5 rounded-lg t-muted hover:t-secondary hover:bg-[var(--glass-bg)] transition-all duration-200 cursor-pointer"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-          </button>
-        </div>
-      }
       collapsible
     >
+      {/* Refresh + Add feed — in container to avoid overlapping widget hover bar */}
+      <div className="flex items-center gap-2 mb-3">
+        {config.feeds.length > 0 && (
+          <button
+            onClick={() => fetchAllFeeds(config.feeds)}
+            className="flex items-center gap-1.5 text-xs t-muted hover:t-secondary transition-colors cursor-pointer"
+            title="Refresh"
+          >
+            <svg className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+            </svg>
+            <span>Refresh</span>
+          </button>
+        )}
+        <button
+          onClick={() => setShowAdd(!showAdd)}
+          className="flex items-center gap-1.5 text-xs t-muted hover:t-secondary transition-colors cursor-pointer"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          <span>{showAdd ? 'Cancel' : 'Add feed'}</span>
+        </button>
+      </div>
       {showAdd && (
         <div className="flex gap-2 mb-3">
           <input
@@ -221,7 +234,7 @@ const RSSWidget: React.FC = () => {
         ))}
         {config.feeds.length === 0 && (
           <p className="text-center t-faint text-xs py-4">
-            Click + to add RSS feed URLs
+            Add feed above to get started
           </p>
         )}
         {config.feeds.length > 0 && articles.length === 0 && !loading && (

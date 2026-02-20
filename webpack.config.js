@@ -49,7 +49,12 @@ module.exports = {
                 ]
             },
             {
-                exclude: /node_modules/,
+                test: /\.svg$/i,
+                include: path.join(__dirname, 'src/icons'),
+                use: ['@svgr/webpack'],
+            },
+            {
+                exclude: [/node_modules/, /[\\/]src[\\/]icons[\\/]/],
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },

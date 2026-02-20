@@ -63,6 +63,16 @@ const QuickLinksWidget: React.FC = () => {
     getWidgetConfig('quicklinks', DEFAULTS, setConfig);
   }, []);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      if ((e as CustomEvent).detail?.widget === 'quicklinks') {
+        getWidgetConfig('quicklinks', DEFAULTS, setConfig);
+      }
+    };
+    window.addEventListener('nexus-widget-refresh', handler);
+    return () => window.removeEventListener('nexus-widget-refresh', handler);
+  }, []);
+
   const handleAdd = () => {
     if (!newName.trim() || !newUrl.trim()) return;
     const url = newUrl.startsWith('http') ? newUrl : `https://${newUrl}`;
@@ -92,17 +102,19 @@ const QuickLinksWidget: React.FC = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
         </svg>
       }
-      headerRight={
+    >
+      {/* Add link — in container to avoid overlapping widget hover bar */}
+      <div className="flex items-center gap-2 mb-3">
         <button
           onClick={() => setShowAdd(!showAdd)}
-          className="p-1.5 rounded-lg t-muted hover:t-secondary hover:bg-[var(--glass-bg)] transition-all duration-200 cursor-pointer"
+          className="flex items-center gap-1.5 text-xs t-muted hover:t-secondary transition-colors cursor-pointer"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
+          <span>{showAdd ? 'Cancel' : 'Add link'}</span>
         </button>
-      }
-    >
+      </div>
       {showAdd && (
         <div className="flex gap-2 mb-3">
           <input

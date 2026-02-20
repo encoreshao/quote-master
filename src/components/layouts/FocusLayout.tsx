@@ -24,6 +24,10 @@ const FocusLayout: React.FC<FocusLayoutProps> = ({
     }
   }
 
+  const onlyBookmarksL = widgets.length === 1
+    && widgets[0] === 'bookmarks'
+    && widgetSettings?.bookmarks?.size === 'large';
+
   return (
     <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center justify-center min-h-[calc(100vh-80px)]">
       <DraggableWidgetGrid
@@ -36,6 +40,7 @@ const FocusLayout: React.FC<FocusLayoutProps> = ({
         gridClassName="grid-cols-1 md:grid-cols-2"
         colSpans={colSpans}
         gridCols={2}
+        singleLargeWidgetMaxWidth={onlyBookmarksL ? 'max-w-2xl' : undefined}
       />
     </div>
   );

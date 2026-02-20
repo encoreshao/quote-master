@@ -13,6 +13,16 @@ const NotesWidget: React.FC = () => {
     getWidgetConfig('notes', DEFAULTS, setConfig);
   }, []);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      if ((e as CustomEvent).detail?.widget === 'notes') {
+        getWidgetConfig('notes', DEFAULTS, setConfig);
+      }
+    };
+    window.addEventListener('nexus-widget-refresh', handler);
+    return () => window.removeEventListener('nexus-widget-refresh', handler);
+  }, []);
+
   const handleChange = useCallback((content: string) => {
     setConfig({ content });
     if (saveTimeout) clearTimeout(saveTimeout);

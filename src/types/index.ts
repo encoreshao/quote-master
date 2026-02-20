@@ -158,6 +158,7 @@ export interface BookmarksWidgetConfig {
 // Full storage shape
 export interface NexusStorage {
   'nexus.profile': NexusProfile;
+  'nexus.aiConfig'?: import('./ai').AIConfig;
   'nexus.activeLayout': LayoutType;
   'nexus.layouts': NexusLayouts;
   'nexus.widget.tasks': TasksWidgetConfig;

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { WidgetId, WidgetSize, WidgetStyle, WidgetSettings } from '../types';
+import { IconClose, IconCheck } from '../icons';
 
 const SIZES: { value: WidgetSize; label: string }[] = [
   { value: 'small', label: 'S' },
@@ -29,6 +30,8 @@ interface DraggableWidgetGridProps {
   colSpans?: Partial<Record<WidgetId, string>>;
   /** Max columns in the grid (used to compute size spans) */
   gridCols?: number;
+  /** When exactly one widget has large size, apply this max-width class (e.g. "max-w-2xl") */
+  singleLargeWidgetMaxWidth?: string;
 }
 
 function getSizeColSpan(size: WidgetSize, gridCols: number): string {
@@ -55,6 +58,7 @@ const DraggableWidgetGrid: React.FC<DraggableWidgetGridProps> = ({
   className = '',
   colSpans = {},
   gridCols = 3,
+  singleLargeWidgetMaxWidth,
 }) => {
   const [draggedId, setDraggedId] = useState<WidgetId | null>(null);
   const [overId, setOverId] = useState<WidgetId | null>(null);
@@ -155,6 +159,8 @@ const DraggableWidgetGrid: React.FC<DraggableWidgetGridProps> = ({
           : (colSpans[id] || '');
 
         const styleClass = currentStyle !== 'glass' ? `widget-style-${currentStyle}` : '';
+        const shouldConstrain = singleLargeWidgetMaxWidth && widgets.length === 1 && currentSize === 'large';
+        const constrainClass = shouldConstrain ? `${singleLargeWidgetMaxWidth} mx-auto w-full` : '';
 
         return (
           <div
@@ -166,7 +172,7 @@ const DraggableWidgetGrid: React.FC<DraggableWidgetGridProps> = ({
             onDragLeave={(e) => handleDragLeave(e, id)}
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, id)}
-            className={`group/widget relative transition-all duration-200 ${span} ${styleClass} ${
+            className={`group/widget relative transition-all duration-200 ${span} ${styleClass} ${constrainClass} ${
               isDragged ? 'opacity-50 scale-[0.98]' : ''
             } ${
               isOver ? 'ring-2 ring-offset-0 rounded-2xl' : ''
@@ -234,9 +240,7 @@ const DraggableWidgetGrid: React.FC<DraggableWidgetGridProps> = ({
                             }}
                           >
                             {currentStyle === value && (
-                              <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                              </svg>
+                              <IconCheck className="w-3 h-3 shrink-0" strokeWidth={2.5} />
                             )}
                             <span className={currentStyle === value ? '' : 'ml-5'}>{label}</span>
                           </button>
@@ -255,15 +259,13 @@ const DraggableWidgetGrid: React.FC<DraggableWidgetGridProps> = ({
                   style={{ backgroundColor: 'rgba(239,68,68,0.25)', border: '1px solid rgba(239,68,68,0.4)', color: '#f87171' }}
                   title="Remove widget"
                 >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  <IconClose className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>
 
-            {/* Drag handle indicator */}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 opacity-0 hover:opacity-100 transition-opacity duration-200 cursor-grab active:cursor-grabbing">
+            {/* Drag handle indicator — top-center (title area, no header buttons) ── */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 opacity-0 group-hover/widget:opacity-100 transition-opacity duration-200 cursor-grab active:cursor-grabbing">
               <div className="flex gap-0.5 px-2 py-1 rounded-lg backdrop-blur-sm" style={{ backgroundColor: 'var(--glass-bg)' }}>
                 <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-muted)' }} />
                 <span className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--text-muted)' }} />

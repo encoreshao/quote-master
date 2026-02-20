@@ -12,6 +12,7 @@
     "build:zip": "cp config/credentials/key.pem dist && zip -r releases/nexus-tab-$(date +%Y%m%d).zip dist"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@types/chrome": "^0.0.268",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

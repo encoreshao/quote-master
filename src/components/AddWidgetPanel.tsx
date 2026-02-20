@@ -1,5 +1,6 @@
 import React from 'react';
 import { WidgetId } from '../types';
+import { IconClose, WIDGET_ICONS } from '../icons';
 
 interface AddWidgetPanelProps {
   isOpen: boolean;
@@ -65,9 +66,7 @@ const AddWidgetPanel: React.FC<AddWidgetPanelProps> = ({
               onClick={onClose}
               className="p-2 rounded-xl t-muted transition-all duration-200 cursor-pointer"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <IconClose className="w-5 h-5" />
             </button>
           </div>
 
@@ -95,14 +94,15 @@ const AddWidgetPanel: React.FC<AddWidgetPanelProps> = ({
                             className="w-full flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 cursor-pointer text-left group"
                             style={{ backgroundColor: 'var(--glass-bg-subtle)' }}
                           >
-                            {/* Plus icon */}
+                            {/* Widget icon */}
                             <div
                               className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
                               style={{ backgroundColor: `${accentColor}20` }}
                             >
-                              <svg className="w-4 h-4" style={{ color: accentColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.5v15m7.5-7.5h-15" />
-                              </svg>
+                              {WIDGET_ICONS[id] && (() => {
+                                const WidgetIcon = WIDGET_ICONS[id]!;
+                                return <WidgetIcon className="w-4 h-4" style={{ color: accentColor }} />;
+                              })()}
                             </div>
                             {/* Label */}
                             <div className="min-w-0 flex-1">

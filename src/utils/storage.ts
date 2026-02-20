@@ -10,6 +10,7 @@ import {
   Task,
   QuickLink,
 } from '../types';
+import type { AIConfig } from '../types/ai';
 
 // ---- Defaults ----
 
@@ -33,6 +34,15 @@ export const DEFAULT_LAYOUTS: NexusLayouts = {
   workflow: {
     widgets: ['tasks', 'clock', 'pomodoro', 'quicklinks', 'notes'],
   },
+};
+
+export const DEFAULT_AI_CONFIG: AIConfig = {
+  provider: 'openai',
+  chatShortcut: 'alt+space',
+  confirmDestructiveActions: true,
+  openai: { apiKey: '', model: 'gpt-4o-mini', baseUrl: '' },
+  claude: { apiKey: '', model: 'claude-3-5-sonnet-20241022' },
+  gemini: { apiKey: '', model: 'gemini-1.5-flash' },
 };
 
 export const DEFAULT_QUICK_LINKS: QuickLink[] = [
@@ -94,6 +104,28 @@ export function getActiveLayout(callback: (layout: LayoutType) => void): void {
 
 export function setActiveLayout(layout: LayoutType, callback?: () => void): void {
   setStorage({ 'nexus.activeLayout': layout }, callback);
+}
+
+export function getAIConfig(callback: (config: AIConfig) => void): void {
+  getStorage(['nexus.aiConfig'], (result: any) => {
+    const stored = result['nexus.aiConfig'];
+    if (!stored) {
+      callback({ ...DEFAULT_AI_CONFIG });
+      return;
+    }
+    callback({
+      provider: stored.provider ?? DEFAULT_AI_CONFIG.provider,
+      chatShortcut: stored.chatShortcut ?? DEFAULT_AI_CONFIG.chatShortcut,
+      confirmDestructiveActions: stored.confirmDestructiveActions ?? DEFAULT_AI_CONFIG.confirmDestructiveActions ?? true,
+      openai: { ...DEFAULT_AI_CONFIG.openai, ...stored.openai },
+      claude: { ...DEFAULT_AI_CONFIG.claude, ...stored.claude },
+      gemini: { ...DEFAULT_AI_CONFIG.gemini, ...stored.gemini },
+    });
+  });
+}
+
+export function setAIConfig(config: AIConfig, callback?: () => void): void {
+  setStorage({ 'nexus.aiConfig': config }, callback);
 }
 
 export function getNexusLayouts(callback: (layouts: NexusLayouts) => void): void {
